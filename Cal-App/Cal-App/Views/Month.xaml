@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Cal_App.Views.Month"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
+    
+    <Grid Name="grid1" Margin="5"  Grid.Row="0" Grid.Column="0"  Opacity="1"  >
+        <Grid.Background>
+
+            <VisualBrush Stretch="Fill"  >
+                <VisualBrush.Visual>
+                    <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" Fill="#008DD2" />
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+        <Grid ShowGridLines="False" Margin="1"  >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Name="set1" Grid.Row="0" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Transparent"  Padding="3" Text="⋮" ></TextBlock>
+            <Button Grid.Row="0" Grid.Column="6" Click="Button_Click_Popup" Opacity="0">
+                <TextBlock  Grid.Row="0" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" Padding="3" Text="⋮"  ToolTipService.InitialShowDelay ="1"  
+                           ToolTipService.Placement="Right" ToolTipService.PlacementTarget="{Binding ElementName=grid1}" ToolTipService.VerticalOffset=" 20" ToolTipService.HorizontalOffset="-25"  >
+                    <TextBlock.ToolTip  >
+                        <ToolTip  BorderThickness="0"  >
+                            <ToolTip.Background >
+                                <VisualBrush Stretch="Fill"  >
+                                    <VisualBrush.Visual>
+                                        <Path Data="M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z"  Fill="Beige" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </ToolTip.Background>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Beállítások</TextBlock>
+                        </ToolTip>
+                    </TextBlock.ToolTip>    
+                </TextBlock>
+            </Button>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" Grid.ColumnSpan="7"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Hé</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5">Ke</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="2"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Sze</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="3"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5">Csü</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Pé</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="5"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Szo</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Va</TextBlock>
+
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[1].Color}" Padding="5"> 1</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[2].Key}" Grid.Column="{Binding Path=DayToPlace[2].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[2].Color}" Padding="5"> 2</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[3].Key}" Grid.Column="{Binding Path=DayToPlace[3].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[3].Color}" Padding="5"> 3</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[4].Key}" Grid.Column="{Binding Path=DayToPlace[4].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[4].Color}" Padding="5"> 4</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[5].Key}" Grid.Column="{Binding Path=DayToPlace[5].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[5].Color}" Padding="5"> 5</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[6].Key}" Grid.Column="{Binding Path=DayToPlace[6].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[6].Color}" Padding="5"> 6</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[7].Key}" Grid.Column="{Binding Path=DayToPlace[7].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[7].Color}" Padding="5"> 7</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[8].Key}" Grid.Column="{Binding Path=DayToPlace[8].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[8].Color}" Padding="5"> 8</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[9].Key}" Grid.Column="{Binding Path=DayToPlace[9].Value}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[9].Color}" Padding="5">9</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[10].Key}" Grid.Column="{Binding Path=DayToPlace[10].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[10].Color}" Padding="5">10</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[11].Key}" Grid.Column="{Binding Path=DayToPlace[11].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[11].Color}" Padding="5">11</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[12].Key}" Grid.Column="{Binding Path=DayToPlace[12].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[12].Color}" Padding="5">12</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[13].Key}" Grid.Column="{Binding Path=DayToPlace[13].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[13].Color}" Padding="5">13</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[14].Key}" Grid.Column="{Binding Path=DayToPlace[14].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[14].Color}" Padding="5">14</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[15].Key}" Grid.Column="{Binding Path=DayToPlace[15].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[15].Color}" Padding="5">15</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[16].Key}" Grid.Column="{Binding Path=DayToPlace[16].Value}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[16].Color}" Padding="5">16</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[17].Key}" Grid.Column="{Binding Path=DayToPlace[17].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[17].Color}" Padding="5">17</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[18].Key}" Grid.Column="{Binding Path=DayToPlace[18].Value}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[18].Color}" Padding="5">18</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[19].Key}" Grid.Column="{Binding Path=DayToPlace[19].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[19].Color}" Padding="5">19</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[20].Key}" Grid.Column="{Binding Path=DayToPlace[20].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[20].Color}" Padding="5">20</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[21].Key}" Grid.Column="{Binding Path=DayToPlace[21].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[21].Color}" Padding="5">21</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[22].Key}" Grid.Column="{Binding Path=DayToPlace[22].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[22].Color}" Padding="5">22</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[23].Key}" Grid.Column="{Binding Path=DayToPlace[23].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[23].Color}" Padding="5">23</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[24].Key}" Grid.Column="{Binding Path=DayToPlace[24].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[24].Color}" Padding="5">24</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[25].Key}" Grid.Column="{Binding Path=DayToPlace[25].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[25].Color}" Padding="5">25</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[26].Key}" Grid.Column="{Binding Path=DayToPlace[26].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[26].Color}" Padding="5">26</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[27].Key}" Grid.Column="{Binding Path=DayToPlace[27].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[27].Color}" Padding="5">27</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[28].Key}" Grid.Column="{Binding Path=DayToPlace[28].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[28].Color}" Padding="5">28</TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[29].Key}" Grid.Column="{Binding Path=DayToPlace[29].Value}" Text="{Binding Path=Days[28]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[29].Color}" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[30].Key}" Grid.Column="{Binding Path=DayToPlace[30].Value}" Text="{Binding Path=Days[29]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[30].Color}" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="{Binding Path=DayToPlace[31].Key}" Grid.Column="{Binding Path=DayToPlace[31].Value}" Text="{Binding Path=Days[30]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[31].Color}" Padding="5"></TextBlock>
+            <Grid Grid.Row="{Binding Path=TodayRow}" Grid.Column="{Binding Path=TodayCol}"  >
+                <Grid.Background >
+                    <VisualBrush Stretch="Fill"  >
+                        <VisualBrush.Visual>
+                            <Path Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" Stroke="White" StrokeThickness="{Binding Path=Thickness}"   />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Grid.Background>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
