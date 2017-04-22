@@ -61,7 +61,7 @@
                     <ListBoxItem>Bejelentkezés</ListBoxItem>
                     <ListBoxItem >Események</ListBoxItem>
 
-                    <ListBoxItem>Nyomtatás</ListBoxItem>
+                    
                     <ListBoxItem>Nyelv</ListBoxItem>
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
@@ -76,6 +76,13 @@
                             </ComboBox>
                         </StackPanel>
                     </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button  Width="160" Click="Button_ClickPrint"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
+                                <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Nyomtatás</TextBlock>
+                            </Button>
+                        </StackPanel>
+                        </ListBoxItem>
                     <ListBoxItem >
                         <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button  Width="160" Click="Button_ClickHolidays"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">

@@ -626,5 +626,14 @@ namespace Cal_App.Views
                 month.UserControl_MouseLeave(sender, e);
             }
         }
+
+        
+        private void Button_ClickPrint(object sender, RoutedEventArgs e)
+        {
+            var uc = this as UserControl;
+            var window = uc.Parent as Window;
+            PrintDialog printDlg = new PrintDialog();
+            printDlg.PrintVisual(window, "Window Printing.");
+        }
     }
 }
