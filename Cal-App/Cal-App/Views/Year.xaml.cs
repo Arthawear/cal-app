@@ -630,6 +630,8 @@ namespace Cal_App.Views
         
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
         {
+            this.Element.ResizeMode = "None";
+            popLink.IsOpen = false;
             var uc = this as UserControl;
             var window = uc.Parent as Window;
             PrintDialog printDlg = new PrintDialog();
