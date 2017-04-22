@@ -82,6 +82,7 @@ namespace Cal_App.Views
         private string white = "#FEFEFE";
         private string transparent = "#00FFFFFF";
         private bool showHolidays = false;
+        public bool isEventOn = false;
         private FrameworkElement element = new FrameworkElement();
         private void OnPropertyChanged(string propertyName)
         {
@@ -203,6 +204,16 @@ namespace Cal_App.Views
                 this.Button_comboClickViewThin(sender, e);
             }
             this.YearToCal = RunYear(Element.Year);
+            int currentMonth = DateTime.Now.Month;
+            for (int i = 1; i < bigGrid.Children.Count; i++)
+            {
+                if (i == currentMonth)
+                {
+                    var month = bigGrid.Children[i] as Month;
+                    month.UserControl_Loaded(sender, e);
+                }
+            }
+
             popLink.IsOpen = false;
             var uc = this as UserControl;
             var window = uc.Parent as Window;
@@ -252,6 +263,7 @@ namespace Cal_App.Views
                     if (grid != null)
                     {
                         grid.Opacity = 1;
+                        grid.Visibility = Visibility.Visible;
                         string color = transparent;
                         Binding binding = new Binding();
                         binding.Source = color;
@@ -333,6 +345,7 @@ namespace Cal_App.Views
                     if (grid != null)
                     {
                         grid.Opacity = 1;
+                        grid.Visibility = Visibility.Visible;
                         string color = transparent;
                         Binding binding = new Binding();
                         binding.Source = color;
@@ -437,6 +450,7 @@ namespace Cal_App.Views
                         if (grid != null)
                         {
                             grid.Opacity = 0;
+                            grid.Visibility = Visibility.Hidden;
                             string color = transparent;
                             Binding binding = new Binding();
                             binding.Source = color;
@@ -445,6 +459,7 @@ namespace Cal_App.Views
                         if (i == currentMonth)
                         {
                             grid.Opacity = 1;
+                            grid.Visibility = Visibility.Visible;
                             Grid.SetRow(uc1, 0); Grid.SetColumn(uc1, 0);
                             string color = white;
                             Binding binding = new Binding();
@@ -497,6 +512,7 @@ namespace Cal_App.Views
                 rows.Add(row2);
                 rows.Add(row3);
                 int currentMonth = DateTime.Now.Month;
+                //currentMonth = 12;
                 string gridName = "grid" + currentMonth;
                 var grids = bigGrid.Children;
                 for (int i = 1; i < grids.Count; i++)
@@ -504,6 +520,7 @@ namespace Cal_App.Views
                     var uc1 = grids[i] as UserControl;
                     var grid = uc1.Content as Grid;
                     grid.Opacity = 0;
+                    grid.Visibility = Visibility.Hidden;
                     var gridSecond = grid.Children[0] as Grid;
                     var set5 = gridSecond.Children[0] as TextBlock;
                     string color0 = transparent;
@@ -513,6 +530,7 @@ namespace Cal_App.Views
                     if (i == currentMonth - 1)
                     {
                         grid.Opacity = 1;
+                        grid.Visibility = Visibility.Visible;
                         Grid.SetRow(uc1, 0); Grid.SetColumn(uc1, 0);
                         string color = white;
                         Binding binding = new Binding();
@@ -522,11 +540,13 @@ namespace Cal_App.Views
                     if (i == currentMonth)
                     {
                         grid.Opacity = 1;
+                        grid.Visibility = Visibility.Visible;
                         Grid.SetRow(uc1, 1); Grid.SetColumn(uc1, 0);
                     }
                     if (i == currentMonth + 1)
                     {
                         grid.Opacity = 1;
+                        grid.Visibility = Visibility.Visible;
                         Grid.SetRow(uc1, 2); Grid.SetColumn(uc1, 0);
                     }
                     if (currentMonth == 1)
@@ -537,6 +557,7 @@ namespace Cal_App.Views
                         MonthModel dec = new MonthModel(12, currentYear - 1, holiday);
                         var gridChild = grid12.Content as Grid;
                         gridChild.Opacity = 1;
+                        gridChild.Visibility = Visibility.Visible;
                         grid12.DataContext = dec;
                         string color = "#FEFEFE";
                         Binding binding = new Binding();
@@ -552,6 +573,7 @@ namespace Cal_App.Views
                         MonthModel jan = new MonthModel(1, currentYear + 1, holiday);
                         var gridChild = grid1.Content as Grid;
                         gridChild.Opacity = 1;
+                        gridChild.Visibility = Visibility.Visible;
                         grid1.DataContext = jan;
                         Grid.SetRow(grid1, 2); Grid.SetColumn(grid1, 0);
                     }
@@ -627,7 +649,6 @@ namespace Cal_App.Views
             }
         }
 
-        
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
         {
             this.Element.ResizeMode = "None";
@@ -636,6 +657,36 @@ namespace Cal_App.Views
             var window = uc.Parent as Window;
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintVisual(window, "Window Printing.");
+        }
+
+
+        private void Button_ClickExitEvent(object sender, RoutedEventArgs e)
+        {
+            popEvent.IsOpen = false;
+        }
+
+        private void Button_ClickEventOn(object sender, RoutedEventArgs e)
+        {
+            Button button = new Button();
+            button = (Button)e.OriginalSource;
+            if (!isEventOn)
+            {
+                isEventOn = true;
+                button.Content = "Események Ki";
+
+            }
+            else if (isEventOn)
+            {
+                isEventOn = false;
+                button.Content = "Események Be";
+            }
+            popLink.IsOpen = false;
+            this.Element.ResizeMode = "None";
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

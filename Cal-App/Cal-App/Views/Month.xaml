@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
-    
+             d:DesignHeight="300" d:DesignWidth="300" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded">
+
     <Grid Name="grid1" Margin="5"  Grid.Row="0" Grid.Column="0"  Opacity="1"  >
         <Grid.Background>
 
@@ -65,38 +65,70 @@
             <TextBlock Grid.Row="1" Grid.Column="5"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Szo</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Va</TextBlock>
 
+
             <TextBlock Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[1].Color}" Padding="5"> 1</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}" Content="1" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[2].Key}" Grid.Column="{Binding Path=DayToPlace[2].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[2].Color}" Padding="5"> 2</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[2].Key}" Grid.Column="{Binding Path=DayToPlace[2].Value}" Content="2" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[3].Key}" Grid.Column="{Binding Path=DayToPlace[3].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[3].Color}" Padding="5"> 3</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[3].Key}" Grid.Column="{Binding Path=DayToPlace[3].Value}" Content="3" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[4].Key}" Grid.Column="{Binding Path=DayToPlace[4].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[4].Color}" Padding="5"> 4</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[4].Key}" Grid.Column="{Binding Path=DayToPlace[4].Value}" Content="4" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[5].Key}" Grid.Column="{Binding Path=DayToPlace[5].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[5].Color}" Padding="5"> 5</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[5].Key}" Grid.Column="{Binding Path=DayToPlace[5].Value}" Content="5" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[6].Key}" Grid.Column="{Binding Path=DayToPlace[6].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[6].Color}" Padding="5"> 6</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[6].Key}" Grid.Column="{Binding Path=DayToPlace[6].Value}" Content="6" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[7].Key}" Grid.Column="{Binding Path=DayToPlace[7].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[7].Color}" Padding="5"> 7</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[7].Key}" Grid.Column="{Binding Path=DayToPlace[7].Value}" Content="7" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[8].Key}" Grid.Column="{Binding Path=DayToPlace[8].Value}"    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[8].Color}" Padding="5"> 8</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[8].Key}" Grid.Column="{Binding Path=DayToPlace[8].Value}" Content="8" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[9].Key}" Grid.Column="{Binding Path=DayToPlace[9].Value}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[9].Color}" Padding="5">9</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[9].Key}" Grid.Column="{Binding Path=DayToPlace[9].Value}" Content="9" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[10].Key}" Grid.Column="{Binding Path=DayToPlace[10].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[10].Color}" Padding="5">10</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[10].Key}" Grid.Column="{Binding Path=DayToPlace[10].Value}" Content="10" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[11].Key}" Grid.Column="{Binding Path=DayToPlace[11].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[11].Color}" Padding="5">11</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[11].Key}" Grid.Column="{Binding Path=DayToPlace[11].Value}" Content="11" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[12].Key}" Grid.Column="{Binding Path=DayToPlace[12].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[12].Color}" Padding="5">12</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[12].Key}" Grid.Column="{Binding Path=DayToPlace[12].Value}" Content="12" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[13].Key}" Grid.Column="{Binding Path=DayToPlace[13].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[13].Color}" Padding="5">13</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[13].Key}" Grid.Column="{Binding Path=DayToPlace[13].Value}" Content="13" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[14].Key}" Grid.Column="{Binding Path=DayToPlace[14].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[14].Color}" Padding="5">14</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[14].Key}" Grid.Column="{Binding Path=DayToPlace[14].Value}" Content="14" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[15].Key}" Grid.Column="{Binding Path=DayToPlace[15].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[15].Color}" Padding="5">15</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[15].Key}" Grid.Column="{Binding Path=DayToPlace[15].Value}" Content="15" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[16].Key}" Grid.Column="{Binding Path=DayToPlace[16].Value}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[16].Color}" Padding="5">16</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[16].Key}" Grid.Column="{Binding Path=DayToPlace[16].Value}" Content="16" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[17].Key}" Grid.Column="{Binding Path=DayToPlace[17].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[17].Color}" Padding="5">17</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[17].Key}" Grid.Column="{Binding Path=DayToPlace[17].Value}" Content="17" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[18].Key}" Grid.Column="{Binding Path=DayToPlace[18].Value}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[18].Color}" Padding="5">18</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[18].Key}" Grid.Column="{Binding Path=DayToPlace[18].Value}" Content="18" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[19].Key}" Grid.Column="{Binding Path=DayToPlace[19].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[19].Color}" Padding="5">19</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[19].Key}" Grid.Column="{Binding Path=DayToPlace[19].Value}" Content="19" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[20].Key}" Grid.Column="{Binding Path=DayToPlace[20].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[20].Color}" Padding="5">20</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[20].Key}" Grid.Column="{Binding Path=DayToPlace[20].Value}" Content="20" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[21].Key}" Grid.Column="{Binding Path=DayToPlace[21].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[21].Color}" Padding="5">21</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[21].Key}" Grid.Column="{Binding Path=DayToPlace[21].Value}" Content="21" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[22].Key}" Grid.Column="{Binding Path=DayToPlace[22].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[22].Color}" Padding="5">22</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[22].Key}" Grid.Column="{Binding Path=DayToPlace[22].Value}" Content="22" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[23].Key}" Grid.Column="{Binding Path=DayToPlace[23].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[23].Color}" Padding="5">23</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[23].Key}" Grid.Column="{Binding Path=DayToPlace[23].Value}" Content="23" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[24].Key}" Grid.Column="{Binding Path=DayToPlace[24].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[24].Color}" Padding="5">24</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[24].Key}" Grid.Column="{Binding Path=DayToPlace[24].Value}" Content="24" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[25].Key}" Grid.Column="{Binding Path=DayToPlace[25].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[25].Color}" Padding="5">25</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[25].Key}" Grid.Column="{Binding Path=DayToPlace[25].Value}" Content="25" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[26].Key}" Grid.Column="{Binding Path=DayToPlace[26].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[26].Color}" Padding="5">26</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[26].Key}" Grid.Column="{Binding Path=DayToPlace[26].Value}" Content="26" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[27].Key}" Grid.Column="{Binding Path=DayToPlace[27].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[27].Color}" Padding="5">27</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[27].Key}" Grid.Column="{Binding Path=DayToPlace[27].Value}" Content="27" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[28].Key}" Grid.Column="{Binding Path=DayToPlace[28].Value}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[28].Color}" Padding="5">28</TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[28].Key}" Grid.Column="{Binding Path=DayToPlace[28].Value}" Content="28" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[29].Key}" Grid.Column="{Binding Path=DayToPlace[29].Value}" Text="{Binding Path=Days[28]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[29].Color}" Padding="5"></TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[29].Key}" Grid.Column="{Binding Path=DayToPlace[29].Value}" Content="29" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[30].Key}" Grid.Column="{Binding Path=DayToPlace[30].Value}" Text="{Binding Path=Days[29]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[30].Color}" Padding="5"></TextBlock>
+            <Button Grid.Row="{Binding Path=DayToPlace[30].Key}" Grid.Column="{Binding Path=DayToPlace[30].Value}" Content="30" Click="Button_Click_Event"  Opacity="0"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[31].Key}" Grid.Column="{Binding Path=DayToPlace[31].Value}" Text="{Binding Path=Days[30]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[31].Color}" Padding="5"></TextBlock>
-            <Grid Grid.Row="{Binding Path=TodayRow}" Grid.Column="{Binding Path=TodayCol}"  >
+            <Button Grid.Row="{Binding Path=DayToPlace[31].Key}" Grid.Column="{Binding Path=DayToPlace[31].Value}" Content="31" Click="Button_Click_Event"  Opacity="0"></Button>
+            <Grid Name="CurrentDaySquare" Grid.Row="{Binding Path=TodayRow}" Grid.Column="{Binding Path=TodayCol}" Visibility="Hidden" >
                 <Grid.Background >
                     <VisualBrush Stretch="Fill"  >
                         <VisualBrush.Visual>
@@ -105,6 +137,9 @@
                     </VisualBrush>
                 </Grid.Background>
             </Grid>
+
+            <Button Name="CurrentDayButton" Grid.Row="{Binding Path=TodayRow}" Grid.Column="{Binding Path=TodayCol}"  Click="Button_Click_Event1"  Opacity="0" Visibility="Hidden"></Button>
         </Grid>
     </Grid>
+
 </UserControl>
