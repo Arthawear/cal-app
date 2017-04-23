@@ -204,6 +204,7 @@ namespace Cal_App.Views
                 this.Button_comboClickViewThin(sender, e);
             }
             this.YearToCal = RunYear(Element.Year);
+            int currentYear = DateTime.Now.Year;
             int currentMonth = DateTime.Now.Month;
             for (int i = 1; i < bigGrid.Children.Count; i++)
             {
@@ -212,6 +213,16 @@ namespace Cal_App.Views
                     var month = bigGrid.Children[i] as Month;
                     month.UserControl_Loaded(sender, e);
                 }
+            }
+            if (this.Element.Year!=currentYear)
+            {
+                currentCombo.Visibility = Visibility.Collapsed;
+                threeMonthCombo.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                currentCombo.Visibility = Visibility.Visible;
+                threeMonthCombo.Visibility = Visibility.Visible;
             }
 
             popLink.IsOpen = false;

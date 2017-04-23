@@ -66,9 +66,9 @@
                                     </ComboBoxItem>
                                     <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewLarge"  >Large
                                     </ComboBoxItem>
-                                    <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewOneMonth">Current month
+                                    <ComboBoxItem Name="currentCombo" Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewOneMonth">Current month
                                     </ComboBoxItem>
-                                    <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewThreeMonths">Three months
+                                    <ComboBoxItem Name="threeMonthCombo" Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewThreeMonths">Three months
                                     </ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
