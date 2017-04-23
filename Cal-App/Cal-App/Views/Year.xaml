@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Cal_App.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" 
-             MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" >
+             MouseLeftButtonDown="Window_MouseLeftButtonDown"  >
     
    
     <UserControl.Background>

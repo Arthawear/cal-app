@@ -82,7 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Asset\GoogleCal.cs" />
+    <Compile Include="GoogleCal.cs" />
     <Compile Include="Views\Month.xaml.cs">
       <DependentUpon>Month.xaml</DependentUpon>
     </Compile>

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cal_App.Asset
+namespace Cal_App
 {
     class GoogleCal
     {
@@ -19,12 +19,9 @@ namespace Cal_App.Asset
         // at ~/.credentials/calendar-dotnet-quickstart.json
         private string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         private string ApplicationName = "Google Calendar API .NET Quickstart";
-
-
         public string GetEvents(int year, int month, int day)
         {
             UserCredential credential;
-
             using (var stream =
               new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {
@@ -70,7 +67,6 @@ namespace Cal_App.Asset
                     result += String.Format("{0:H:mm} - {1}\n", when, eventItem.Summary);
                 }
             }
-
             return result;
         }
     }

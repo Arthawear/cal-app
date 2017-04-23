@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Cal_App"
         xmlns:Control="clr-namespace:Cal_App.Views"
         mc:Ignorable="d"
-        Title="Cal_App"  WindowStyle="None" AllowsTransparency="True"   ResizeMode="{Binding Path=ResizeMode }"
+        Title="Cal_App"  WindowStyle="None" AllowsTransparency="True"   ResizeMode="CanResizeWithGrip" 
          MaxWidth="350"  MinHeight="900" MinWidth="300" Height="900" FontWeight="Bold" FontSize="10" 
-             Foreground="White"   SizeChanged="Window_SizeChanged">
+             Foreground="White"   SizeChanged="Window_SizeChanged" MouseEnter="Window_MouseEnter"  MouseLeave="Window_MouseLeave">
 
     <Window.Background>
         <VisualBrush Stretch="Fill"  >

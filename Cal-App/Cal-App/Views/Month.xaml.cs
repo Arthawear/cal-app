@@ -1,4 +1,4 @@
-﻿using Cal_App.Asset;
+﻿
 using Cal_App.Models;
 using System;
 using System.Collections.Generic;
@@ -26,8 +26,6 @@ namespace Cal_App.Views
         public Month()
         {
             InitializeComponent();
-
-
         }
         public void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -45,8 +43,22 @@ namespace Cal_App.Views
                 CurrentDaySquare.Visibility = Visibility.Hidden;
                 CurrentDayButton.Visibility = Visibility.Hidden;
             }
+            if (dc.Days.Length<31)
+            {
+                button31.IsEnabled = false;
+                button31.Visibility = Visibility.Hidden;
+                if (dc.Days.Length < 30)
+                {
+                    button30.IsEnabled = false;
+                    button30.Visibility = Visibility.Hidden;
+                    if (dc.Days.Length < 29)
+                    {
+                        button29.IsEnabled = false;
+                        button29.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
         }
-
         private void Button_Click_Popup(object sender, RoutedEventArgs e)
         {
             var month = this as UserControl;
@@ -63,17 +75,14 @@ namespace Cal_App.Views
                 popLink.IsOpen = false;
             }
         }
-
         public void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             set1.Opacity = 1;
         }
-
         public void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             set1.Opacity = 0;
         }
-
         private void Button_Click_Event(object sender, RoutedEventArgs e)
         {
             var month = this as UserControl;
@@ -89,8 +98,8 @@ namespace Cal_App.Views
                 var dt = button.DataContext as MonthModel;
                 var year = dt.Year;
                 var monthNr = dt.Number;
-                var day = button.Content as string;
-                var dayInt = int.Parse(day);
+                var day = button.Content ;
+                var dayInt = (int)day;
                 var popEvent = grid1.Children[1] as Popup;
                 popLink.IsOpen = false;
                 var grid2 = popEvent.Child as Grid;
@@ -101,14 +110,9 @@ namespace Cal_App.Views
                 {
                     popEvent.IsOpen = true;
                 }
-                //else
-                //{
-                //    popEvent.IsOpen = false;
-                //}
             }
             popLink.IsOpen = false;
         }
-
         private void Button_Click_Event1(object sender, RoutedEventArgs e)
         {
             var month = this as UserControl;
@@ -122,10 +126,8 @@ namespace Cal_App.Views
             {
                 Button button = new Button();
                 button = (Button)e.OriginalSource;
-                //var dt = button.DataContext as MonthModel;
                 var year = DateTime.Now.Year; ;
                 var monthNr = DateTime.Now.Month;
-                //var day = button.Content as string;
                 var dayInt = DateTime.Now.Day;
                 popLink.IsOpen = false;
                 var grid2 = popEvent.Child as Grid;
@@ -139,7 +141,5 @@ namespace Cal_App.Views
             }
             popLink.IsOpen = false;
         }
-
-
     }
 }

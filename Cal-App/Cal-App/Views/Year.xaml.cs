@@ -22,7 +22,6 @@ namespace Cal_App.Views
     /// </summary>
     public class FrameworkElement : UIElement, INotifyPropertyChanged
     {
-        private string resizeMode = "CanResizeWithGrip";
         public static readonly DependencyProperty YearProperty;
         private void OnPropertyChanged(string propertyName)
         {
@@ -32,7 +31,6 @@ namespace Cal_App.Views
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
         public int Year
         {
             get
@@ -43,26 +41,6 @@ namespace Cal_App.Views
             set
             {
                 SetValue(YearProperty, value);
-            }
-        }
-
-        public string ResizeMode
-        {
-            get
-            {
-
-                return this.resizeMode;
-
-            }
-
-            set
-            {
-                if (this.resizeMode != value)
-                {
-                    this.resizeMode = value;
-                    this.OnPropertyChanged("ResizeMode");
-                }
-
             }
         }
         static FrameworkElement()
@@ -92,14 +70,12 @@ namespace Cal_App.Views
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
         public YearModel YearToCal
         {
             get
             {
                 return this.yearToCal;
             }
-
             set
             {
                 if (this.yearToCal != value)
@@ -107,11 +83,8 @@ namespace Cal_App.Views
                     this.yearToCal = value;
                     this.OnPropertyChanged("YearToCal");
                 }
-
             }
         }
-
-
         public FrameworkElement Element
         {
             get
@@ -128,14 +101,12 @@ namespace Cal_App.Views
                 }
             }
         }
-
         public bool ShowHolidays
         {
             get
             {
                 return this.showHolidays;
             }
-
             set
             {
                 if (this.showHolidays != value)
@@ -143,16 +114,11 @@ namespace Cal_App.Views
                     this.showHolidays = value;
                     this.OnPropertyChanged("ShowHolidays");
                 }
-
             }
         }
-
-
-
         public Year()
         {
             InitializeComponent();
-            element.ResizeMode = "None";
             DataContext = Element;
             this.YearToCal = RunYear(Element.Year);
             for (int i = 1; i < bigGrid.Children.Count; i++)
@@ -193,7 +159,6 @@ namespace Cal_App.Views
             grid12.DataContext = months.Items1[11];
             return months;
         }
-
         private void Button_ClickSetYear(object sender, RoutedEventArgs e)
         {
             this.Element.Year = int.Parse(yearTxtBox.Text);
@@ -224,28 +189,24 @@ namespace Cal_App.Views
                 currentCombo.Visibility = Visibility.Visible;
                 threeMonthCombo.Visibility = Visibility.Visible;
             }
-
             popLink.IsOpen = false;
             var uc = this as UserControl;
             var window = uc.Parent as Window;
-            this.Element.ResizeMode = "None";
+            window.ResizeMode = ResizeMode.NoResize;
         }
-
         private void Button_ClickExit(object sender, RoutedEventArgs e)
         {
             var uc = this as UserControl;
             var window = uc.Parent as Window;
             window.Close();
         }
-
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var uc = this as UserControl;
             var window = uc.Parent as Window;
             window.DragMove();
-            this.Element.ResizeMode = "None";
+            window.ResizeMode = ResizeMode.NoResize;
         }
-
         private void Button_comboClick(object sender, RoutedEventArgs e)
         {
             ComboBoxItem a = (ComboBoxItem)e.OriginalSource;
@@ -255,11 +216,9 @@ namespace Cal_App.Views
             binding.Mode = BindingMode.TwoWay;
             WinBack.SetBinding(Path.FillProperty, binding);
             popLink.IsOpen = false;
-            this.Element.ResizeMode = "None";
+            var window = this.Parent as Window;
+            window.ResizeMode = ResizeMode.NoResize;
         }
-
-
-
         private void Button_comboClickViewLarge(object sender, RoutedEventArgs e)
         {
             var grids = bigGrid.Children;
@@ -273,7 +232,6 @@ namespace Cal_App.Views
                     var set2 = gridSecond.Children[0] as TextBlock;
                     if (grid != null)
                     {
-                        grid.Opacity = 1;
                         grid.Visibility = Visibility.Visible;
                         string color = transparent;
                         Binding binding = new Binding();
@@ -289,6 +247,7 @@ namespace Cal_App.Views
                     }
                 }
             }
+            var window = this.Parent as Window;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (!(cols.Count == 4 && rows.Count == 3))
@@ -321,8 +280,6 @@ namespace Cal_App.Views
                 Grid.SetRow(grid10, 2); Grid.SetColumn(grid10, 1);
                 Grid.SetRow(grid11, 2); Grid.SetColumn(grid11, 2);
                 Grid.SetRow(grid12, 2); Grid.SetColumn(grid12, 3);
-                var uc = this as UserControl;
-                var window = uc.Parent as Window;
                 window.MinHeight = 150;
                 window.MaxHeight = 1000;
                 window.MaxWidth = 1333;
@@ -338,10 +295,9 @@ namespace Cal_App.Views
                 var data = WinBack.Data;
                 WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
-            this.Element.ResizeMode = "None";
+            window.ResizeMode = ResizeMode.NoResize;
             popLink.IsOpen = false;
         }
-
         private void Button_comboClickViewThin(object sender, RoutedEventArgs e)
         {
             var grids = bigGrid.Children;
@@ -355,7 +311,6 @@ namespace Cal_App.Views
                     var set3 = gridSecond.Children[0] as TextBlock;
                     if (grid != null)
                     {
-                        grid.Opacity = 1;
                         grid.Visibility = Visibility.Visible;
                         string color = transparent;
                         Binding binding = new Binding();
@@ -371,6 +326,7 @@ namespace Cal_App.Views
                     }
                 }
             }
+            var window = this.Parent as Window;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (cols.Count != 2 && rows.Count != 6)
@@ -405,8 +361,6 @@ namespace Cal_App.Views
                 Grid.SetRow(grid10, 4); Grid.SetColumn(grid10, 1);
                 Grid.SetRow(grid11, 5); Grid.SetColumn(grid11, 0);
                 Grid.SetRow(grid12, 5); Grid.SetColumn(grid12, 1);
-                var uc = this as UserControl;
-                var window = uc.Parent as Window;
                 window.MinHeight = 750;
                 window.MaxHeight = 1200;
                 window.MaxWidth = this.MaxHeight / 3;
@@ -416,17 +370,15 @@ namespace Cal_App.Views
                 window.MaxWidth = this.MaxHeight / 3;
                 window.MinHeight = 750;
                 window.MinWidth = this.MinHeight / 3;
-                //this.MaxWidth = 350;
                 string path = "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z";
                 Binding pathBinding = new Binding();
                 pathBinding.Source = path;
                 var data = WinBack.Data;
                 WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
-            this.Element.ResizeMode = "None";
+            window.ResizeMode = ResizeMode.NoResize;
             popLink.IsOpen = false;
         }
-
         private void Button_comboClickViewOneMonth(object sender, RoutedEventArgs e)
         {
             int currentYear0 = DateTime.Now.Year;
@@ -437,6 +389,7 @@ namespace Cal_App.Views
                 popLink.IsOpen = false;
                 return;
             }
+            var window = this.Parent as Window;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (!(cols.Count == 1 && rows.Count == 1))
@@ -448,7 +401,6 @@ namespace Cal_App.Views
                 cols.Add(col1);
                 rows.Add(row1);
                 int currentMonth = DateTime.Now.Month;
-                //currentMonth = 12;
                 var grids = bigGrid.Children;
                 for (int i = 1; i < grids.Count; i++)
                 {
@@ -460,7 +412,6 @@ namespace Cal_App.Views
                         var set3 = gridSecond.Children[0] as TextBlock;
                         if (grid != null)
                         {
-                            grid.Opacity = 0;
                             grid.Visibility = Visibility.Hidden;
                             string color = transparent;
                             Binding binding = new Binding();
@@ -469,7 +420,6 @@ namespace Cal_App.Views
                         }
                         if (i == currentMonth)
                         {
-                            grid.Opacity = 1;
                             grid.Visibility = Visibility.Visible;
                             Grid.SetRow(uc1, 0); Grid.SetColumn(uc1, 0);
                             string color = white;
@@ -479,8 +429,6 @@ namespace Cal_App.Views
                         }
                     }
                 }
-                var uc = this as UserControl;
-                var window = uc.Parent as Window;
                 window.MaxWidth = 300;
                 window.MinWidth = 150;
                 window.MinHeight = 150;
@@ -494,10 +442,9 @@ namespace Cal_App.Views
                 var data = WinBack.Data;
                 WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
-            this.Element.ResizeMode = "None";
+            window.ResizeMode = ResizeMode.NoResize;
             popLink.IsOpen = false;
         }
-
         private void Button_comboClickViewThreeMonths(object sender, RoutedEventArgs e)
         {
             int currentYear0 = DateTime.Now.Year;
@@ -508,6 +455,7 @@ namespace Cal_App.Views
                 popLink.IsOpen = false;
                 return;
             }
+            var window = this.Parent as Window;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (!(cols.Count == 1 && rows.Count == 3))
@@ -523,14 +471,12 @@ namespace Cal_App.Views
                 rows.Add(row2);
                 rows.Add(row3);
                 int currentMonth = DateTime.Now.Month;
-                //currentMonth = 12;
                 string gridName = "grid" + currentMonth;
                 var grids = bigGrid.Children;
                 for (int i = 1; i < grids.Count; i++)
                 {
                     var uc1 = grids[i] as UserControl;
                     var grid = uc1.Content as Grid;
-                    grid.Opacity = 0;
                     grid.Visibility = Visibility.Hidden;
                     var gridSecond = grid.Children[0] as Grid;
                     var set5 = gridSecond.Children[0] as TextBlock;
@@ -540,7 +486,6 @@ namespace Cal_App.Views
                     set5.SetBinding(ForegroundProperty, binding0);
                     if (i == currentMonth - 1)
                     {
-                        grid.Opacity = 1;
                         grid.Visibility = Visibility.Visible;
                         Grid.SetRow(uc1, 0); Grid.SetColumn(uc1, 0);
                         string color = white;
@@ -550,13 +495,11 @@ namespace Cal_App.Views
                     }
                     if (i == currentMonth)
                     {
-                        grid.Opacity = 1;
                         grid.Visibility = Visibility.Visible;
                         Grid.SetRow(uc1, 1); Grid.SetColumn(uc1, 0);
                     }
                     if (i == currentMonth + 1)
                     {
-                        grid.Opacity = 1;
                         grid.Visibility = Visibility.Visible;
                         Grid.SetRow(uc1, 2); Grid.SetColumn(uc1, 0);
                     }
@@ -567,7 +510,6 @@ namespace Cal_App.Views
                         bool holiday = dc.ShowHolidays;
                         MonthModel dec = new MonthModel(12, currentYear - 1, holiday);
                         var gridChild = grid12.Content as Grid;
-                        gridChild.Opacity = 1;
                         gridChild.Visibility = Visibility.Visible;
                         grid12.DataContext = dec;
                         string color = "#FEFEFE";
@@ -583,14 +525,11 @@ namespace Cal_App.Views
                         bool holiday = dc.ShowHolidays;
                         MonthModel jan = new MonthModel(1, currentYear + 1, holiday);
                         var gridChild = grid1.Content as Grid;
-                        gridChild.Opacity = 1;
                         gridChild.Visibility = Visibility.Visible;
                         grid1.DataContext = jan;
                         Grid.SetRow(grid1, 2); Grid.SetColumn(grid1, 0);
                     }
                 }
-                var uc = this as UserControl;
-                var window = uc.Parent as Window;
                 window.MaxWidth = 200;
                 window.MinWidth = 200;
                 window.MinHeight = 600;
@@ -606,12 +545,11 @@ namespace Cal_App.Views
                 var data = WinBack.Data;
                 WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
-            this.Element.ResizeMode = "None";
+            window.ResizeMode = ResizeMode.NoResize;
             popLink.IsOpen = false;
         }
         private void Button_ClickHolidays(object sender, RoutedEventArgs e)
         {
-
             if (!ShowHolidays)
             {
                 ShowHolidays = true;
@@ -636,46 +574,21 @@ namespace Cal_App.Views
             else
                 this.YearToCal = RunYear(Element.Year);
             popLink.IsOpen = false;
-            this.Element.ResizeMode = "None";
+            var window = this.Parent as Window;
+            window.ResizeMode = ResizeMode.NoResize;
         }
-
-        private void Window_MouseEnter(object sender, MouseEventArgs e)
-        {
-            this.Element.ResizeMode = "CanResizeWithGrip";
-            int currentMonth = DateTime.Now.Month;
-            for (int i = 1; i < bigGrid.Children.Count; i++)
-            {
-                var month = bigGrid.Children[i] as Month;
-                month.UserControl_MouseEnter(sender, e);
-            }
-        }
-
-        private void Window_MouseLeave(object sender, MouseEventArgs e)
-        {
-            int currentMonth = DateTime.Now.Month;
-            for (int i = 1; i < bigGrid.Children.Count; i++)
-            {
-                var month = bigGrid.Children[i] as Month;
-                month.UserControl_MouseLeave(sender, e);
-            }
-        }
-
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
         {
-            this.Element.ResizeMode = "None";
+            var window = this.Parent as Window;
+            window.ResizeMode = ResizeMode.NoResize;
             popLink.IsOpen = false;
-            var uc = this as UserControl;
-            var window = uc.Parent as Window;
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintVisual(window, "Window Printing.");
         }
-
-
         private void Button_ClickExitEvent(object sender, RoutedEventArgs e)
         {
             popEvent.IsOpen = false;
         }
-
         private void Button_ClickEventOn(object sender, RoutedEventArgs e)
         {
             Button button = new Button();
@@ -684,20 +597,46 @@ namespace Cal_App.Views
             {
                 isEventOn = true;
                 button.Content = "Események Ki";
-
+                for (int i = 1; i < bigGrid.Children.Count; i++)
+                {
+                    var month = bigGrid.Children[i] as Month;
+                    var grid1 = month.Content as Grid;
+                    var grid2 = grid1.Children[0] as Grid;
+                    for (int j = 2; j < grid2.Children.Count-1; j++)
+                    {
+                        if (grid2.Children[j] is Button)
+                        {
+                            var button1 = grid2.Children[j] as Button;
+                            button1.Visibility = Visibility.Visible;
+                        }
+                    }
+                    month.UserControl_Loaded(sender,e);
+                }
             }
             else if (isEventOn)
             {
                 isEventOn = false;
                 button.Content = "Események Be";
+                for (int i = 1; i < bigGrid.Children.Count; i++)
+                {
+                    var month = bigGrid.Children[i] as Month;
+                    var grid1 = month.Content as Grid;
+                    var grid2 = grid1.Children[0] as Grid;
+                    for (int j = 2; j < grid2.Children.Count; j++)
+                    {
+                        if (grid2.Children[j] is Button)
+                        {
+                            var button1 = grid2.Children[j] as Button;
+                            button1.Visibility = Visibility.Hidden;
+                        }
+                    }
+                }
             }
             popLink.IsOpen = false;
-            this.Element.ResizeMode = "None";
+            var window = this.Parent as Window;
+            window.ResizeMode = ResizeMode.NoResize;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }
