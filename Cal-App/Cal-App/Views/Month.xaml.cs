@@ -96,7 +96,7 @@ namespace Cal_App.Views
                 var grid2 = popEvent.Child as Grid;
                 var googleEvents = grid2.Children[0] as TextBlock;
                 var googleCal = new GoogleCal();
-                googleEvents.Text = String.Format("Események\n {0:yyyy.MM.dd}\n\n{1}", new DateTime(year, monthNr, dayInt), googleCal.GetEvents(year, monthNr, dayInt));
+                googleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year, monthNr, dayInt), googleCal.GetEvents(year, monthNr, dayInt));
                 if (popEvent.IsOpen == false)
                 {
                     popEvent.IsOpen = true;
@@ -131,7 +131,7 @@ namespace Cal_App.Views
                 var grid2 = popEvent.Child as Grid;
                 var googleEvents = grid2.Children[0] as TextBlock;
                 var googleCal = new GoogleCal();
-                googleEvents.Text = String.Format("Események\n {0:yyyy.MM.dd}\n\n{1}", new DateTime(year, monthNr, dayInt), googleCal.GetEvents(year, monthNr, dayInt));
+                googleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year, monthNr, dayInt), googleCal.GetEvents(year, monthNr, dayInt));
                 if (popEvent.IsOpen == false)
                 {
                     popEvent.IsOpen = true;

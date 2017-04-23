@@ -124,7 +124,8 @@
                     MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True"  >
                 <Grid   >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="19*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="245*"/>
                         <RowDefinition Height="245*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -141,10 +142,11 @@
                         </VisualBrush>
                     </Grid.Background>
                     <!--<ScrollViewer>-->
-                    <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium"  Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
+                    <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
                         Események a google naptarbol
                     </TextBlock>
-                    <TextBlock Grid.Column="3" Padding="8" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">x</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20" >Események</TextBlock>
+                    <TextBlock Grid.Column="3" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">x</TextBlock>
                     <Button Grid.Column="3" Opacity="0" Click="Button_ClickExitEvent"></Button>
                     <!--</ScrollViewer>-->
                 </Grid>
