@@ -63,6 +63,8 @@ namespace Cal_App
                 Width = Height / 3;
             }
             FontSize = Width / (cols.Count * 15);
+            calendar.showYearTxtBlock.FontSize = Height / 22;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
             this.ResizeMode = ResizeMode.NoResize;
         }
         private void Window_MouseEnter(object sender, MouseEventArgs e)
@@ -78,6 +80,7 @@ namespace Cal_App
                 var month = bigGrid.Children[i] as Month;
                 month.UserControl_MouseEnter(sender, e);
             }
+            calendar.yearPanel.Visibility = Visibility.Visible;
         }
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -101,10 +104,13 @@ namespace Cal_App
                     dispatcherTimer.Start();
                 }
             }
+            
         }
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             this.ResizeMode = ResizeMode.NoResize;
+            var calendar = this.Content as Views.Calendar;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

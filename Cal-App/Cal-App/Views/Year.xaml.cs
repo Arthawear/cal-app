@@ -164,6 +164,7 @@ namespace Cal_App.Views
             var window = calendar.Parent as Window;
             window.DragMove();
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Cal_App.Views
         {
             InitializeComponent();
         }
-        private void Button_comboClickViewThin(object sender, RoutedEventArgs e)
+        public void Button_comboClickViewThin(object sender, RoutedEventArgs e)
         {
             var grid0 = this.Parent as Grid;
             var year = grid0.Children[1] as Year;
@@ -111,6 +111,7 @@ namespace Cal_App.Views
                 year.WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
             popLink.IsOpen = false;
         }
 
@@ -195,6 +196,7 @@ namespace Cal_App.Views
                 year.WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
             popLink.IsOpen = false;
         }
 
@@ -267,6 +269,7 @@ namespace Cal_App.Views
                 year.WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
             popLink.IsOpen = false;
         }
 
@@ -376,6 +379,7 @@ namespace Cal_App.Views
                 year.WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
             popLink.IsOpen = false;
         }
 
@@ -417,8 +421,10 @@ namespace Cal_App.Views
             }
             popLink.IsOpen = false;
             var calendar = grid0.Parent as Calendar;
+            calendar.showYearTxtBlock.Text = year.Element.Year.ToString();
             var window = calendar.Parent as Window;
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
         }
 
         private void Button_comboClick(object sender, RoutedEventArgs e)
@@ -435,6 +441,7 @@ namespace Cal_App.Views
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as Window;
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
         }
 
         private void Button_ClickEventOn(object sender, RoutedEventArgs e)
@@ -487,6 +494,7 @@ namespace Cal_App.Views
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as Window;
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
         }
 
         private void Button_ClickHolidays(object sender, RoutedEventArgs e)
@@ -520,6 +528,7 @@ namespace Cal_App.Views
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as Window;
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
         }
 
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
@@ -528,6 +537,7 @@ namespace Cal_App.Views
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as Window;
             window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
             popLink.IsOpen = false;
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintVisual(window, "Window Printing.");
