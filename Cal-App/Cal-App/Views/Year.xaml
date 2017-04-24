@@ -7,8 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" 
              MouseLeftButtonDown="Window_MouseLeftButtonDown"  >
-    
-   
     <UserControl.Background>
         <VisualBrush Stretch="Fill"  >
             <VisualBrush.Visual>
@@ -16,7 +14,6 @@
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Background>
-
     <Grid Name="bigGrid" ShowGridLines="False" Margin="5" >
         <Grid.RowDefinitions>
             <RowDefinition Name="row1"></RowDefinition>
@@ -29,128 +26,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="col1"></ColumnDefinition>
             <ColumnDefinition Name="col2"></ColumnDefinition>
-
         </Grid.ColumnDefinitions>
-
-
         <Grid>
-            <Popup  Name="popLink" StaysOpen="True" IsOpen="False" Placement="Right"   PlacementTarget="{Binding ElementName=bigGrid}"  MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True"  >
-                <Grid   >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="19*"/>
-                        <RowDefinition Height="245*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.Background >
-                        <VisualBrush Stretch="Fill"  >
-                            <VisualBrush.Visual>
-                                <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z"   Fill="Beige"  />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Grid.Background>
-                    <ListBox Name="SettingListBox" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" BorderThickness="0" Grid.RowSpan="2" >
-                        <ListBoxItem Name="SetYear" >
-                            <StackPanel Orientation="Horizontal">
-                                <Label VerticalContentAlignment="Center" HorizontalAlignment="Left">
-                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Év</TextBlock>
-                                </Label>
-                                <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="2017" ></TextBox>
-                                <Button Width="50" VerticalContentAlignment="Center" HorizontalAlignment="Center" Background="Beige" BorderThickness="0" Click="Button_ClickSetYear">Ok</Button>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>Nyelv</ListBoxItem>
-                        <ListBoxItem Name="View" >
-                            <StackPanel Orientation="Horizontal">
-                                <Label>Nézet</Label>
-                                <ComboBox Width="100"  Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack,  Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" >
-                                    <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="Button_comboClickViewThin">Thin
-                                    </ComboBoxItem>
-                                    <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewLarge"  >Large
-                                    </ComboBoxItem>
-                                    <ComboBoxItem Name="currentCombo" Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewOneMonth">Current month
-                                    </ComboBoxItem>
-                                    <ComboBoxItem Name="threeMonthCombo" Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewThreeMonths">Three months
-                                    </ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <Label>Háttér</Label>
-                                <ComboBox Width="100" Name="WinBackgroundCombo" Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack,  Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" >
-                                    <ComboBoxItem Width="Auto" Height="20"  Name="Beige" Background="Beige" Selected="Button_comboClick">Beige
-                                    </ComboBoxItem>
-                                    <ComboBoxItem Name="Black" Width="Auto" Height="20" Background="Black" Selected="Button_comboClick" Foreground="White" >Black
-                                    </ComboBoxItem>
-                                    <ComboBoxItem Name="Transparent" Width="Auto" Height="20" Background="Transparent" Selected="Button_comboClick">Transparent
-                                    </ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem >
-                            <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button  Width="160" Click="Button_ClickEventOn"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                                    <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Események Be</TextBlock>
-                                </Button>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem >
-                            <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button  Width="160" Click="Button_ClickHolidays"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                                    <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Ünnepnapok</TextBlock>
-                                </Button>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button  Width="160" Click="Button_ClickPrint"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                                    <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Nyomtatás</TextBlock>
-                                </Button>
-                            </StackPanel>
-                        </ListBoxItem>
-
-
-                        <ListBoxItem >
-                            <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button  Width="160" Click="Button_ClickExit"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                                    <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Kilépés</TextBlock>
-                                </Button>
-                            </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
-                </Grid>
-            </Popup>
-            <Popup  Name="popEvent" StaysOpen="True" IsOpen="False" Placement="Right"  PlacementTarget="{Binding ElementName=bigGrid}" 
-                    MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True"  >
-                <Grid   >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="245*"/>
-                        <RowDefinition Height="245*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.Background >
-                        <VisualBrush Stretch="Fill"  >
-                            <VisualBrush.Visual>
-                                <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z"   Fill="Beige"  />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Grid.Background>
-                    <!--<ScrollViewer>-->
-                    <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
-                        Események a google naptarbol
-                    </TextBlock>
-                    <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20" >Események</TextBlock>
-                    <TextBlock Grid.Column="3" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">x</TextBlock>
-                    <Button Grid.Column="3" Opacity="0" Click="Button_ClickExitEvent"></Button>
-                    <!--</ScrollViewer>-->
-                </Grid>
-            </Popup>
         </Grid>
         <local:Month x:Name="grid1" Grid.Row="0" Grid.Column="0"/>
         <local:Month x:Name="grid2" Grid.Row="0" Grid.Column="1"/>

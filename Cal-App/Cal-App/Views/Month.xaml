@@ -65,7 +65,6 @@
             <TextBlock Grid.Row="1" Grid.Column="5"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Szo</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Va</TextBlock>
 
-
             <TextBlock Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[1].Color}" Padding="5"> 1</TextBlock>
             <Button Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}" Content="{Binding Path=Days[0]}" Click="Button_Click_Event" Foreground="{Binding Path=DayToPlace[1].Color}" Background="Transparent" BorderThickness="0" UseLayoutRounding="True" Visibility="Hidden"></Button>
             <TextBlock Grid.Row="{Binding Path=DayToPlace[2].Key}" Grid.Column="{Binding Path=DayToPlace[2].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[2].Color}" Padding="5"> 2</TextBlock>
@@ -132,12 +131,11 @@
                 <Grid.Background >
                     <VisualBrush Stretch="Fill"  >
                         <VisualBrush.Visual>
-                            <Path Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" Stroke="White" StrokeThickness="{Binding Path=Thickness}"   />
+                            <Path Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" Stroke="White" StrokeThickness="{Binding Path=Thickness}"/>
                         </VisualBrush.Visual>
                     </VisualBrush>
                 </Grid.Background>
             </Grid>
-
             <Button Name="CurrentDayButton" Grid.Row="{Binding Path=TodayRow}" Grid.Column="{Binding Path=TodayCol}"  Click="Button_Click_Event1" Background="Transparent" BorderThickness="0"  Opacity="0.4" Visibility="Hidden"></Button>
         </Grid>
     </Grid>

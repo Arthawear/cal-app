@@ -83,8 +83,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GoogleCal.cs" />
+    <Compile Include="Views\Calendar.xaml.cs">
+      <DependentUpon>Calendar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Month.xaml.cs">
       <DependentUpon>Month.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Popups.xaml.cs">
+      <DependentUpon>Popups.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Year.xaml.cs">
       <DependentUpon>Year.xaml</DependentUpon>
@@ -101,7 +107,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Calendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Month.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Popups.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
