@@ -57,13 +57,13 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" Grid.ColumnSpan="7"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
 
-            <TextBlock Grid.Row="1" Grid.Column="0"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Hé</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5">Ke</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="2"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Sze</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="3"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5">Csü</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Pé</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="5"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Szo</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"> Va</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=DayNames[0]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=DayNames[1]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=DayNames[2]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Path=DayNames[3]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Path=DayNames[4]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding Path=DayNames[5]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="6" Text="{Binding Path=DayNames[6]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
 
             <TextBlock Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Path=DayToPlace[1].Color}" Padding="5"> 1</TextBlock>
             <Button Grid.Row="{Binding Path=DayToPlace[1].Key}" Grid.Column="{Binding Path=DayToPlace[1].Value}" Content="{Binding Path=Days[0]}" Click="Button_Click_Event" Foreground="{Binding Path=DayToPlace[1].Color}" Background="Transparent" BorderThickness="0" UseLayoutRounding="True" Visibility="Hidden"></Button>

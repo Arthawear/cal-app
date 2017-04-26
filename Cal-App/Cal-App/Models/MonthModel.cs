@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,40 @@ namespace Cal_App.Models
         private int number;
         private Dictionary<int, RenderDay> dayToPlace = new Dictionary<int, RenderDay>();
         private bool showHolidays;
+        private string culture;
+        public string Culture
+        {
+            get
+            {
+                return this.culture;
+            }
+            set
+            {
+                if (this.culture != value)
+                {
+                    this.culture = value;
+                    this.OnPropertyChanged("Culture");
+                }
+            }
+        }
+        private string[] dayNames;
+        
+        public string[] DayNames
+        {
+            get
+            {
+                return this.dayNames;
+            }
+            set
+            {
+                if (this.dayNames != value)
+                {
+                    this.dayNames = value;
+                    this.OnPropertyChanged("DayNames");
+                }
+            }
+        }
+
         public string Name
         {
             get
@@ -153,8 +188,10 @@ namespace Cal_App.Models
             }
         }
 
-        public MonthModel(int month, int year, bool showHolidays)
+        public MonthModel(int month, int year, bool showHolidays, string culture )
         {
+
+            this.Culture = culture;
             this.number = month;
             Today = DateTime.Now.Day;
             this.firstDay = new DateTime(year, month, 1).DayOfWeek;
@@ -167,16 +204,13 @@ namespace Cal_App.Models
             {
                 case 1:
                     this.numberOfDays = 31;
-                    this.name = "Január";
                     this.backgroundColour = "#008DD2";
                     if (currentMonth == 1)
                     {
                         Thickness = 100;
-
                     }
                     break;
                 case 2:
-                    this.name = "Február";
                     this.backgroundColour = "#393185";
                     if (currentMonth == 2)
                     {
@@ -191,7 +225,6 @@ namespace Cal_App.Models
                         this.numberOfDays = 28;
                     break;
                 case 3:
-                    this.name = "Március";
                     this.backgroundColour = "#57A7B3";
                     if (currentMonth == 3)
                     {
@@ -200,7 +233,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 31;
                     break;
                 case 4:
-                    this.name = "Április";
                     this.backgroundColour = "#61A375";
                     if (currentMonth == 4)
                     {
@@ -209,7 +241,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 30;
                     break;
                 case 5:
-                    this.name = "Május";
                     this.backgroundColour = "#009846";
                     if (currentMonth == 5)
                     {
@@ -218,7 +249,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 31;
                     break;
                 case 6:
-                    this.name = "Június";
                     this.backgroundColour = "#DCCF73";
                     if (currentMonth == 6)
                     {
@@ -226,8 +256,7 @@ namespace Cal_App.Models
                     }
                     this.numberOfDays = 30;
                     break;
-                case 7:
-                    this.name = "Július";
+                case 7:;
                     this.backgroundColour = "#E31E24";
                     if (currentMonth == 7)
                     {
@@ -236,7 +265,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 31;
                     break;
                 case 8:
-                    this.name = "Augusztus";
                     this.backgroundColour = "#E5097F";
                     if (currentMonth == 8)
                     {
@@ -244,8 +272,7 @@ namespace Cal_App.Models
                     }
                     this.numberOfDays = 31;
                     break;
-                case 9:
-                    this.name = "Szeptember";
+                case 9:;
                     this.backgroundColour = "#EF7F1A";
                     if (currentMonth == 9)
                     {
@@ -254,7 +281,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 30;
                     break;
                 case 10:
-                    this.name = "Október";
                     this.backgroundColour = "#CC6F3C";
                     if (currentMonth == 10)
                     {
@@ -263,7 +289,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 31;
                     break;
                 case 11:
-                    this.name = "November";
                     this.backgroundColour = "#B2AD81";
                     if (currentMonth == 11)
                     {
@@ -272,7 +297,6 @@ namespace Cal_App.Models
                     this.numberOfDays = 30;
                     break;
                 case 12:
-                    this.name = "December";
                     this.backgroundColour = "#7690C9";
                     if (currentMonth == 12)
                     {
@@ -337,14 +361,25 @@ namespace Cal_App.Models
             }
             this.todayRow = dayToPlace[Today].Key;
             this.todayCol = dayToPlace[Today].Value;
+            this.name = new DateTime(year, month, 1).ToString("MMMM", new CultureInfo(Culture));
+            name = new CultureInfo("en-US", false).TextInfo.ToTitleCase(name);
+            DayNames = new string[7];
+            for (int i = 2; i < 9; i++)
+            {
+                string dayName = new DateTime(2017, 1, i).ToString("dddd", new CultureInfo(Culture));
+                //if (Culture.ToLower()!="hu")
+                //{
+                    dayName =dayName.Substring(0, 2);
+                //}
+                dayName= new CultureInfo("en-US", false).TextInfo.ToTitleCase(dayName);
+                DayNames[i - 2] = dayName;
+            }
         }
         public class RenderDay
         {
             public int Key { get; set; }
             public int Value { get; set; }
             public string Color { get; set; }
-
         }
-
     }
 }

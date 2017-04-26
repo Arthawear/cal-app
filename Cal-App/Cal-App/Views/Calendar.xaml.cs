@@ -35,6 +35,7 @@ namespace Cal_App.Views
             var grid = this.Content as Grid;
             var popups = grid.Children[0] as Popups;
             var year = grid.Children[1] as Year;
+            string culture = year.Culture;
             int yearNr = int.Parse(showYearTxtBlock.Text);
             int prevYear = yearNr - 1;
             showYearTxtBlock.Text = prevYear.ToString();
@@ -46,7 +47,8 @@ namespace Cal_App.Views
             {
                 popups.Button_comboClickViewThin(sender, e);
             }
-            year.YearToCal = year.RunYear(year.Element.Year);
+            
+            year.YearToCal = year.RunYear(year.Element.Year,culture);
             int currentYear = DateTime.Now.Year;
             int currentMonth = DateTime.Now.Month;
             for (int i = 1; i < year.bigGrid.Children.Count; i++)
@@ -80,6 +82,7 @@ namespace Cal_App.Views
             var grid = this.Content as Grid;
             var popups = grid.Children[0] as Popups;
             var year = grid.Children[1] as Year;
+            string culture = year.Culture;
             int yearNr = int.Parse(showYearTxtBlock.Text);
                 int nextYear = yearNr + 1;
             showYearTxtBlock.Text = nextYear.ToString();
@@ -91,7 +94,8 @@ namespace Cal_App.Views
             {
                 popups.Button_comboClickViewThin(sender, e);
             }
-            year.YearToCal = year.RunYear(year.Element.Year);
+            
+            year.YearToCal = year.RunYear(year.Element.Year,culture);
             int currentYear = DateTime.Now.Year;
             int currentMonth = DateTime.Now.Month;
             for (int i = 1; i < year.bigGrid.Children.Count; i++)

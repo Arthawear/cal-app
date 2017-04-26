@@ -24,9 +24,11 @@ namespace Cal_App.Views
         private string white = "#FEFEFE";
         private string transparent = "#00FFFFFF";
         public bool isEventOn = false;
+        //private string[] languages = new string[10] { "EN", "HU", "RO", "DE", "FR", "IT", "ES", "", "", "" };
         public Popups()
         {
             InitializeComponent();
+            //languageCB.ItemsSource = languages;
         }
         public void Button_comboClickViewThin(object sender, RoutedEventArgs e)
         {
@@ -341,7 +343,8 @@ namespace Cal_App.Views
                         int currentYear = DateTime.Now.Year;
                         var dc = year.grid12.DataContext as MonthModel;
                         bool holiday = dc.ShowHolidays;
-                        MonthModel dec = new MonthModel(12, currentYear - 1, holiday);
+                        string culture = dc.Culture;
+                        MonthModel dec = new MonthModel(12, currentYear - 1, holiday,culture);
                         var gridChild = year.grid12.Content as Grid;
                         gridChild.Visibility = Visibility.Visible;
                         year.grid12.DataContext = dec;
@@ -356,7 +359,8 @@ namespace Cal_App.Views
                         int currentYear = DateTime.Now.Year;
                         var dc = year.grid1.DataContext as MonthModel;
                         bool holiday = dc.ShowHolidays;
-                        MonthModel jan = new MonthModel(1, currentYear + 1, holiday);
+                        string culture = dc.Culture;
+                        MonthModel jan = new MonthModel(1, currentYear + 1, holiday,culture);
                         var gridChild = year.grid1.Content as Grid;
                         gridChild.Visibility = Visibility.Visible;
                         year.grid1.DataContext = jan;
@@ -388,13 +392,15 @@ namespace Cal_App.Views
             var grid0 = this.Parent as Grid;
             var year = grid0.Children[1] as Year;
             year.Element.Year = int.Parse(yearTxtBox.Text);
+            string culture = year.Culture;
             var cols = year.bigGrid.ColumnDefinitions;
             var rows = year.bigGrid.RowDefinitions;
             if (cols.Count == 1 && (rows.Count == 1 || rows.Count == 3))
             {
                 this.Button_comboClickViewThin(sender, e);
             }
-            year.YearToCal = year.RunYear(year.Element.Year);
+            
+            year.YearToCal = year.RunYear(year.Element.Year,culture);
             int currentYear = DateTime.Now.Year;
             int currentMonth = DateTime.Now.Month;
             for (int i = 1; i < year.bigGrid.Children.Count; i++)
@@ -514,16 +520,20 @@ namespace Cal_App.Views
                 var grids = year.bigGrid.Children;
                 for (int i = 1; i < grids.Count; i++)
                 {
-                    var grid = grids[i] as Grid;
-                    var dc = grid.DataContext as MonthModel;
-                    int currentYear = dc.Year;
-                    int monthNumber = dc.Number;
-                    MonthModel current = new MonthModel(monthNumber, currentYear, year.ShowHolidays);
-                    grid.DataContext = current;
+                    var month = year.bigGrid.Children[i] as Month;
+                    var monthModel = month.DataContext as MonthModel;
+                    int currentYear = monthModel.Year;
+                    int monthNumber = monthModel.Number;
+                    string culture = monthModel.Culture;
+                    MonthModel current = new MonthModel(monthNumber, currentYear, year.ShowHolidays,culture);
+                    month.DataContext = current;
                 }
             }
             else
-                year.YearToCal = year.RunYear(year.Element.Year);
+            {
+                string culture = year.Culture;
+                year.YearToCal = year.RunYear(year.Element.Year,culture);
+            } 
             popLink.IsOpen = false;
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as Window;
@@ -554,6 +564,33 @@ namespace Cal_App.Views
         private void Button_ClickExitEvent(object sender, RoutedEventArgs e)
         {
             popEvent.IsOpen = false;
+        }
+        
+        private void SetLanguage(object sender, RoutedEventArgs e)
+        {
+            var comboItem = e.OriginalSource as ComboBoxItem;
+            string newCulture = comboItem.Content.ToString();
+            var grid0 = this.Parent as Grid;
+            var year = grid0.Children[1] as Year;
+            for (int i = 1; i < year.bigGrid.Children.Count; i++)
+            {
+                var month = year.bigGrid.Children[i] as Month;
+                var monthModel = month.DataContext as MonthModel;
+                
+                int currentYear = monthModel.Year;
+                int monthNumber = monthModel.Number;
+                bool showHolidays = monthModel.ShowHolidays;
+                MonthModel current = new MonthModel(monthNumber, currentYear, showHolidays,newCulture);
+                month.DataContext = current;
+            }
+            year.Culture = newCulture;
+            popLink.IsOpen = false;
+            var calendar = grid0.Parent as Calendar;
+            calendar.showYearTxtBlock.Text = year.Element.Year.ToString();
+            var window = calendar.Parent as Window;
+            window.ResizeMode = ResizeMode.NoResize;
+            calendar.yearPanel.Visibility = Visibility.Collapsed;
+
         }
     }
 }

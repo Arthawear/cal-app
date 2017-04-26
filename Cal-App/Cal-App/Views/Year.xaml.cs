@@ -114,11 +114,28 @@ namespace Cal_App.Views
                 }
             }
         }
+        private string culture;
+        public string Culture
+        {
+            get
+            {
+                return this.culture;
+            }
+            set
+            {
+                if (this.culture != value)
+                {
+                    this.culture = value;
+                    this.OnPropertyChanged("Culture");
+                }
+            }
+        }
         public Year()
         {
             InitializeComponent();
+            culture = "hu";
             DataContext = Element;
-            this.YearToCal = RunYear(Element.Year);
+            this.YearToCal = RunYear(Element.Year,culture);
             for (int i = 1; i < bigGrid.Children.Count; i++)
             {
                 var month = bigGrid.Children[i] as UserControl;
@@ -140,9 +157,10 @@ namespace Cal_App.Views
                 }
             }
         }
-        public YearModel RunYear(int year)
+        public YearModel RunYear(int year, string culture)
         {
-            YearModel months = new YearModel(year, ShowHolidays);
+            this.Culture = culture;
+            YearModel months = new YearModel(year, ShowHolidays, culture);
             grid1.DataContext = months.Items1[0];
             grid2.DataContext = months.Items1[1];
             grid3.DataContext = months.Items1[2];

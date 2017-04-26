@@ -30,7 +30,27 @@
                             <Button Width="50" VerticalContentAlignment="Center" HorizontalAlignment="Center" Background="Beige" BorderThickness="0" Click="Button_ClickSetYear">Ok</Button>
                         </StackPanel>
                     </ListBoxItem>
-                    <ListBoxItem>Nyelv</ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Nyelv</Label>
+                            <ComboBox Name="languageCB" Width="100"  Background="Beige" BorderThickness="0" FontSize="10" VerticalAlignment="Center"   >
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">EN
+                                </ComboBoxItem>
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">HU
+                                </ComboBoxItem>
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">RO
+                                </ComboBoxItem>
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">DE
+                                </ComboBoxItem>
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">FR
+                                </ComboBoxItem>
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">IT
+                                </ComboBoxItem>
+                                <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">ES
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        </ListBoxItem>
                     <ListBoxItem Name="View" >
                         <StackPanel Orientation="Horizontal">
                             <Label>Nézet</Label>
