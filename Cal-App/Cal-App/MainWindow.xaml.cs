@@ -34,7 +34,7 @@ namespace Cal_App
             var element = year.DataContext as Views.FrameworkElement;
             this.DataContext = element;
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -42,7 +42,6 @@ namespace Cal_App
             var calendar = this.Content as Views.Calendar;
             var grid = calendar.Content as Grid;
             var year = grid.Children[1] as Year;
-            
             var bigGrid = year.Content as Grid;
             var cols = bigGrid.ColumnDefinitions;
             var rows = bigGrid.RowDefinitions;
@@ -63,7 +62,7 @@ namespace Cal_App
                 Width = Height / 3;
             }
             FontSize = Width / (cols.Count * 15);
-            calendar.showYearTxtBlock.FontSize = Height / 22;
+            calendar.showYearTxtBlock.FontSize = Height/15;
             calendar.yearPanel.Visibility = Visibility.Collapsed;
             this.ResizeMode = ResizeMode.NoResize;
         }
@@ -75,42 +74,26 @@ namespace Cal_App
             var grid = calendar.Content as Grid;
             var year = grid.Children[1] as Year;
             var bigGrid = year.Content as Grid;
-            for (int i = 1; i < bigGrid.Children.Count; i++)
-            {
-                var month = bigGrid.Children[i] as Month;
-                month.UserControl_MouseEnter(sender, e);
-            }
             calendar.yearPanel.Visibility = Visibility.Visible;
+            calendar.set1.Opacity = 1;
         }
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
             var calendar = this.Content as Views.Calendar;
-            var grid = calendar.Content as Grid;
-            var popups = grid.Children[0] as Popups;
-            var year = grid.Children[1] as Year;
-            var bigGrid = year.bigGrid;
-            var grid1 = popups.Content as Grid;
-            var popLink = grid1.Children[0] as Popup;
-            var popEvent = grid1.Children[1] as Popup;
-            if (!(popLink.IsOpen || popEvent.IsOpen))
+            if (!(calendar.popLink.IsOpen || calendar.popEvent.IsOpen))
             {
-                for (int i = 1; i < bigGrid.Children.Count; i++)
-                {
-                    var month = bigGrid.Children[i] as Month;
-                    month.UserControl_MouseLeave(sender, e);
-                }
                 if (this.ResizeMode == ResizeMode.CanResizeWithGrip)
                 {
                     dispatcherTimer.Start();
                 }
             }
-            
         }
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        public void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             this.ResizeMode = ResizeMode.NoResize;
             var calendar = this.Content as Views.Calendar;
             calendar.yearPanel.Visibility = Visibility.Collapsed;
+            calendar.set1.Opacity = 0;
         }
     }
 }

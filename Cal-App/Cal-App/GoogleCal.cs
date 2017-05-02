@@ -37,16 +37,19 @@ namespace Cal_App
                   new FileDataStore(credPath, true)).Result;
                 Console.WriteLine("Credential file saved to: " + credPath);
             }
-
+            Events events;
+            var result = String.Empty;
             // Create Google Calendar API service.
-            var service = new CalendarService(new BaseClientService.Initializer()
+            using (var service = new CalendarService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
-            });
+            }))
+            {
+                // Define parameters of request.
+                EventsResource.ListRequest request = service.Events.List("primary");
+            
 
-            // Define parameters of request.
-            EventsResource.ListRequest request = service.Events.List("primary");
             DateTime questionedDay = new DateTime(year, month, day);
             request.TimeMin = questionedDay;
             request.ShowDeleted = false;
@@ -57,8 +60,9 @@ namespace Cal_App
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             // List events.
-            var result = String.Empty;
-            Events events = request.Execute();
+            
+             events = request.Execute();
+        }
             if (events.Items != null && events.Items.Count > 0)
             {
                 foreach (var eventItem in events.Items)

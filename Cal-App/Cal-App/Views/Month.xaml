@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Cal_App.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded">
+             d:DesignHeight="300" d:DesignWidth="300"   Loaded="UserControl_Loaded">
 
     <Grid Name="grid1" Margin="5"  Grid.Row="0" Grid.Column="0"  Opacity="1"  >
         <Grid.Background>
@@ -35,25 +36,6 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <TextBlock Name="set1" Grid.Row="0" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Transparent"  Padding="3" Text="⋮" ></TextBlock>
-            <Button Grid.Row="0" Grid.Column="6" Click="Button_Click_Popup" Opacity="0">
-                <TextBlock  Grid.Row="0" Grid.Column="6"   VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" Padding="3" Text="⋮"  ToolTipService.InitialShowDelay ="1"  
-                           ToolTipService.Placement="Right" ToolTipService.PlacementTarget="{Binding ElementName=grid1}" ToolTipService.VerticalOffset=" 20" ToolTipService.HorizontalOffset="-25"  >
-                    <TextBlock.ToolTip  >
-                        <ToolTip  BorderThickness="0"  >
-                            <ToolTip.Background >
-                                <VisualBrush Stretch="Fill"  >
-                                    <VisualBrush.Visual>
-                                        <Path Data="M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z"  Fill="Beige" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </ToolTip.Background>
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Beállítások</TextBlock>
-                        </ToolTip>
-                    </TextBlock.ToolTip>    
-                </TextBlock>
-            </Button>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" Grid.ColumnSpan="7"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Padding="5"></TextBlock>
 

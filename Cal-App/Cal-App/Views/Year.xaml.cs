@@ -57,7 +57,6 @@ namespace Cal_App.Views
     public partial class Year : UserControl, INotifyPropertyChanged
     {
         private YearModel yearToCal;
-        private string white = "#FEFEFE";
         private bool showHolidays = false;
         private FrameworkElement element = new FrameworkElement();
         private void OnPropertyChanged(string propertyName)
@@ -146,15 +145,6 @@ namespace Cal_App.Views
                 var back = grid.Background as VisualBrush;
                 var path = back.Visual as Path;
                 path.SetBinding(Path.FillProperty, binding);
-                if (i == 2)
-                {
-                    var gridSecond = grid.Children[0] as Grid;
-                    var set1 = gridSecond.Children[0] as TextBlock;
-                    string color = white;
-                    Binding binding1 = new Binding();
-                    binding1.Source = color;
-                    set1.SetBinding(ForegroundProperty, binding1);
-                }
             }
         }
         public YearModel RunYear(int year, string culture)
@@ -179,10 +169,9 @@ namespace Cal_App.Views
         {
             var grid = this.Parent as Grid;
             var calendar = grid.Parent as Calendar;
-            var window = calendar.Parent as Window;
+            var window = calendar.Parent as MainWindow;
             window.DragMove();
-            window.ResizeMode = ResizeMode.NoResize;
-            calendar.yearPanel.Visibility = Visibility.Collapsed;
+            window.DispatcherTimer_Tick(sender, e);
         }
     }
 }

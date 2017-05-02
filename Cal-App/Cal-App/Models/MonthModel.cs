@@ -367,11 +367,8 @@ namespace Cal_App.Models
             for (int i = 2; i < 9; i++)
             {
                 string dayName = new DateTime(2017, 1, i).ToString("dddd", new CultureInfo(Culture));
-                //if (Culture.ToLower()!="hu")
-                //{
-                    dayName =dayName.Substring(0, 2);
-                //}
-                dayName= new CultureInfo("en-US", false).TextInfo.ToTitleCase(dayName);
+                dayName = dayName.Substring(0, 2);
+                dayName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(dayName);
                 DayNames[i - 2] = dayName;
             }
         }

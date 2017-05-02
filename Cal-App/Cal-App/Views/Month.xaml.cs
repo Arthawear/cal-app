@@ -60,90 +60,47 @@ namespace Cal_App.Views
             if (monthModel.Year%4==0&& button29.IsEnabled == false)
             {
                 button29.IsEnabled = true;
-                //button29.Visibility = Visibility.Visible;
             }
-        }
-        private void Button_Click_Popup(object sender, RoutedEventArgs e)
-        {
             var bigGrid = this.Parent as Grid;
-            var year = bigGrid.Parent as Year;
-            var grid1 = year.Parent as Grid;
-            var popups = grid1.Children[0] as Popups;
-            var grid2 = popups.Content as Grid;
-            var popLink = grid2.Children[0] as Popup;
-            if (popLink.IsOpen == false)
-            {
-                popLink.IsOpen = true;
-            }
-            else
-            {
-                popLink.IsOpen = false;
-            }
-        }
-        public void UserControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-            set1.Opacity = 1;
-        }
-        public void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            set1.Opacity = 0;
         }
         private void Button_Click_Event(object sender, RoutedEventArgs e)
         {
-            var bigGrid = this.Parent as Grid;
-            var year = bigGrid.Parent as Year;
-            var grid1 = year.Parent as Grid;
-            var popups = grid1.Children[0] as Popups;
-            var grid2 = popups.Content as Grid;
-            var popLink = grid2.Children[0] as Popup;
-            if (popups.isEventOn)
+            var grid = this.Parent as Grid;
+            var year = grid.Parent as Year;
+            var grid0 = year.Parent as Grid;
+            var calendar = grid0.Parent as Calendar;
+            if (calendar.popEvent.IsOpen == false)
             {
-                Button button = new Button();
-                button = (Button)e.OriginalSource;
-                var dt = button.DataContext as MonthModel;
-                var year1 = dt.Year;
-                var monthNr = dt.Number;
-                var day = (int)button.Content ;
-                var popEvent = grid2.Children[1] as Popup;
-                popLink.IsOpen = false;
-                var grid3 = popEvent.Child as Grid;
-                var googleEvents = grid3.Children[0] as TextBlock;
-                var googleCal = new GoogleCal();
-                googleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), googleCal.GetEvents(year1, monthNr, day));
-                if (popEvent.IsOpen == false)
-                {
-                    popEvent.IsOpen = true;
-                }
+                calendar.popEvent.IsOpen = true;
             }
-            popLink.IsOpen = false;
+            Button button = new Button();
+            button = (Button)e.OriginalSource;
+            var googleCal = new GoogleCal();
+            var dt = button.DataContext as MonthModel;
+            var year1 = dt.Year;
+            var monthNr = dt.Number;
+            var day = (int)button.Content;
+            var events = googleCal.GetEvents(year1, monthNr, day);
+            var events1 = calendar.popEvent.Child as Events;
+            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), events);
         }
         private void Button_Click_Event1(object sender, RoutedEventArgs e)
         {
-            var bigGrid = this.Parent as Grid;
-            var year = bigGrid.Parent as Year;
-            var grid1 = year.Parent as Grid;
-            var popups = grid1.Children[0] as Popups;
-            var grid2 = popups.Content as Grid;
-            var popLink = grid2.Children[0] as Popup;
-            var popEvent= grid2.Children[1] as Popup;
-            if (popups.isEventOn)
+            var grid = this.Parent as Grid;
+            var year = grid.Parent as Year;
+            var grid0 = year.Parent as Grid;
+            var calendar = grid0.Parent as Calendar;
+            if (calendar.popEvent.IsOpen == false)
             {
-                Button button = new Button();
-                button = (Button)e.OriginalSource;
-                var year1 = DateTime.Now.Year; ;
-                var monthNr = DateTime.Now.Month;
-                var day = DateTime.Now.Day;
-                popLink.IsOpen = false;
-                var grid3 = popEvent.Child as Grid;
-                var googleEvents = grid3.Children[0] as TextBlock;
-                var googleCal = new GoogleCal();
-                googleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), googleCal.GetEvents(year1, monthNr, day));
-                if (popEvent.IsOpen == false)
-                {
-                    popEvent.IsOpen = true;
-                }
+                calendar.popEvent.IsOpen = true;
             }
-            popLink.IsOpen = false;
+            var googleCal = new GoogleCal();
+            var year1 = DateTime.Now.Year; ;
+            var monthNr = DateTime.Now.Month;
+            var day = DateTime.Now.Day;
+            var events = googleCal.GetEvents(year1, monthNr, day);
+            var events1 = calendar.popEvent.Child as Events;
+            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), events);
         }
     }
 }
