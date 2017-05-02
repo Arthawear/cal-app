@@ -35,6 +35,8 @@ namespace Cal_App
             this.DataContext = element;
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            this.Height = screenHeight*4/5;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

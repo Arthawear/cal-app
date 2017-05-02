@@ -7,7 +7,7 @@
         xmlns:Control="clr-namespace:Cal_App.Views"
         mc:Ignorable="d"
         Title="Calendar"  WindowStyle="None" AllowsTransparency="True"   ResizeMode="CanResizeWithGrip" 
-        MaxWidth="350"  MinHeight="900" MinWidth="300" Height="900" FontWeight="Bold" FontSize="10" 
+        MaxWidth="350"  MinHeight="300" MinWidth="100"  FontWeight="Bold" FontSize="10" 
         Foreground="White"   SizeChanged="Window_SizeChanged" MouseEnter="Window_MouseEnter"  MouseLeave="Window_MouseLeave">
 
     <Window.Background>
