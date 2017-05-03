@@ -19,7 +19,7 @@ namespace Cal_App
         // at ~/.credentials/calendar-dotnet-quickstart.json
         private string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         private string ApplicationName = "Google Calendar API .NET Quickstart";
-        public string GetEvents(int year, int month, int day)
+        public async Task<string> GetEvents(int year, int month, int day)
         {
             UserCredential credential;
             using (var stream =
@@ -48,21 +48,21 @@ namespace Cal_App
             {
                 // Define parameters of request.
                 EventsResource.ListRequest request = service.Events.List("primary");
-            
 
-            DateTime questionedDay = new DateTime(year, month, day);
-            request.TimeMin = questionedDay;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            TimeSpan oneDay = new TimeSpan(1, 0, 0, 0);
-            request.TimeMax = questionedDay + oneDay;
-            //request.MaxResults = 15;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
-            // List events.
-            
-             events = request.Execute();
-        }
+                DateTime questionedDay = new DateTime(year, month, day);
+                request.TimeMin = questionedDay;
+                request.ShowDeleted = false;
+                request.SingleEvents = true;
+                TimeSpan oneDay = new TimeSpan(1, 0, 0, 0);
+                request.TimeMax = questionedDay + oneDay;
+                //request.MaxResults = 15;
+                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+                // List events.
+
+                events = await request.ExecuteAsync();
+            }
             if (events.Items != null && events.Items.Count > 0)
             {
                 foreach (var eventItem in events.Items)

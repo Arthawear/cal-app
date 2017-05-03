@@ -63,16 +63,9 @@ namespace Cal_App.Views
             }
             var bigGrid = this.Parent as Grid;
         }
-        private void Button_Click_Event(object sender, RoutedEventArgs e)
+
+        private async void Button_Click_EventAsync(object sender, RoutedEventArgs e)
         {
-            var grid = this.Parent as Grid;
-            var year = grid.Parent as Year;
-            var grid0 = year.Parent as Grid;
-            var calendar = grid0.Parent as Calendar;
-            if (calendar.popEvent.IsOpen == false)
-            {
-                calendar.popEvent.IsOpen = true;
-            }
             Button button = new Button();
             button = (Button)e.OriginalSource;
             var googleCal = new GoogleCal();
@@ -81,11 +74,6 @@ namespace Cal_App.Views
             var monthNr = dt.Number;
             var day = (int)button.Content;
             var events = googleCal.GetEvents(year1, monthNr, day);
-            var events1 = calendar.popEvent.Child as Events;
-            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), events);
-        }
-        private void Button_Click_Event1(object sender, RoutedEventArgs e)
-        {
             var grid = this.Parent as Grid;
             var year = grid.Parent as Year;
             var grid0 = year.Parent as Grid;
@@ -94,13 +82,64 @@ namespace Cal_App.Views
             {
                 calendar.popEvent.IsOpen = true;
             }
+            var events1 = calendar.popEvent.Child as Events;
+            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events);
+        }
+
+        //private void Button_Click_Event(object sender, RoutedEventArgs e)
+        //{
+        //    var grid = this.Parent as Grid;
+        //    var year = grid.Parent as Year;
+        //    var grid0 = year.Parent as Grid;
+        //    var calendar = grid0.Parent as Calendar;
+        //    if (calendar.popEvent.IsOpen == false)
+        //    {
+        //        calendar.popEvent.IsOpen = true;
+        //    }
+        //    Button button = new Button();
+        //    button = (Button)e.OriginalSource;
+        //    var googleCal = new GoogleCal();
+        //    var dt = button.DataContext as MonthModel;
+        //    var year1 = dt.Year;
+        //    var monthNr = dt.Number;
+        //    var day = (int)button.Content;
+        //    var events = googleCal.GetEvents(year1, monthNr, day);
+        //    var events1 = calendar.popEvent.Child as Events;
+        //    events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), events);
+        //}
+        private async void Button_Click_Event1Async(object sender, RoutedEventArgs e)
+        {
             var googleCal = new GoogleCal();
             var year1 = DateTime.Now.Year; ;
             var monthNr = DateTime.Now.Month;
             var day = DateTime.Now.Day;
             var events = googleCal.GetEvents(year1, monthNr, day);
+            var grid = this.Parent as Grid;
+            var year = grid.Parent as Year;
+            var grid0 = year.Parent as Grid;
+            var calendar = grid0.Parent as Calendar;
+            if (calendar.popEvent.IsOpen == false)
+            {
+                calendar.popEvent.IsOpen = true;
+            }
             var events1 = calendar.popEvent.Child as Events;
-            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), events);
+            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events);
+
+            //var grid = this.Parent as Grid;
+            //var year = grid.Parent as Year;
+            //var grid0 = year.Parent as Grid;
+            //var calendar = grid0.Parent as Calendar;
+            //if (calendar.popEvent.IsOpen == false)
+            //{
+            //    calendar.popEvent.IsOpen = true;
+            //}
+            //var googleCal = new GoogleCal();
+            //var year1 = DateTime.Now.Year; ;
+            //var monthNr = DateTime.Now.Month;
+            //var day = DateTime.Now.Day;
+            //var events = googleCal.GetEvents(year1, monthNr, day);
+            //var events1 = calendar.popEvent.Child as Events;
+            //events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), events);
         }
     }
 }
