@@ -15,12 +15,12 @@ namespace Cal_App.Models
         private int todayRow;
         private int todayCol;
         private int numberOfDays;
-        private DayOfWeek firstDay;
         private int[] days;
         private int number;
         private Dictionary<int, RenderDay> dayToPlace = new Dictionary<int, RenderDay>();
         private bool showHolidays;
         private string culture;
+        private MonthStyle monthStyle;
         public string Culture
         {
             get
@@ -192,125 +192,67 @@ namespace Cal_App.Models
             this.Culture = culture;
             this.number = month;
             Today = DateTime.Now.Day;
-            this.firstDay = new DateTime(year, month, 1).DayOfWeek;
             int currentMonth = DateTime.Now.Month;
             int currentYear = DateTime.Now.Year;
             this.Year = year;
             this.showHolidays = showHolidays;
+            this.monthStyle = new MonthStyle(month);
+            this.BackgroundColour = monthStyle.BackgroundColour;
+            this.numberOfDays = monthStyle.NumberOfDays;
+            if (year%4==0&&month==2)
+            {
+                this.numberOfDays = 29;
+            }
+            if (currentMonth == month&& year == currentYear)
+            {
+                Thickness = 100;
+            }
+            this.DayToPlace = ArrangeDays(year, month, this.numberOfDays, showHolidays);
+            this.todayRow = dayToPlace[Today].Key;
+            this.todayCol = dayToPlace[Today].Value;
+            this.name = GetName(year, month, 1, false, culture);
+            DayNames = new string[7];
+            for (int i = 2; i < 9; i++)
+            {
+                string dayName = GetName(2017, 1, i, true, culture);
+                DayNames[i - 2] = dayName;
+            }
+        }
+        /// <summary>
+        /// Gets the name of the month or the weekdays
+        /// </summary>
+        /// <param name="year">The number of year</param>
+        /// <param name="month">The number of month</param>
+        /// <param name="day">The number of day</param>
+        /// <param name="isDayName">Shows if is day name or month name</param>
+        /// <param name="culture">The calendar display language</param>
+        /// <returns></returns>
+        private string GetName(int year, int month, int day, bool isDayName, string culture)
+        {
+            string s =isDayName? "dddd": "MMMM";
+            string name= new DateTime(year, month, day).ToString(s, new CultureInfo(culture));
+            if (isDayName)
+            {
+                name=name.Substring(0, 2);
+            }
+            name = new CultureInfo("en-US", false).TextInfo.ToTitleCase(name);
+            return name;
+        }
+        /// <summary>
+        /// Arrange the days by the place occupied in the Month grid, and sets the color for weekend days
+        /// </summary>
+        /// <param name="year">The number of year</param>
+        /// <param name="month">The number of month</param>
+        /// <param name="numberOfDays">The number of the days of a month</param>
+        /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
+        /// <returns></returns>
+        private Dictionary<int, RenderDay> ArrangeDays(int year, int month, int numberOfDays, bool showHolidays)
+        {
+            DayOfWeek firstDay = new DateTime(year, month, 1).DayOfWeek;
             int start = 0;
-            switch (month)
-            {
-                case 1:
-                    this.numberOfDays = 31;
-                    this.backgroundColour = "#008DD2";
-                    if (currentMonth == 1)
-                    {
-                        Thickness = 100;
-                    }
-                    break;
-                case 2:
-                    this.backgroundColour = "#393185";
-                    if (currentMonth == 2)
-                    {
-                        Thickness = 100;
-                    }
-                    if (year % 4 == 0)
-                    {
-                        this.numberOfDays = 29;
-                        this.Leap = "29";
-                    }
-                    else
-                        this.numberOfDays = 28;
-                    break;
-                case 3:
-                    this.backgroundColour = "#57A7B3";
-                    if (currentMonth == 3)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 31;
-                    break;
-                case 4:
-                    this.backgroundColour = "#61A375";
-                    if (currentMonth == 4)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 30;
-                    break;
-                case 5:
-                    this.backgroundColour = "#009846";
-                    if (currentMonth == 5)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 31;
-                    break;
-                case 6:
-                    this.backgroundColour = "#DCCF73";
-                    if (currentMonth == 6)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 30;
-                    break;
-                case 7:;
-                    this.backgroundColour = "#E31E24";
-                    if (currentMonth == 7)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 31;
-                    break;
-                case 8:
-                    this.backgroundColour = "#E5097F";
-                    if (currentMonth == 8)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 31;
-                    break;
-                case 9:;
-                    this.backgroundColour = "#EF7F1A";
-                    if (currentMonth == 9)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 30;
-                    break;
-                case 10:
-                    this.backgroundColour = "#CC6F3C";
-                    if (currentMonth == 10)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 31;
-                    break;
-                case 11:
-                    this.backgroundColour = "#B2AD81";
-                    if (currentMonth == 11)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 30;
-                    break;
-                case 12:
-                    this.backgroundColour = "#7690C9";
-                    if (currentMonth == 12)
-                    {
-                        Thickness = 100;
-                    }
-                    this.numberOfDays = 31;
-                    break;
-                default:
-                    break;
-            }
-            if (year != currentYear)
-            {
-                Thickness = 0;
-            }
+            Dictionary<int, RenderDay> days1 = new Dictionary<int, RenderDay>();
             this.days = new int[numberOfDays];
-            Enumerable.Range(1, numberOfDays).ToArray().CopyTo(this.days, 0);
+            Enumerable.Range(1, numberOfDays).ToArray().CopyTo(days, 0);
             switch (firstDay)
             {
                 case DayOfWeek.Sunday:
@@ -337,14 +279,12 @@ namespace Cal_App.Models
                 default:
                     break;
             }
-            for (int i = 0; i < this.days.Length; i++)
+            for (int i = 0; i < days.Length; i++)
             {
                 bool isHoliday = false;
-                int day = this.days[i];
+                int day = days[i];
                 int place = start + i;
-
                 DayOfWeek currentDayOfWeek = new DateTime(year, month, day).DayOfWeek;
-                var holyday = new DateTime(year, month, day).DayOfYear;
                 if (currentDayOfWeek == DayOfWeek.Saturday ^ currentDayOfWeek == DayOfWeek.Sunday)
                 {
                     isHoliday = true;
@@ -355,26 +295,86 @@ namespace Cal_App.Models
                 {
                     color = "#2B2A29";
                 }
-                dayToPlace.Add(day, new RenderDay() { Key = place / 7 + 2, Value = place % 7, Color = color });
+                days1.Add(day, new RenderDay() { Key = place / 7 + 2, Value = place % 7, Color = color });
             }
-            this.todayRow = dayToPlace[Today].Key;
-            this.todayCol = dayToPlace[Today].Value;
-            this.name = new DateTime(year, month, 1).ToString("MMMM", new CultureInfo(Culture));
-            name = new CultureInfo("en-US", false).TextInfo.ToTitleCase(name);
-            DayNames = new string[7];
-            for (int i = 2; i < 9; i++)
-            {
-                string dayName = new DateTime(2017, 1, i).ToString("dddd", new CultureInfo(Culture));
-                dayName = dayName.Substring(0, 2);
-                dayName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(dayName);
-                DayNames[i - 2] = dayName;
-            }
+            return days1;
         }
+        /// <summary>
+        /// Contains the grid row and column number and the color of a day
+        /// </summary>
         public class RenderDay
         {
             public int Key { get; set; }
             public int Value { get; set; }
             public string Color { get; set; }
+        }
+        /// <summary>
+        /// Contains the background color and the number of days of a Month
+        /// </summary>
+        private class  MonthStyle
+        {
+            int numberOfDays;
+            string backgroundColour;
+            public int NumberOfDays { get => numberOfDays; set => numberOfDays = value; }
+            public string BackgroundColour { get => backgroundColour; set => backgroundColour = value; }
+            public MonthStyle(int month)
+            {
+                switch (month)
+                {
+                    case 1:
+                        this.NumberOfDays = 31;
+                        this.BackgroundColour = "#008DD2";
+                        break;
+                    case 2:
+                        this.BackgroundColour = "#393185";
+                            this.NumberOfDays = 28;
+                        break;
+                    case 3:
+                        this.BackgroundColour = "#57A7B3";
+                        this.NumberOfDays = 31;
+                        break;
+                    case 4:
+                        this.BackgroundColour = "#61A375";
+                        this.NumberOfDays = 30;
+                        break;
+                    case 5:
+                        this.BackgroundColour = "#009846";
+                        this.NumberOfDays = 31;
+                        break;
+                    case 6:
+                        this.BackgroundColour = "#DCCF73";
+                        this.NumberOfDays = 30;
+                        break;
+                    case 7:
+                        ;
+                        this.BackgroundColour = "#E31E24";
+                        this.NumberOfDays = 31;
+                        break;
+                    case 8:
+                        this.BackgroundColour = "#E5097F";
+                        this.NumberOfDays = 31;
+                        break;
+                    case 9:
+                        ;
+                        this.BackgroundColour = "#EF7F1A";
+                        this.NumberOfDays = 30;
+                        break;
+                    case 10:
+                        this.BackgroundColour = "#CC6F3C";
+                        this.NumberOfDays = 31;
+                        break;
+                    case 11:
+                        this.BackgroundColour = "#B2AD81";
+                        this.NumberOfDays = 30;
+                        break;
+                    case 12:
+                        this.BackgroundColour = "#7690C9";
+                        this.NumberOfDays = 31;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
