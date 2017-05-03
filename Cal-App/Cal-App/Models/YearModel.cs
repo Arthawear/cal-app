@@ -78,6 +78,12 @@ namespace Cal_App.Models
 
             }
         }
+        /// <summary>
+        /// Initializes a new YearModel 
+        /// </summary>
+        /// <param name="year">The year number</param>
+        /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
+        /// <param name="culture">The calendar's display language</param>
         public YearModel(int year, bool showHolidays, string culture)
         {
             this.Culture = culture;

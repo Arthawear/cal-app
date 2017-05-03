@@ -13,12 +13,23 @@ using System.Threading.Tasks;
 
 namespace Cal_App
 {
+    /// <summary>
+    /// Gets the calendar event list from google accont
+    /// </summary>
     class GoogleCal
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/calendar-dotnet-quickstart.json
         private string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         private string ApplicationName = "Google Calendar API .NET Quickstart";
+
+        /// <summary>
+        /// Gets the calendar event list
+        /// </summary>
+        /// <param name="year">The year of the event list</param>
+        /// <param name="month">The month of the event list</param>
+        /// <param name="day">The day of the event list</param>
+        /// <returns>Task<string></returns>
         public async Task<string> GetEvents(int year, int month, int day)
         {
             UserCredential credential;

@@ -27,6 +27,11 @@ namespace Cal_App.Views
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Sets the calendar view to thin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         public void Button_comboClickViewThin(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -103,6 +108,11 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
+        /// <summary>
+        /// Sets the calendar view to large
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_comboClickViewLarge(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -176,6 +186,11 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
+        /// <summary>
+        /// Sets the calendar view to one month
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_comboClickViewOneMonth(object sender, RoutedEventArgs e)
         {
             int currentYear0 = DateTime.Now.Year;
@@ -237,6 +252,11 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
+        /// <summary>
+        /// Sets the calendar view to three months
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_comboClickViewThreeMonths(object sender, RoutedEventArgs e)
         {
             int currentYear0 = DateTime.Now.Year;
@@ -333,6 +353,11 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
+        /// <summary>
+        /// Sets the calendar's year
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickSetYear(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -386,6 +411,11 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
+        /// <summary>
+        /// Sets the calendar background color
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_comboClick(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -402,6 +432,11 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
+        /// <summary>
+        /// Enable/Disable google events buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickEventOn(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -454,6 +489,11 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
+        /// <summary>
+        /// Sets to show/or not the weekends with different color
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickHolidays(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -490,6 +530,11 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
+        /// <summary>
+        /// Prints the calendar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -520,6 +565,11 @@ namespace Cal_App.Views
             currentMonth.CurrentDaySquare.Visibility = currentDaySquareVisibility;
             window.DispatcherTimer_Tick(sender, e);
         }
+        /// <summary>
+        /// Shuts down the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickExit(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -528,6 +578,11 @@ namespace Cal_App.Views
             var window = calendar.Parent as Window;
             window.Close();
         }
+        /// <summary>
+        /// Sets the calendar's display language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void SetLanguage(object sender, RoutedEventArgs e)
         {
             var comboItem = e.OriginalSource as ComboBoxItem;

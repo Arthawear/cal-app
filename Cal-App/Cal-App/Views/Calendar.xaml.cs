@@ -26,6 +26,11 @@ namespace Cal_App.Views
             InitializeComponent();
             showYearTxtBlock.Text = yearToCalendar.Element.Year.ToString();
         }
+        /// <summary>
+        /// Sets the previous year
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickPrevYear(object sender, RoutedEventArgs e)
         {
             string culture = yearToCalendar.Culture;
@@ -69,6 +74,11 @@ namespace Cal_App.Views
             window.ResizeMode = ResizeMode.NoResize;
             set1.Opacity = 0;
         }
+        /// <summary>
+        /// Sets the next year
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickNextYear(object sender, RoutedEventArgs e)
         {
             string culture = yearToCalendar.Culture;
@@ -112,6 +122,11 @@ namespace Cal_App.Views
             window.ResizeMode = ResizeMode.NoResize;
             set1.Opacity = 0;
         }
+        /// <summary>
+        /// Opens the Settings popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_Click_Popup(object sender, RoutedEventArgs e)
         {
             if (popLink.IsOpen == false)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cal_App.Models
 {
+
     public class MonthModel : BaseModel
     {
         private string backgroundColour = "#008DD2";
@@ -179,6 +180,13 @@ namespace Cal_App.Models
 
             }
         }
+        /// <summary>
+        /// The constructor of the MonthModel
+        /// </summary>
+        /// <param name="month">The number of the month</param>
+        /// <param name="year">The year number </param>
+        /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
+        /// <param name="culture">The calendar's display language</param>
         public MonthModel(int month, int year, bool showHolidays, string culture )
         {
             this.Culture = culture;

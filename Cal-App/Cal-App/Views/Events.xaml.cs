@@ -25,6 +25,11 @@ namespace Cal_App.Views
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Shuts down the Events popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Button_ClickExitEvent(object sender, RoutedEventArgs e)
         {
             var popEvent = this.Parent as Popup;

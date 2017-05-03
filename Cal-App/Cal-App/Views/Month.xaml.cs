@@ -27,6 +27,11 @@ namespace Cal_App.Views
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Loads the Month view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         public void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             var year = DateTime.Now.Year; ;
@@ -63,6 +68,11 @@ namespace Cal_App.Views
             }
             var bigGrid = this.Parent as Grid;
         }
+        /// <summary>
+        /// Opens the event popup, and asks for one day's events from google account
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private async void Button_Click_EventAsync(object sender, RoutedEventArgs e)
         {
             Button button = new Button();
@@ -84,6 +94,11 @@ namespace Cal_App.Views
             var events1 = calendar.popEvent.Child as Events;
             events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events);
         }
+        /// <summary>
+        /// Opens the event popup, and asks for the current day's events from google account
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private async void Button_Click_Event1Async(object sender, RoutedEventArgs e)
         {
             var googleCal = new GoogleCal();

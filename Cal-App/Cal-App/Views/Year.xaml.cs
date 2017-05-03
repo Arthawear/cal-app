@@ -147,6 +147,12 @@ namespace Cal_App.Views
                 path.SetBinding(Path.FillProperty, binding);
             }
         }
+        /// <summary>
+        /// Initializes by a new YearModel new MonthModels for Month DataContexts 
+        /// </summary>
+        /// <param name="year">New year number</param>
+        /// <param name="culture">New calendar display language</param>
+        /// <returns>YearModel</returns>
         public YearModel RunYear(int year, string culture)
         {
             this.Culture = culture;
@@ -165,6 +171,11 @@ namespace Cal_App.Views
             grid12.DataContext = months.Items1[11];
             return months;
         }
+        /// <summary>
+        /// Method for dragging the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var grid = this.Parent as Grid;

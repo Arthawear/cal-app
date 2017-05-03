@@ -24,6 +24,7 @@ namespace Cal_App
     /// </summary>
     public partial class MainWindow : Window
     {
+        //A timer for delay the hiding of the window resize grip, the header with year number and the settings sign
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         public MainWindow()
         {
@@ -33,12 +34,18 @@ namespace Cal_App
             var year=grid.Children[1] as Year;
             var element = year.DataContext as Views.FrameworkElement;
             this.DataContext = element;
+            //sets the timer
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            //sets the window size to different screens
             var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Height = screenHeight*4/5;
         }
-
+        /// <summary>
+        /// Sets the proper proportion of the window and font sizes when window size changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var calendar = this.Content as Views.Calendar;
@@ -68,6 +75,11 @@ namespace Cal_App
             calendar.yearPanel.Visibility = Visibility.Collapsed;
             this.ResizeMode = ResizeMode.NoResize;
         }
+        /// <summary>
+        /// Shows up the window resize grip, the header with year number and the settings sign  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
             dispatcherTimer.Stop();
@@ -79,6 +91,11 @@ namespace Cal_App
             calendar.yearPanel.Visibility = Visibility.Visible;
             calendar.set1.Opacity = 1;
         }
+        /// <summary>
+        /// Sets a timer for hide the window resize grip, the header with year number and the settings sign
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
             var calendar = this.Content as Views.Calendar;
@@ -90,6 +107,11 @@ namespace Cal_App
                 }
             }
         }
+        /// <summary>
+        /// Hides the window resize grip, the header with year number and the settings sign
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
         public void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             this.ResizeMode = ResizeMode.NoResize;
