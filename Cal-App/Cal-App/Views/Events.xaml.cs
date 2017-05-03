@@ -25,7 +25,6 @@ namespace Cal_App.Views
         {
             InitializeComponent();
         }
-
         private void Button_ClickExitEvent(object sender, RoutedEventArgs e)
         {
             var popEvent = this.Parent as Popup;

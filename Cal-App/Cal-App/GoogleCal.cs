@@ -48,8 +48,6 @@ namespace Cal_App
             {
                 // Define parameters of request.
                 EventsResource.ListRequest request = service.Events.List("primary");
-
-
                 DateTime questionedDay = new DateTime(year, month, day);
                 request.TimeMin = questionedDay;
                 request.ShowDeleted = false;
@@ -58,9 +56,7 @@ namespace Cal_App
                 request.TimeMax = questionedDay + oneDay;
                 //request.MaxResults = 15;
                 request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
                 // List events.
-
                 events = await request.ExecuteAsync();
             }
             if (events.Items != null && events.Items.Count > 0)

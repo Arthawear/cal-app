@@ -44,7 +44,6 @@ namespace Cal_App.Models
 
             }
         }
-
         public int IsLeap
         {
             get
@@ -62,7 +61,6 @@ namespace Cal_App.Models
 
             }
         }
-
         public MonthModel[] Items1
         {
             get
@@ -98,7 +96,5 @@ namespace Cal_App.Models
                 new MonthModel(12, year, showHolidays,culture)
             };
         }
-
-
     }
 }

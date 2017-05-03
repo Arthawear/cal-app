@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Cal_App.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid   >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="245*"/>
@@ -18,18 +18,17 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.Background >
-            <VisualBrush Stretch="Fill"  >
+        <Grid.Background>
+            <VisualBrush Stretch="Fill">
                 <VisualBrush.Visual>
-                    <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z"   Fill="Beige"  />
+                    <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" Fill="Beige"/>
                 </VisualBrush.Visual>
             </VisualBrush>
         </Grid.Background>
         <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
-                        Események a google naptarbol
-        </TextBlock>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20" >Események</TextBlock>
-        <TextBlock Grid.Column="3" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">x</TextBlock>
+             Események a google naptarbol</TextBlock>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">Események</TextBlock>
+        <TextBlock Grid.Column="3" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium" FontSize="20">x</TextBlock>
         <Button Grid.Column="3" Opacity="0" Click="Button_ClickExitEvent"></Button>
     </Grid>
 </UserControl>

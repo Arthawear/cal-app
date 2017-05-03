@@ -27,7 +27,7 @@ namespace Cal_App.Views
         {
             if (this.PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -63,7 +63,7 @@ namespace Cal_App.Views
         {
             if (this.PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

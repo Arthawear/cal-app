@@ -6,56 +6,56 @@
              xmlns:local="clr-namespace:Cal_App.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid   >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
             <RowDefinition Height="245*"/>
         </Grid.RowDefinitions>
-        <Grid.Background >
-            <VisualBrush Stretch="Fill"  >
+        <Grid.Background>
+            <VisualBrush Stretch="Fill">
                 <VisualBrush.Visual>
-                    <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z"   Fill="Beige"  />
+                    <Path  Data="M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" Fill="Beige"/>
                 </VisualBrush.Visual>
             </VisualBrush>
         </Grid.Background>
-        <ListBox Name="SettingListBox" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" BorderThickness="0" Grid.RowSpan="2" >
-            <ListBoxItem Name="SetYear" >
+        <ListBox Name="SettingListBox" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" BorderThickness="0" Grid.RowSpan="2">
+            <ListBoxItem Name="SetYear">
                 <StackPanel Orientation="Horizontal">
                     <Label VerticalContentAlignment="Center" HorizontalAlignment="Left">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Év</TextBlock>
                     </Label>
-                    <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="2017" ></TextBox>
+                    <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="2017"></TextBox>
                     <Button Width="50" VerticalContentAlignment="Center" HorizontalAlignment="Center" Background="Beige" BorderThickness="0" Click="Button_ClickSetYear">Ok</Button>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem>
                 <StackPanel Orientation="Horizontal">
                     <Label>Nyelv</Label>
-                    <ComboBox Name="languageCB" Width="100"  Background="Beige" BorderThickness="0" FontSize="10" VerticalAlignment="Center"   >
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">EN
+                    <ComboBox Name="languageCB" Width="100" Background="Beige" BorderThickness="0" FontSize="10" VerticalAlignment="Center">
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">EN
                         </ComboBoxItem>
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">HU
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">HU
                         </ComboBoxItem>
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">RO
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">RO
                         </ComboBoxItem>
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">DE
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">DE
                         </ComboBoxItem>
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">FR
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">FR
                         </ComboBoxItem>
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">IT
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">IT
                         </ComboBoxItem>
-                        <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="SetLanguage">ES
+                        <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">ES
                         </ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
             </ListBoxItem>
-            <ListBoxItem Name="View" >
+            <ListBoxItem Name="View">
                 <StackPanel Orientation="Horizontal">
                     <Label>Nézet</Label>
                     <ComboBox Width="100"  Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack,  Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" >
                         <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="Button_comboClickViewThin">Thin
                         </ComboBoxItem>
-                        <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewLarge"  >Large
+                        <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewLarge">Large
                         </ComboBoxItem>
                         <ComboBoxItem Name="currentCombo" Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewOneMonth">Current month
                         </ComboBoxItem>
@@ -67,10 +67,10 @@
             <ListBoxItem>
                 <StackPanel Orientation="Horizontal">
                     <Label>Háttér</Label>
-                    <ComboBox Width="100" Name="WinBackgroundCombo" Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack,  Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" >
+                    <ComboBox Width="100" Name="WinBackgroundCombo" Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack, Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center">
                         <ComboBoxItem Width="Auto" Height="20"  Name="Beige" Background="Beige" Selected="Button_comboClick">Beige
                         </ComboBoxItem>
-                        <ComboBoxItem Name="Black" Width="Auto" Height="20" Background="Black" Selected="Button_comboClick" Foreground="White" >Black
+                        <ComboBoxItem Name="Black" Width="Auto" Height="20" Background="Black" Selected="Button_comboClick" Foreground="White">Black
                         </ComboBoxItem>
                         <ComboBoxItem Name="Transparent" Width="Auto" Height="20" Background="Transparent" Selected="Button_comboClick">Transparent
                         </ComboBoxItem>
@@ -79,12 +79,12 @@
             </ListBoxItem>
             <ListBoxItem >
                 <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button  Width="160" Click="Button_ClickEventOn"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
+                    <Button Width="160" Click="Button_ClickEventOn"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
                         <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Események Be</TextBlock>
                     </Button>
                 </StackPanel>
             </ListBoxItem>
-            <ListBoxItem >
+            <ListBoxItem>
                 <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button  Width="160" Click="Button_ClickHolidays"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
                         <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Ünnepnapok</TextBlock>

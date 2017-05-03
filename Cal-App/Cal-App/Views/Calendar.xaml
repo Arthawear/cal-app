@@ -18,9 +18,8 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            
         </Grid.ColumnDefinitions>
-        <Popup  Name="popLink" StaysOpen="True" IsOpen="False" Placement="Right"   PlacementTarget="{Binding ElementName=yearToCalendar}"  MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True"  >
+        <Popup  Name="popLink" StaysOpen="True" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=yearToCalendar}" MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True">
             <local:Settings x:Name="settings"></local:Settings>
         </Popup>
         <local:Year x:Name="yearToCalendar" Grid.Row="1" Grid.ColumnSpan="6"></local:Year>
@@ -31,14 +30,14 @@
         </StackPanel>
         <TextBlock Name="set1" Grid.Row="0" Grid.Column="5"   VerticalAlignment="Center" HorizontalAlignment="Right"  Foreground="White"  Padding="10" Text="⋮" Opacity="0"></TextBlock>
         <Button Grid.Row="0" Grid.Column="5" Click="Button_Click_Popup" Opacity="0.02" Background="Transparent" BorderThickness="0">
-            <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Yellow"  Padding="10" Text="⋮⋮⋮⋮"  ToolTipService.InitialShowDelay ="1"  
-                           ToolTipService.Placement="Right" ToolTipService.PlacementTarget="{Binding ElementName=set1}" ToolTipService.VerticalOffset=" 30" ToolTipService.HorizontalOffset="-25"  >
-                <TextBlock.ToolTip  >
-                    <ToolTip  BorderThickness="0"  >
-                        <ToolTip.Background >
-                            <VisualBrush Stretch="Fill"  >
+            <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Yellow"  Padding="10" Text="⋮⋮⋮⋮" ToolTipService.InitialShowDelay ="1"  
+                      ToolTipService.Placement="Right" ToolTipService.PlacementTarget="{Binding ElementName=set1}" ToolTipService.VerticalOffset=" 30" ToolTipService.HorizontalOffset="-25">
+                <TextBlock.ToolTip>
+                    <ToolTip  BorderThickness="0">
+                        <ToolTip.Background>
+                            <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Path Data="M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z"  Fill="Beige" />
+                                    <Path Data="M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z" Fill="Beige"/>
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </ToolTip.Background>
@@ -48,7 +47,7 @@
                 </TextBlock>
         </Button>
         <Popup  Name="popEvent" StaysOpen="True" IsOpen="False" Placement="Right"  PlacementTarget="{Binding ElementName=yearToCalendar}" 
-                    MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True"  >
+                MaxWidth="200" PopupAnimation="Slide" AllowsTransparency="True" IsEnabled="True">
             <local:Events></local:Events>
         </Popup>
     </Grid>

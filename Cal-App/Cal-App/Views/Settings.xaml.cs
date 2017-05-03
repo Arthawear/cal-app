@@ -103,7 +103,6 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
-
         private void Button_comboClickViewLarge(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -115,7 +114,7 @@ namespace Cal_App.Views
             {
                 if (grids[i] is UserControl)
                 {
-                    var uc = grids[i] as UserControl;
+                    var uc = grids[i] as Month;
                     var grid = uc.Content as Grid;
                     if (grid != null)
                     {
@@ -177,7 +176,6 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
-
         private void Button_comboClickViewOneMonth(object sender, RoutedEventArgs e)
         {
             int currentYear0 = DateTime.Now.Year;
@@ -239,7 +237,6 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
-
         private void Button_comboClickViewThreeMonths(object sender, RoutedEventArgs e)
         {
             int currentYear0 = DateTime.Now.Year;
@@ -336,7 +333,6 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
-
         private void Button_ClickSetYear(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -360,7 +356,6 @@ namespace Cal_App.Views
             {
                 this.Button_comboClickViewThin(sender, e);
             }
-
             year.YearToCal = year.RunYear(year.Element.Year, culture);
             int currentYear = DateTime.Now.Year;
             int currentMonth = DateTime.Now.Month;
@@ -391,7 +386,6 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
-
         private void Button_comboClick(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -408,7 +402,6 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
-
         private void Button_ClickEventOn(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -461,7 +454,6 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
-
         private void Button_ClickHolidays(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;
@@ -498,7 +490,6 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
-
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
         {
             var popLink = this.Parent as Popup;

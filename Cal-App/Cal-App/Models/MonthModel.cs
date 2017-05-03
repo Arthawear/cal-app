@@ -36,7 +36,6 @@ namespace Cal_App.Models
             }
         }
         private string[] dayNames;
-        
         public string[] DayNames
         {
             get
@@ -52,7 +51,6 @@ namespace Cal_App.Models
                 }
             }
         }
-
         public string Name
         {
             get
@@ -68,8 +66,6 @@ namespace Cal_App.Models
                 }
             }
         }
-
-
         public Dictionary<int, RenderDay> DayToPlace
         {
             get
@@ -131,7 +127,6 @@ namespace Cal_App.Models
                 days = value;
             }
         }
-
         public int Number
         {
             get
@@ -149,7 +144,6 @@ namespace Cal_App.Models
 
             }
         }
-
         public bool ShowHolidays
         {
             get
@@ -167,9 +161,7 @@ namespace Cal_App.Models
 
             }
         }
-
         public int Year { get; set; }
-
         public string BackgroundColour
         {
             get
@@ -187,10 +179,8 @@ namespace Cal_App.Models
 
             }
         }
-
         public MonthModel(int month, int year, bool showHolidays, string culture )
         {
-
             this.Culture = culture;
             this.number = month;
             Today = DateTime.Now.Day;

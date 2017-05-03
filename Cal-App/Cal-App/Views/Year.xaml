@@ -6,15 +6,15 @@
              xmlns:local="clr-namespace:Cal_App.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" 
-             MouseLeftButtonDown="Window_MouseLeftButtonDown"  >
+             MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <UserControl.Background>
-        <VisualBrush Stretch="Fill"  >
+        <VisualBrush Stretch="Fill">
             <VisualBrush.Visual>
-                <Path Name="WinBack" Data="M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z"  Stroke="Transparent"  Fill="Transparent" />
+                <Path Name="WinBack" Data="M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z" Stroke="Transparent" Fill="Transparent"/>
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Background>
-    <Grid Name="bigGrid" ShowGridLines="False" Margin="5" >
+    <Grid Name="bigGrid" ShowGridLines="False" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Name="row1"></RowDefinition>
             <RowDefinition Name="row2"></RowDefinition>
@@ -42,5 +42,4 @@
         <local:Month x:Name="grid11" Grid.Row="5" Grid.Column="0"/>
         <local:Month x:Name="grid12" Grid.Row="5" Grid.Column="1"/>
     </Grid>
-
 </UserControl>
