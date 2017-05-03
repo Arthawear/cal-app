@@ -16,7 +16,7 @@ namespace Cal_App
     /// <summary>
     /// Gets the calendar event list from google accont
     /// </summary>
-    class GoogleCal
+    class GoogleCal: ICalendar
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/calendar-dotnet-quickstart.json
