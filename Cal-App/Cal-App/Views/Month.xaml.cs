@@ -66,7 +66,6 @@ namespace Cal_App.Views
             {
                 button29.IsEnabled = true;
             }
-            var bigGrid = this.Parent as Grid;
         }
         /// <summary>
         /// Opens the event popup, and asks for one day's events from google account

@@ -208,8 +208,6 @@ namespace Cal_App.Models
                 Thickness = 100;
             }
             this.DayToPlace = ArrangeDays(year, month, this.numberOfDays, showHolidays);
-            this.todayRow = dayToPlace[Today].Key;
-            this.todayCol = dayToPlace[Today].Value;
             this.name = GetName(year, month, 1, false, culture);
             DayNames = new string[7];
             for (int i = 2; i < 9; i++)
@@ -217,6 +215,15 @@ namespace Cal_App.Models
                 string dayName = GetName(2017, 1, i, true, culture);
                 DayNames[i - 2] = dayName;
             }
+            if (Today > dayToPlace.Count)
+            {
+                this.todayRow = 0;
+                this.todayCol = 0;
+                return;
+            }
+            this.todayRow = dayToPlace[Today].Key;
+            this.todayCol = dayToPlace[Today].Value;
+            
         }
         /// <summary>
         /// Gets the name of the month or the weekdays
