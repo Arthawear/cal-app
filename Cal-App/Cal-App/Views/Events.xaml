@@ -26,8 +26,8 @@
             </VisualBrush>
         </Grid.Background>
         <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
-             Események a google naptarbol</TextBlock>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">Események</TextBlock>
+             Events from google calendar</TextBlock>
+        <TextBlock Name="eventPopupContent" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20">Events</TextBlock>
         <TextBlock Grid.Column="3" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium" FontSize="20">x</TextBlock>
         <Button Grid.Column="3" Opacity="0" Click="Button_ClickExitEvent"></Button>
     </Grid>

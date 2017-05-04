@@ -448,7 +448,6 @@ namespace Cal_App.Views
             if (!isEventOn)
             {
                 isEventOn = true;
-                button.Content = "Események Ki";
                 for (int i = 1; i < bigGrid.Children.Count; i++)
                 {
                     var month = bigGrid.Children[i] as Month;
@@ -468,7 +467,6 @@ namespace Cal_App.Views
             else if (isEventOn)
             {
                 isEventOn = false;
-                button.Content = "Események Be";
                 for (int i = 1; i < bigGrid.Children.Count; i++)
                 {
                     var month = bigGrid.Children[i] as Month;
@@ -590,6 +588,7 @@ namespace Cal_App.Views
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
             var year = grid0.Children[1] as Year;
+            var calendar = grid0.Parent as Calendar;
             for (int i = 1; i < year.bigGrid.Children.Count; i++)
             {
                 var month = year.bigGrid.Children[i] as Month;
@@ -601,8 +600,38 @@ namespace Cal_App.Views
                 month.DataContext = current;
             }
             year.Culture = newCulture;
+            if (newCulture!="HU")
+            {
+                yearContent.Text = "Year";
+                languageContent.Content = "Language";
+                viewContent.Content = "View";
+                backgroundContent.Content = "Background";
+                eventContent.Text = "Events";
+                weekEndContent.Text = "Weekends";
+                printContent.Text = "Print";
+                exitContent.Text = "Exit";
+                var popEvent = grid0.Children[5] as Popup;
+                var events = popEvent.Child as Events;
+                events.eventPopupContent.Text = "Events";
+                calendar.settingsContent.Text = "Settings";
+            }
+            if (newCulture == "HU")
+            {
+                yearContent.Text = "Év";
+                languageContent.Content = "Nyelv";
+                viewContent.Content = "Nézet";
+                backgroundContent.Content = "Háttér";
+                eventContent.Text = "Események";
+                weekEndContent.Text = "Hétvégék";
+                printContent.Text = "Nyomtatás";
+                exitContent.Text = "Kilépés";
+                var popEvent = grid0.Children[5] as Popup;
+                var events = popEvent.Child as Events;
+                events.eventPopupContent.Text = "Események";
+                calendar.settingsContent.Text = "Beállítások";
+            }
             popLink.IsOpen = false;
-            var calendar = grid0.Parent as Calendar;
+            
             calendar.showYearTxtBlock.Text = year.Element.Year.ToString();
             var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);

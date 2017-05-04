@@ -41,7 +41,7 @@
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </ToolTip.Background>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Beállítások</TextBlock>
+                        <TextBlock Name="settingsContent" VerticalAlignment="Center" HorizontalAlignment="Center">Settings</TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>    
                 </TextBlock>

@@ -20,18 +20,18 @@
         </Grid.Background>
         <ListBox Name="SettingListBox" Margin="10"  FontSize="15" Background="Beige" FontWeight="Medium" BorderThickness="0" Grid.RowSpan="2">
             <ListBoxItem Name="SetYear">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Width="150">
                     <Label VerticalContentAlignment="Center" HorizontalAlignment="Left">
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">Év</TextBlock>
+                        <TextBlock Name="yearContent" HorizontalAlignment="Left" VerticalAlignment="Center">Year</TextBlock>
                     </Label>
-                    <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="2017"></TextBox>
-                    <Button Width="50" VerticalContentAlignment="Center" HorizontalAlignment="Center" Background="Beige" BorderThickness="0" Click="Button_ClickSetYear">Ok</Button>
+                    <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="2017" HorizontalAlignment="Center"></TextBox>
+                    <Button Width="50" VerticalContentAlignment="Center" HorizontalAlignment="Right" Background="Beige" BorderThickness="0" Click="Button_ClickSetYear">Ok</Button>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Nyelv</Label>
-                    <ComboBox Name="languageCB" Width="100" Background="Beige" BorderThickness="0" FontSize="10" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Width="150">
+                    <Label Name="languageContent">Language</Label>
+                    <ComboBox Name="languageCB" Width="70" Background="Beige" BorderThickness="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">EN
                         </ComboBoxItem>
                         <ComboBoxItem Width="Auto" Height="20" Background="Beige" Selected="SetLanguage">HU
@@ -50,9 +50,9 @@
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem Name="View">
-                <StackPanel Orientation="Horizontal">
-                    <Label>Nézet</Label>
-                    <ComboBox Width="100"  Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack,  Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" >
+                <StackPanel Orientation="Horizontal" Width="150">
+                    <Label Name="viewContent">View</Label>
+                    <ComboBox Width="70"  Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack,  Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <ComboBoxItem Width="Auto" Height="20"   Background="Beige" Selected="Button_comboClickViewThin">Thin
                         </ComboBoxItem>
                         <ComboBoxItem  Width="Auto" Height="20" Background="Beige" Selected="Button_comboClickViewLarge">Large
@@ -65,9 +65,9 @@
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Háttér</Label>
-                    <ComboBox Width="100" Name="WinBackgroundCombo" Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack, Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Width="150">
+                    <Label Name="backgroundContent">Background</Label>
+                    <ComboBox Width="70" Name="WinBackgroundCombo" Background="Beige" BorderThickness="0" SelectedItem="{Binding ElementName=WinBack, Path=Fill, Mode=TwoWay }" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <ComboBoxItem Width="Auto" Height="20"  Name="Beige" Background="Beige" Selected="Button_comboClick">Beige
                         </ComboBoxItem>
                         <ComboBoxItem Name="Black" Width="Auto" Height="20" Background="Black" Selected="Button_comboClick" Foreground="White">Black
@@ -80,28 +80,28 @@
             <ListBoxItem >
                 <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button Width="160" Click="Button_ClickEventOn"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Események Be</TextBlock>
+                        <TextBlock Name="eventContent" HorizontalAlignment="Left" VerticalAlignment="Center">Events</TextBlock>
                     </Button>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem>
                 <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button  Width="160" Click="Button_ClickHolidays"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Ünnepnapok</TextBlock>
+                        <TextBlock Name="weekEndContent" HorizontalAlignment="Left" VerticalAlignment="Center">Weekends</TextBlock>
                     </Button>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem>
                 <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button  Width="160" Click="Button_ClickPrint"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Nyomtatás</TextBlock>
+                        <TextBlock Name="printContent" HorizontalAlignment="Left" VerticalAlignment="Center">Print</TextBlock>
                     </Button>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem >
                 <StackPanel Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button  Width="160" Click="Button_ClickExit"  HorizontalAlignment="Left" Background="Beige" BorderThickness="0">
-                        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center">Kilépés</TextBlock>
+                        <TextBlock Name="exitContent" HorizontalAlignment="Left" VerticalAlignment="Center">Exit</TextBlock>
                     </Button>
                 </StackPanel>
             </ListBoxItem>

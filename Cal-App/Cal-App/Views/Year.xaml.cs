@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -132,7 +133,8 @@ namespace Cal_App.Views
         public Year()
         {
             InitializeComponent();
-            culture = "hu";
+            CultureInfo current = new CultureInfo("en-US", false);
+            culture = current.ToString();
             DataContext = Element;
             this.YearToCal = RunYear(Element.Year,culture);
             for (int i = 1; i < bigGrid.Children.Count; i++)
