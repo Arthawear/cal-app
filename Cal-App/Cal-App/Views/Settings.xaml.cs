@@ -459,7 +459,7 @@ namespace Cal_App.Views
                         if (grid2.Children[j] is Button)
                         {
                             var button1 = grid2.Children[j] as Button;
-                            button1.Visibility = Visibility.Visible;
+                            button1.IsEnabled = true;
                         }
                     }
                     month.UserControl_Loaded(sender, e);
@@ -479,7 +479,7 @@ namespace Cal_App.Views
                         if (grid2.Children[j] is Button)
                         {
                             var button1 = grid2.Children[j] as Button;
-                            button1.Visibility = Visibility.Hidden;
+                            button1.IsEnabled = false;
                         }
                     }
                 }
