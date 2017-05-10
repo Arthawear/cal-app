@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cal_App.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
@@ -24,7 +24,7 @@
                     <Label VerticalContentAlignment="Center" HorizontalAlignment="Left">
                         <TextBlock Name="yearContent" HorizontalAlignment="Left" VerticalAlignment="Center">Year</TextBlock>
                     </Label>
-                    <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="2017" HorizontalAlignment="Center"></TextBox>
+                    <TextBox Name="yearTxtBox" Width="75" VerticalContentAlignment="Center" BorderThickness="0" Background="Beige" Text="{Binding Path=Number, Mode=TwoWay}" HorizontalAlignment="Center"></TextBox>
                     <Button Width="50" VerticalContentAlignment="Center" HorizontalAlignment="Right" Background="Beige" BorderThickness="0" Click="Button_ClickSetYear">Ok</Button>
                 </StackPanel>
             </ListBoxItem>

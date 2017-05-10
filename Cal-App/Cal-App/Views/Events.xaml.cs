@@ -34,10 +34,10 @@ namespace Cal_App.Views
         {
             var popEvent = this.Parent as Popup;
             popEvent.IsOpen = false;
-            var grid = popEvent.Parent as Grid;
-            var calendar = grid.Parent as Calendar;
-            var window = calendar.Parent as MainWindow;
-            window.DispatcherTimer_Tick(sender,e);
+            //var grid = popEvent.Parent as Grid;
+            //var calendar = grid.Parent as Calendar;
+            //var window = calendar.Parent as MainWindow;
+            //window.DispatcherTimer_Tick(sender,e);
         }
     }
 }

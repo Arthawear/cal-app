@@ -20,7 +20,6 @@ namespace Cal_App.Models
         private Dictionary<int, RenderDay> dayToPlace = new Dictionary<int, RenderDay>();
         private bool showHolidays;
         private string culture;
-        private MonthStyle monthStyle;
         public string Culture
         {
             get
@@ -37,6 +36,24 @@ namespace Cal_App.Models
             }
         }
         private string[] dayNames;
+        private string leap;
+        private bool isEventOn=false;
+        string[] colors = new string[12] { "#008DD2", "#393185", "#57A7B3", "#61A375", "#009846", "#DCCF73", "#E31E24", "#E5097F", "#EF7F1A", "#CC6F3C", "#B2AD81", "#7690C9" };
+        public bool IsEventOn
+        {
+            get
+            {
+                return this.isEventOn;
+            }
+            set
+            {
+                if (this.isEventOn != value)
+                {
+                    this.isEventOn= value;
+                    this.OnPropertyChanged("IsEventOn");
+                }
+            }
+        }
         public string[] DayNames
         {
             get
@@ -115,7 +132,21 @@ namespace Cal_App.Models
                 }
             }
         }
-        public string Leap { get; set; }
+        public string Leap
+        {
+            get
+            {
+                return this.leap;
+            }
+            set
+            {
+                if (this.leap != value)
+                {
+                    this.leap = value;
+                    this.OnPropertyChanged("Leap");
+                }
+            }
+        }
         public int[] Days
         {
             get
@@ -187,23 +218,21 @@ namespace Cal_App.Models
         /// <param name="year">The year number </param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
-        public MonthModel(int month, int year, bool showHolidays, string culture )
+        public MonthModel(int month, int year, bool showHolidays, string culture, bool isEventOn )
         {
+            this.IsEventOn = isEventOn;
             this.Culture = culture;
             this.number = month;
             Today = DateTime.Now.Day;
-            int currentMonth = DateTime.Now.Month;
-            int currentYear = DateTime.Now.Year;
             this.Year = year;
             this.showHolidays = showHolidays;
-            this.monthStyle = new MonthStyle(month);
-            this.BackgroundColour = monthStyle.BackgroundColour;
-            this.numberOfDays = monthStyle.NumberOfDays;
+            this.BackgroundColour = colors[month-1];
+            this.numberOfDays = GetNumberOfDays(month);
             if (year%4==0&&month==2)
             {
                 this.numberOfDays = 29;
             }
-            if (currentMonth == month&& year == currentYear)
+            if (year == DateTime.Now.Year && month == DateTime.Now.Month)
             {
                 Thickness = 100;
             }
@@ -260,31 +289,18 @@ namespace Cal_App.Models
             Dictionary<int, RenderDay> days1 = new Dictionary<int, RenderDay>();
             this.days = new int[numberOfDays];
             Enumerable.Range(1, numberOfDays).ToArray().CopyTo(days, 0);
-            switch (firstDay)
+            start = (int)firstDay-1;
+            if (firstDay==DayOfWeek.Sunday)
             {
-                case DayOfWeek.Sunday:
-                    start = 6;
-                    break;
-                case DayOfWeek.Monday:
-                    start = 0;
-                    break;
-                case DayOfWeek.Tuesday:
-                    start = 1;
-                    break;
-                case DayOfWeek.Wednesday:
-                    start = 2;
-                    break;
-                case DayOfWeek.Thursday:
-                    start = 3;
-                    break;
-                case DayOfWeek.Friday:
-                    start = 4;
-                    break;
-                case DayOfWeek.Saturday:
-                    start = 5;
-                    break;
-                default:
-                    break;
+                start = 6;
+            }
+            if (year % 4 == 0)
+            {
+                Leap = "Visible";
+            }
+            else
+            {
+                Leap = "Hidden";
             }
             for (int i = 0; i < days.Length; i++)
             {
@@ -297,7 +313,6 @@ namespace Cal_App.Models
                     isHoliday = true;
                 }
                 string color = "#FEFEFE";
-
                 if (isHoliday && showHolidays)
                 {
                     color = "#2B2A29";
@@ -305,6 +320,34 @@ namespace Cal_App.Models
                 days1.Add(day, new RenderDay() { Key = place / 7 + 2, Value = place % 7, Color = color });
             }
             return days1;
+        }
+        public int GetNumberOfDays(int month)
+        {
+            int numberOfDays = 0;
+            switch (month)
+            {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    numberOfDays = 31;
+                    break;
+                case 2:
+                    numberOfDays = 28;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    numberOfDays = 30;
+                    break;
+                default:
+                    break;
+            }
+            return numberOfDays;
         }
         /// <summary>
         /// Contains the grid row and column number and the color of a day
@@ -318,70 +361,36 @@ namespace Cal_App.Models
         /// <summary>
         /// Contains the background color and the number of days of a Month
         /// </summary>
-        private class  MonthStyle
-        {
-            int numberOfDays;
-            string backgroundColour;
-            public int NumberOfDays { get => numberOfDays; set => numberOfDays = value; }
-            public string BackgroundColour { get => backgroundColour; set => backgroundColour = value; }
-            public MonthStyle(int month)
-            {
-                switch (month)
-                {
-                    case 1:
-                        this.NumberOfDays = 31;
-                        this.BackgroundColour = "#008DD2";
-                        break;
-                    case 2:
-                        this.BackgroundColour = "#393185";
-                            this.NumberOfDays = 28;
-                        break;
-                    case 3:
-                        this.BackgroundColour = "#57A7B3";
-                        this.NumberOfDays = 31;
-                        break;
-                    case 4:
-                        this.BackgroundColour = "#61A375";
-                        this.NumberOfDays = 30;
-                        break;
-                    case 5:
-                        this.BackgroundColour = "#009846";
-                        this.NumberOfDays = 31;
-                        break;
-                    case 6:
-                        this.BackgroundColour = "#DCCF73";
-                        this.NumberOfDays = 30;
-                        break;
-                    case 7:
-                        ;
-                        this.BackgroundColour = "#E31E24";
-                        this.NumberOfDays = 31;
-                        break;
-                    case 8:
-                        this.BackgroundColour = "#E5097F";
-                        this.NumberOfDays = 31;
-                        break;
-                    case 9:
-                        ;
-                        this.BackgroundColour = "#EF7F1A";
-                        this.NumberOfDays = 30;
-                        break;
-                    case 10:
-                        this.BackgroundColour = "#CC6F3C";
-                        this.NumberOfDays = 31;
-                        break;
-                    case 11:
-                        this.BackgroundColour = "#B2AD81";
-                        this.NumberOfDays = 30;
-                        break;
-                    case 12:
-                        this.BackgroundColour = "#7690C9";
-                        this.NumberOfDays = 31;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        //private class MonthStyle
+        //{
+        //    int numberOfDays;
+        //    public int NumberOfDays { get => numberOfDays; set => numberOfDays = value; }
+        //    public MonthStyle(int month)
+        //    {
+        //        switch (month)
+        //        {
+        //            case 1:
+        //            case 3:
+        //            case 5:
+        //            case 7:
+        //            case 8:
+        //            case 10:
+        //            case 12:
+        //                this.NumberOfDays = 31;
+        //                break;
+        //            case 2:
+        //                this.NumberOfDays = 28;
+        //                break;
+        //            case 4:
+        //            case 6:
+        //            case 9:
+        //            case 11:
+        //                this.NumberOfDays = 30;
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
+        //}
     }
 }

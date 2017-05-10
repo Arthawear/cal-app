@@ -26,6 +26,7 @@ namespace Cal_App.Views
         public Month()
         {
             InitializeComponent();
+            
         }
         /// <summary>
         /// Loads the Month view
@@ -34,10 +35,11 @@ namespace Cal_App.Views
         /// <param name="e">The instance containing the event data</param>
         public void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var year = DateTime.Now.Year; ;
-            var monthNr = DateTime.Now.Month;
             var monthModel = this.DataContext as MonthModel;
-            if (year == monthModel.Year && monthNr == monthModel.Number)
+            Binding binding = new Binding();
+            binding.Source = monthModel.BackgroundColour;
+            path.SetBinding(Path.FillProperty, binding);
+            if (monthModel.Year == DateTime.Now.Year && monthModel.Number == DateTime.Now.Month)
             {
                 CurrentDaySquare.Visibility = Visibility.Visible;
                 CurrentDayButton.Visibility = Visibility.Visible;
@@ -62,9 +64,14 @@ namespace Cal_App.Views
                     }
                 }
             }
-            if (monthModel.Year%4==0&& button29.IsEnabled == false)
+            if (monthModel.Number==2)
             {
-                button29.IsEnabled = true;
+                binding = new Binding();
+                binding.Source = monthModel.Leap;
+                button29.SetBinding(VisibilityProperty, binding);
+                binding = new Binding();
+                binding.Source = monthModel.IsEventOn;
+                button29.SetBinding(IsEnabledProperty, binding);
             }
         }
         /// <summary>
@@ -81,7 +88,7 @@ namespace Cal_App.Views
             var year1 = dt.Year;
             var monthNr = dt.Number;
             var day = (int)button.Content;
-            var events = googleCal.GetEvents(year1, monthNr, day);
+            var events0 = googleCal.GetEvents(year1, monthNr, day);
             var grid = this.Parent as Grid;
             var year = grid.Parent as Year;
             var grid0 = year.Parent as Grid;
@@ -90,8 +97,7 @@ namespace Cal_App.Views
             {
                 calendar.popEvent.IsOpen = true;
             }
-            var events1 = calendar.popEvent.Child as Events;
-            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events);
+            calendar.eventsToCalendar.GoogleEvents.Text= String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events0);
         }
         /// <summary>
         /// Opens the event popup, and asks for the current day's events from google account
@@ -113,8 +119,7 @@ namespace Cal_App.Views
             {
                 calendar.popEvent.IsOpen = true;
             }
-            var events1 = calendar.popEvent.Child as Events;
-            events1.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events);
+            calendar.eventsToCalendar.GoogleEvents.Text = String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(year1, monthNr, day), await events);
         }
     }
 }

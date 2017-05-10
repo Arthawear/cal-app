@@ -36,8 +36,10 @@ namespace Cal_App.Views
         {
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
-            var bigGrid = year.bigGrid;
+            var calendar = grid0.Parent as Calendar;
+            var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
+            var bigGrid = calendar.yearToCalendar.bigGrid;
             var grids = bigGrid.Children;
             for (int i = 1; i < grids.Count; i++)
             {
@@ -52,8 +54,6 @@ namespace Cal_App.Views
                     }
                 }
             }
-            var calendar = grid0.Parent as Calendar;
-            var window = calendar.Parent as MainWindow;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (cols.Count != 2 && rows.Count != 6)
@@ -91,18 +91,17 @@ namespace Cal_App.Views
                 var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
                 window.MinHeight = 750;
                 window.MaxHeight = 1200;
-                window.MaxWidth = this.MaxHeight / 3;
-                window.MinWidth = this.MinHeight / 3;
+                window.MaxWidth = window.MaxHeight / 3;
+                window.MinWidth = window.MinHeight / 3;
                 //window.Height = 800;
                 window.Height = screenHeight*3 / 4;
                 window.MaxHeight = 1800;
-                window.MaxWidth = this.MaxHeight / 3;
+                window.MaxWidth = window.MaxHeight / 3;
                 window.MinHeight = 750;
-                window.MinWidth = this.MinHeight / 3;
+                window.MinWidth = window.MinHeight / 3;
                 string path = "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z";
                 Binding pathBinding = new Binding();
                 pathBinding.Source = path;
-                var data = year.WinBack.Data;
                 year.WinBack.SetBinding(Path.DataProperty, pathBinding);
             }
             window.DispatcherTimer_Tick(sender, e);
@@ -117,7 +116,9 @@ namespace Cal_App.Views
         {
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
+            var calendar = grid0.Parent as Calendar;
+            var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
             var bigGrid = year.bigGrid;
             var grids = bigGrid.Children;
             for (int i = 1; i < grids.Count; i++)
@@ -132,8 +133,6 @@ namespace Cal_App.Views
                     }
                 }
             }
-            var calendar = grid0.Parent as Calendar;
-            var window = calendar.Parent as MainWindow;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (!(cols.Count == 4 && rows.Count == 3))
@@ -193,20 +192,12 @@ namespace Cal_App.Views
         /// <param name="e">The instance containing the event data</param>
         private void Button_comboClickViewOneMonth(object sender, RoutedEventArgs e)
         {
-            int currentYear0 = DateTime.Now.Year;
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
-            var bigGrid = year.bigGrid;
-            var dc0 = year.grid1.DataContext as MonthModel;
-            int year1 = dc0.Year;
-            if (year1 != currentYear0)
-            {
-                popLink.IsOpen = false;
-                return;
-            }
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
+            var bigGrid = year.bigGrid;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (!(cols.Count == 1 && rows.Count == 1))
@@ -221,19 +212,12 @@ namespace Cal_App.Views
                 var grids = bigGrid.Children;
                 for (int i = 1; i < grids.Count; i++)
                 {
-                    if (grids[i] is UserControl)
+                    var month = grids[i] as Month;
+                    month.grid1.Visibility = Visibility.Hidden;
+                    if (i == currentMonth)
                     {
-                        var uc1 = grids[i] as UserControl;
-                        var grid = uc1.Content as Grid;
-                        if (grid != null)
-                        {
-                            grid.Visibility = Visibility.Hidden;
-                        }
-                        if (i == currentMonth)
-                        {
-                            grid.Visibility = Visibility.Visible;
-                            Grid.SetRow(uc1, 0); Grid.SetColumn(uc1, 0);
-                        }
+                        month.grid1.Visibility = Visibility.Visible;
+                        Grid.SetRow(month, 0); Grid.SetColumn(month, 0);
                     }
                 }
                 window.MaxWidth = 300;
@@ -259,20 +243,12 @@ namespace Cal_App.Views
         /// <param name="e">The instance containing the event data</param>
         private void Button_comboClickViewThreeMonths(object sender, RoutedEventArgs e)
         {
-            int currentYear0 = DateTime.Now.Year;
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
-            var bigGrid = year.bigGrid;
-            var dc0 = year.grid1.DataContext as MonthModel;
-            int year1 = dc0.Year;
-            if (year1 != currentYear0)
-            {
-                popLink.IsOpen = false;
-                return;
-            }
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
+            var bigGrid = year.bigGrid;
             var rows = bigGrid.RowDefinitions;
             var cols = bigGrid.ColumnDefinitions;
             if (!(cols.Count == 1 && rows.Count == 3))
@@ -288,52 +264,25 @@ namespace Cal_App.Views
                 rows.Add(row2);
                 rows.Add(row3);
                 int currentMonth = DateTime.Now.Month;
-                string gridName = "grid" + currentMonth;
                 var grids = bigGrid.Children;
-                for (int i = 1; i < grids.Count; i++)
+                SetMonths();
+                if (currentMonth == 1)
                 {
-                    var uc1 = grids[i] as UserControl;
-                    var grid = uc1.Content as Grid;
-                    grid.Visibility = Visibility.Hidden;
-                    if (i == currentMonth - 1)
-                    {
-                        grid.Visibility = Visibility.Visible;
-                        Grid.SetRow(uc1, 0); Grid.SetColumn(uc1, 0);
-                    }
-                    if (i == currentMonth)
-                    {
-                        grid.Visibility = Visibility.Visible;
-                        Grid.SetRow(uc1, 1); Grid.SetColumn(uc1, 0);
-                    }
-                    if (i == currentMonth + 1)
-                    {
-                        grid.Visibility = Visibility.Visible;
-                        Grid.SetRow(uc1, 2); Grid.SetColumn(uc1, 0);
-                    }
-                    if (currentMonth == 1)
-                    {
-                        int currentYear = DateTime.Now.Year;
-                        var dc = year.grid12.DataContext as MonthModel;
-                        bool holiday = dc.ShowHolidays;
-                        string culture = dc.Culture;
-                        MonthModel dec = new MonthModel(12, currentYear - 1, holiday, culture);
-                        var gridChild = year.grid12.Content as Grid;
-                        gridChild.Visibility = Visibility.Visible;
-                        year.grid12.DataContext = dec;
-                        Grid.SetRow(year.grid12, 0); Grid.SetColumn(year.grid12, 0);
-                    }
-                    if (currentMonth == 12)
-                    {
-                        int currentYear = DateTime.Now.Year;
-                        var dc = year.grid1.DataContext as MonthModel;
-                        bool holiday = dc.ShowHolidays;
-                        string culture = dc.Culture;
-                        MonthModel jan = new MonthModel(1, currentYear + 1, holiday, culture);
-                        var gridChild = year.grid1.Content as Grid;
-                        gridChild.Visibility = Visibility.Visible;
-                        year.grid1.DataContext = jan;
-                        Grid.SetRow(year.grid1, 2); Grid.SetColumn(year.grid1, 0);
-                    }
+                    int currentYear = DateTime.Now.Year;
+                    var monthModel = year.grid12.DataContext as MonthModel;
+                    MonthModel dec = new MonthModel(12, currentYear - 1, monthModel.ShowHolidays, monthModel.Culture, monthModel.IsEventOn);
+                    year.grid12.grid1.Visibility = Visibility.Visible;
+                    year.grid12.DataContext = dec;
+                    Grid.SetRow(year.grid12, 0); Grid.SetColumn(year.grid12, 0);
+                }
+                else if (currentMonth == 12)
+                {
+                    int currentYear = DateTime.Now.Year;
+                    var monthModel = year.grid1.DataContext as MonthModel;
+                    MonthModel jan = new MonthModel(1, currentYear + 1, monthModel.ShowHolidays, monthModel.Culture, monthModel.IsEventOn);
+                    year.grid1.grid1.Visibility = Visibility.Visible;
+                    year.grid1.DataContext = jan;
+                    Grid.SetRow(year.grid1, 2); Grid.SetColumn(year.grid1, 0);
                 }
                 window.MaxWidth = 200;
                 window.MinWidth = 200;
@@ -353,6 +302,28 @@ namespace Cal_App.Views
             window.DispatcherTimer_Tick(sender, e);
             popLink.IsOpen = false;
         }
+        private void SetMonths()
+        {
+            var popLink = this.Parent as Popup;
+            var grid0 = popLink.Parent as Grid;
+            var calendar = grid0.Parent as Calendar;
+            var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
+            var bigGrid = year.bigGrid;
+            int currentMonth = DateTime.Now.Month;
+            var grids = bigGrid.Children;
+            for (int i = 1; i < grids.Count; i++)
+            {
+                var month = grids[i] as Month;
+                if (i >= currentMonth - 1 && i <= currentMonth + 1)
+                {
+                    month.grid1.Visibility = Visibility.Visible;
+                    Grid.SetRow(month, i - (currentMonth - 1)); Grid.SetColumn(month, 0);
+                }
+                else
+                    month.grid1.Visibility = Visibility.Hidden;
+            }
+        }
         /// <summary>
         /// Sets the calendar's year
         /// </summary>
@@ -363,40 +334,27 @@ namespace Cal_App.Views
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
             var calendar = grid0.Parent as Calendar;
-            var year = grid0.Children[1] as Year;
+            var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
             string text = yearTxtBox.Text;
             int a = DateTime.Now.Year;
             bool isNumber = Int32.TryParse(yearTxtBox.Text, out a);
             if (a==0)
             {
-                yearTxtBox.Text = calendar.showYearTxtBlock.Text;
+                yearTxtBox.Text = year.YearNumber.ToString();
                 popLink.IsOpen = false;
                 return;
             }
-            year.Element.Year = a;
-            string culture = year.Culture;
+            year.YearNumber = a;
             var cols = year.bigGrid.ColumnDefinitions;
             var rows = year.bigGrid.RowDefinitions;
             if (cols.Count == 1 && (rows.Count == 1 || rows.Count == 3))
             {
                 this.Button_comboClickViewThin(sender, e);
             }
-            year.YearToCal = year.RunYear(year.Element.Year, culture);
             int currentYear = DateTime.Now.Year;
-            int currentMonth = DateTime.Now.Month;
-            for (int i = 1; i < year.bigGrid.Children.Count; i++)
-            {
-                var month = year.bigGrid.Children[i] as Month;
-                if (i == currentMonth)
-                {
-                    month.UserControl_Loaded(sender, e);
-                }
-                if (i == 2 && year.Element.Year % 4 == 0 && isEventOn)
-                {
-                    month.button29.Visibility = Visibility.Visible;
-                }
-            }
-            if (year.Element.Year != currentYear)
+            //sets the view combos, if other year than the current, the one month view and the three months view is disabled
+            if (year.YearNumber != currentYear)
             {
                 currentCombo.Visibility = Visibility.Collapsed;
                 threeMonthCombo.Visibility = Visibility.Collapsed;
@@ -407,8 +365,6 @@ namespace Cal_App.Views
                 threeMonthCombo.Visibility = Visibility.Visible;
             }
             popLink.IsOpen = false;
-            calendar.showYearTxtBlock.Text = year.Element.Year.ToString();
-            var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
         /// <summary>
@@ -420,16 +376,15 @@ namespace Cal_App.Views
         {
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
+            var calendar = grid0.Parent as Calendar;
+            var window = calendar.Parent as MainWindow;
             ComboBoxItem a = (ComboBoxItem)e.OriginalSource;
             Binding binding = new Binding();
             binding.Source = a;
             binding.Path = new PropertyPath("Background");
             binding.Mode = BindingMode.TwoWay;
-            year.WinBack.SetBinding(Path.FillProperty, binding);
+            calendar.yearToCalendar.WinBack.SetBinding(Path.FillProperty, binding);
             popLink.IsOpen = false;
-            var calendar = grid0.Parent as Calendar;
-            var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
         /// <summary>
@@ -441,50 +396,22 @@ namespace Cal_App.Views
         {
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
+            var calendar = grid0.Parent as Calendar;
+            var window = calendar.Parent as MainWindow;
+            var year = calendar.yearToCalendar;
             var bigGrid = year.bigGrid;
             Button button = new Button();
             button = (Button)e.OriginalSource;
             if (!isEventOn)
             {
                 isEventOn = true;
-                for (int i = 1; i < bigGrid.Children.Count; i++)
-                {
-                    var month = bigGrid.Children[i] as Month;
-                    var grid1 = month.Content as Grid;
-                    var grid2 = grid1.Children[0] as Grid;
-                    for (int j = 2; j < grid2.Children.Count - 1; j++)
-                    {
-                        if (grid2.Children[j] is Button)
-                        {
-                            var button1 = grid2.Children[j] as Button;
-                            button1.IsEnabled = true;
-                        }
-                    }
-                    month.UserControl_Loaded(sender, e);
-                }
             }
             else if (isEventOn)
             {
                 isEventOn = false;
-                for (int i = 1; i < bigGrid.Children.Count; i++)
-                {
-                    var month = bigGrid.Children[i] as Month;
-                    var grid1 = month.Content as Grid;
-                    var grid2 = grid1.Children[0] as Grid;
-                    for (int j = 2; j < grid2.Children.Count; j++)
-                    {
-                        if (grid2.Children[j] is Button)
-                        {
-                            var button1 = grid2.Children[j] as Button;
-                            button1.IsEnabled = false;
-                        }
-                    }
-                }
             }
+            calendar.yearToCalendar.IsEventOn = isEventOn;
             popLink.IsOpen = false;
-            var calendar = grid0.Parent as Calendar;
-            var window = calendar.Parent as MainWindow;
             window.DispatcherTimer_Tick(sender, e);
         }
         /// <summary>
@@ -496,36 +423,15 @@ namespace Cal_App.Views
         {
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
-            if (!year.ShowHolidays)
-            {
-                year.ShowHolidays = true;
-            }
-            else
-                year.ShowHolidays = false;
-            int currentMonth = DateTime.Now.Month;
-            if (currentMonth == 1 || currentMonth == 12)
-            {
-                var grids = year.bigGrid.Children;
-                for (int i = 1; i < grids.Count; i++)
-                {
-                    var month = year.bigGrid.Children[i] as Month;
-                    var monthModel = month.DataContext as MonthModel;
-                    int currentYear = monthModel.Year;
-                    int monthNumber = monthModel.Number;
-                    string culture = monthModel.Culture;
-                    MonthModel current = new MonthModel(monthNumber, currentYear, year.ShowHolidays, culture);
-                    month.DataContext = current;
-                }
-            }
-            else
-            {
-                string culture = year.Culture;
-                year.YearToCal = year.RunYear(year.Element.Year, culture);
-            }
-            popLink.IsOpen = false;
             var calendar = grid0.Parent as Calendar;
             var window = calendar.Parent as MainWindow;
+            if (!calendar.yearToCalendar.ShowHolidays)
+            {
+                calendar.yearToCalendar.ShowHolidays = true;
+            }
+            else
+                calendar.yearToCalendar.ShowHolidays = false;
+            popLink.IsOpen = false;
             window.DispatcherTimer_Tick(sender, e);
         }
         /// <summary>
@@ -541,19 +447,22 @@ namespace Cal_App.Views
             var window = calendar.Parent as MainWindow;
             popLink.IsOpen = false;
             var whiteColour = calendar.showYearTxtBlock.Foreground;
-            var year = grid0.Children[1] as Year;
+            var year = calendar.yearToCalendar;
             var grids = year.bigGrid.Children;
             int currentMonthNumber = DateTime.Now.Month;
             Month currentMonth = new Month();
             Visibility currentDaySquareVisibility = new Visibility();
-            for (int i = 1; i < grids.Count; i++)
+            if (year.YearNumber == DateTime.Now.Year)
             {
-                var month = year.bigGrid.Children[i] as Month;
-                if (i == currentMonthNumber)
+                for (int i = 1; i < grids.Count; i++)
                 {
-                    currentMonth = month;
-                    currentDaySquareVisibility = currentMonth.CurrentDaySquare.Visibility;
-                    currentMonth.CurrentDaySquare.Visibility = Visibility.Collapsed;
+                    var month = year.bigGrid.Children[i] as Month;
+                    if (i == currentMonthNumber)
+                    {
+                        currentMonth = month;
+                        currentDaySquareVisibility = currentMonth.CurrentDaySquare.Visibility;
+                        currentMonth.CurrentDaySquare.Visibility = Visibility.Collapsed;
+                    }
                 }
             }
             calendar.showYearTxtBlock.Foreground = Black.Background;
@@ -581,59 +490,16 @@ namespace Cal_App.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
-        private void SetLanguage(object sender, RoutedEventArgs e)
+        public void SetLanguage(object sender, RoutedEventArgs e)
         {
-            var comboItem = e.OriginalSource as ComboBoxItem;
-            string newCulture = comboItem.Content.ToString();
             var popLink = this.Parent as Popup;
             var grid0 = popLink.Parent as Grid;
-            var year = grid0.Children[1] as Year;
             var calendar = grid0.Parent as Calendar;
-            for (int i = 1; i < year.bigGrid.Children.Count; i++)
-            {
-                var month = year.bigGrid.Children[i] as Month;
-                var monthModel = month.DataContext as MonthModel;
-                int currentYear = monthModel.Year;
-                int monthNumber = monthModel.Number;
-                bool showHolidays = monthModel.ShowHolidays;
-                MonthModel current = new MonthModel(monthNumber, currentYear, showHolidays, newCulture);
-                month.DataContext = current;
-            }
-            year.Culture = newCulture;
-            if (newCulture!="HU")
-            {
-                yearContent.Text = "Year";
-                languageContent.Content = "Language";
-                viewContent.Content = "View";
-                backgroundContent.Content = "Background";
-                eventContent.Text = "Events";
-                weekEndContent.Text = "Weekends";
-                printContent.Text = "Print";
-                exitContent.Text = "Exit";
-                var popEvent = grid0.Children[5] as Popup;
-                var events = popEvent.Child as Events;
-                events.eventPopupContent.Text = "Events";
-                calendar.settingsContent.Text = "Settings";
-            }
-            if (newCulture == "HU")
-            {
-                yearContent.Text = "Év";
-                languageContent.Content = "Nyelv";
-                viewContent.Content = "Nézet";
-                backgroundContent.Content = "Háttér";
-                eventContent.Text = "Események";
-                weekEndContent.Text = "Hétvégék";
-                printContent.Text = "Nyomtatás";
-                exitContent.Text = "Kilépés";
-                var popEvent = grid0.Children[5] as Popup;
-                var events = popEvent.Child as Events;
-                events.eventPopupContent.Text = "Események";
-                calendar.settingsContent.Text = "Beállítások";
-            }
-            popLink.IsOpen = false;
-            
-            calendar.showYearTxtBlock.Text = year.Element.Year.ToString();
             var window = calendar.Parent as MainWindow;
+            var comboItem = e.OriginalSource as ComboBoxItem;
+            string newCulture = comboItem.Content.ToString();
+            calendar.yearToCalendar.Culture = newCulture;
+            popLink.IsOpen = false;
             window.DispatcherTimer_Tick(sender, e);
         }
     }

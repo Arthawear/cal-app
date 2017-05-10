@@ -12,6 +12,22 @@ namespace Cal_App.Models
         private int isLeap;
         private MonthModel[] items;
         private string culture;
+        private bool isEventOn = false;
+        public bool IsEventOn
+        {
+            get
+            {
+                return this.isEventOn;
+            }
+            set
+            {
+                if (this.isEventOn != value)
+                {
+                    this.isEventOn = value;
+                    this.OnPropertyChanged("IsEventOn");
+                }
+            }
+        }
         public string Culture
         {
             get
@@ -84,22 +100,24 @@ namespace Cal_App.Models
         /// <param name="year">The year number</param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
-        public YearModel(int year, bool showHolidays, string culture)
+        public YearModel(int year, bool showHolidays, string culture, bool isEventOn)
         {
+            this.Number=year;
+            this.IsEventOn = isEventOn;
             this.Culture = culture;
             this.items = new MonthModel[12] {
-                new MonthModel(1, year, showHolidays,culture),
-                new MonthModel(2, year, showHolidays,culture),
-                new MonthModel(3, year, showHolidays,culture),
-                new MonthModel(4, year, showHolidays,culture),
-                new MonthModel(5, year, showHolidays,culture),
-                new MonthModel(6, year, showHolidays,culture),
-                new MonthModel(7, year, showHolidays,culture),
-                new MonthModel(8, year, showHolidays,culture),
-                new MonthModel(9, year, showHolidays,culture),
-                new MonthModel(10, year, showHolidays,culture),
-                new MonthModel(11, year, showHolidays,culture),
-                new MonthModel(12, year, showHolidays,culture)
+                new MonthModel(1, year, showHolidays,culture, isEventOn),
+                new MonthModel(2, year, showHolidays,culture, isEventOn),
+                new MonthModel(3, year, showHolidays,culture, isEventOn),
+                new MonthModel(4, year, showHolidays,culture, isEventOn),
+                new MonthModel(5, year, showHolidays,culture, isEventOn),
+                new MonthModel(6, year, showHolidays,culture, isEventOn),
+                new MonthModel(7, year, showHolidays,culture, isEventOn),
+                new MonthModel(8, year, showHolidays,culture, isEventOn),
+                new MonthModel(9, year, showHolidays,culture, isEventOn),
+                new MonthModel(10, year, showHolidays,culture, isEventOn),
+                new MonthModel(11, year, showHolidays,culture, isEventOn),
+                new MonthModel(12, year, showHolidays,culture, isEventOn)
             };
         }
     }

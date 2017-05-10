@@ -1,4 +1,5 @@
-﻿using Cal_App.Views;
+﻿using Cal_App.Models;
+using Cal_App.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,11 +30,12 @@ namespace Cal_App
         public MainWindow()
         {
             InitializeComponent();
-            var calendar = this.Content as Views.Calendar;
-            var grid = calendar.Content as Grid; 
-            var year=grid.Children[1] as Year;
-            var element = year.DataContext as Views.FrameworkElement;
-            this.DataContext = element;
+            this.DataContext = calendar.yearToCalendar.YearToCal;
+            Binding binding = new Binding();
+            binding.Source = this;
+            binding.Path = new PropertyPath("DataContext");
+            binding.Mode = BindingMode.TwoWay;
+            calendar.SetBinding(DataContextProperty, binding);
             //sets the timer
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
@@ -48,17 +50,9 @@ namespace Cal_App
         /// <param name="e">The instance containing the event data</param>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var calendar = this.Content as Views.Calendar;
-            var grid = calendar.Content as Grid;
-            var year = grid.Children[1] as Year;
-            var bigGrid = year.Content as Grid;
-            var cols = bigGrid.ColumnDefinitions;
-            var rows = bigGrid.RowDefinitions;
-            if (cols.Count == 2 && rows.Count == 6)
-            {
-                Width = Height / 3;
-            }
-            else if (cols.Count == 4)
+            var cols = calendar.yearToCalendar.bigGrid.ColumnDefinitions;
+            var rows = calendar.yearToCalendar.bigGrid.RowDefinitions;
+            if (cols.Count == 4)
             {
                 Width = Height * 4 / 3;
             }
@@ -66,7 +60,7 @@ namespace Cal_App
             {
                 Width = Height;
             }
-            else if (cols.Count == 1 && rows.Count == 3)
+            else 
             {
                 Width = Height / 3;
             }
@@ -84,10 +78,6 @@ namespace Cal_App
         {
             dispatcherTimer.Stop();
             this.ResizeMode = ResizeMode.CanResizeWithGrip;
-            var calendar = this.Content as Views.Calendar;
-            var grid = calendar.Content as Grid;
-            var year = grid.Children[1] as Year;
-            var bigGrid = year.Content as Grid;
             calendar.yearPanel.Visibility = Visibility.Visible;
             calendar.set1.Opacity = 1;
         }
@@ -98,7 +88,6 @@ namespace Cal_App
         /// <param name="e">The instance containing the event data</param>
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-            var calendar = this.Content as Views.Calendar;
             if (!(calendar.popLink.IsOpen || calendar.popEvent.IsOpen))
             {
                 if (this.ResizeMode == ResizeMode.CanResizeWithGrip)
@@ -115,9 +104,18 @@ namespace Cal_App
         public void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             this.ResizeMode = ResizeMode.NoResize;
-            var calendar = this.Content as Views.Calendar;
             calendar.yearPanel.Visibility = Visibility.Collapsed;
             calendar.set1.Opacity = 0;
+        }
+        /// <summary>
+        /// Method for dragging the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">The instance containing the event data</param>
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+            this.DispatcherTimer_Tick(sender, e);
         }
     }
 }
