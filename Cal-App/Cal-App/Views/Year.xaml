@@ -1,15 +1,15 @@
-﻿<UserControl x:Class="Cal_App.Views.Year"
+﻿<UserControl x:Class="CalApp.Views.Year"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Cal_App.Views"
+             xmlns:local="clr-namespace:CalApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Background>
         <VisualBrush Stretch="Fill">
             <VisualBrush.Visual>
-                <Path Name="WinBack" Data="M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z" Stroke="Transparent" Fill="Transparent"/>
+                <Path Name="WinBack" Data="{Binding Path=Data}" Stroke="Transparent" Fill="{Binding Path=BackgroundColor}"/>
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Background>
@@ -25,20 +25,20 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="col1"></ColumnDefinition>
             <ColumnDefinition Name="col2"></ColumnDefinition>
+            <ColumnDefinition Name="col3"></ColumnDefinition>
+            <ColumnDefinition Name="col4"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid>
-        </Grid>
-        <local:Month x:Name="grid1" DataContext="{Binding Path=Items1[0], Mode=TwoWay}" Grid.Row="0" Grid.Column="0"/>
-        <local:Month x:Name="grid2" DataContext="{Binding Path=Items1[1], Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
-        <local:Month x:Name="grid3" DataContext="{Binding Path=Items1[2], Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
-        <local:Month x:Name="grid4" DataContext="{Binding Path=Items1[3], Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
-        <local:Month x:Name="grid5" DataContext="{Binding Path=Items1[4], Mode=TwoWay}" Grid.Row="2" Grid.Column="0"/>
-        <local:Month x:Name="grid6" DataContext="{Binding Path=Items1[5], Mode=TwoWay}" Grid.Row="2" Grid.Column="1"/>
-        <local:Month x:Name="grid7" DataContext="{Binding Path=Items1[6], Mode=TwoWay}" Grid.Row="3" Grid.Column="0"/>
-        <local:Month x:Name="grid8" DataContext="{Binding Path=Items1[7], Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
-        <local:Month x:Name="grid9" DataContext="{Binding Path=Items1[8], Mode=TwoWay}" Grid.Row="4" Grid.Column="0"/>
-        <local:Month x:Name="grid10" DataContext="{Binding Path=Items1[9], Mode=TwoWay}" Grid.Row="4" Grid.Column="1"/>
-        <local:Month x:Name="grid11" DataContext="{Binding Path=Items1[10], Mode=TwoWay}" Grid.Row="5" Grid.Column="0"/>
-        <local:Month x:Name="grid12" DataContext="{Binding Path=Items1[11], Mode=TwoWay}" Grid.Row="5" Grid.Column="1"/>
+        <local:Month x:Name="month1" DataContext="{Binding Path=Items1[0], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month2" DataContext="{Binding Path=Items1[1], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month3" DataContext="{Binding Path=Items1[2], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month4" DataContext="{Binding Path=Items1[3], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month5" DataContext="{Binding Path=Items1[4], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month6" DataContext="{Binding Path=Items1[5], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month7" DataContext="{Binding Path=Items1[6], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month8" DataContext="{Binding Path=Items1[7], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month9" DataContext="{Binding Path=Items1[8], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month10" DataContext="{Binding Path=Items1[9], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month11" DataContext="{Binding Path=Items1[10], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
+        <local:Month x:Name="month12" DataContext="{Binding Path=Items1[11], Mode=TwoWay}" Grid.Row="{Binding Path=GridRow}" Grid.Column="{Binding Path=GridColumn}" Visibility="{Binding Path=Visibility}"/>
     </Grid>
 </UserControl>

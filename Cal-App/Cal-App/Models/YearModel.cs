@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cal_App.Models
+namespace CalApp.Models
 {
     public class YearModel : BaseModel
     {
@@ -13,6 +13,123 @@ namespace Cal_App.Models
         private MonthModel[] items;
         private string culture;
         private bool isEventOn = false;
+        private int viewColumnNumber;
+        private string visibility;
+        private bool showHolidays;
+        internal string[] pathData = new string[3] { "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z", "M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z", "M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" };
+        private string data = "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z";
+        private string[] texts;
+        public string[] Texts
+        {
+            get
+            {
+                return this.texts;
+            }
+
+            set
+            {
+                if (this.texts != value)
+                {
+                    this.texts = value;
+                    this.OnPropertyChanged("Texts");
+                }
+            }
+        }
+        public string Data
+        {
+            get
+            {
+                return this.data;
+            }
+
+            set
+            {
+                if (this.data != value)
+                {
+                    this.data = value;
+                    this.OnPropertyChanged("Data");
+                }
+            }
+        }
+        private string backgroundColor= "Transparent";
+        private bool isEventPopupOpen = false;
+        private string eventsText= "Events from google calendar";
+        public string EventsText
+        {
+            get
+            {
+                return this.eventsText;
+            }
+            set
+            {
+                if (this.eventsText != value)
+                {
+                    this.eventsText = value;
+                    this.OnPropertyChanged("EventsText");
+                }
+            }
+        }
+        public bool IsEventPopupOpen
+        {
+            get
+            {
+                return this.isEventPopupOpen;
+            }
+            set
+            {
+                if (this.isEventPopupOpen != value)
+                {
+                    this.isEventPopupOpen = value;
+                    this.OnPropertyChanged("IsEventPopupOpen");
+                }
+            }
+        }
+        public string BackgroundColor
+        {
+            get
+            {
+                return this.backgroundColor;
+            }
+
+            set
+            {
+                if (this.backgroundColor != value)
+                {
+                    this.backgroundColor = value;
+                    this.OnPropertyChanged("BackgroundColor");
+                }
+            }
+        }
+        public string Visibility
+        {
+            get
+            {
+                return this.visibility;
+            }
+            set
+            {
+                if (this.visibility != value)
+                {
+                    this.visibility = value;
+                    this.OnPropertyChanged("Visibility");
+                }
+            }
+        }
+        public int ViewColumnNumber
+        {
+            get
+            {
+                return this.viewColumnNumber;
+            }
+            set
+            {
+                if (this.viewColumnNumber != value)
+                {
+                    this.viewColumnNumber = value;
+                    this.OnPropertyChanged("ViewColumnNumber");
+                }
+            }
+        }
         public bool IsEventOn
         {
             get
@@ -77,6 +194,22 @@ namespace Cal_App.Models
 
             }
         }
+        public bool ShowHolidays
+        {
+            get
+            {
+                return this.showHolidays;
+            }
+
+            set
+            {
+                if (this.showHolidays != value)
+                {
+                    this.showHolidays = value;
+                    this.OnPropertyChanged("ShowHolidays");
+                }
+            }
+        }
         public MonthModel[] Items1
         {
             get
@@ -100,25 +233,41 @@ namespace Cal_App.Models
         /// <param name="year">The year number</param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
-        public YearModel(int year, bool showHolidays, string culture, bool isEventOn)
+        public YearModel(int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, string visibility)
         {
+            this.ShowHolidays = showHolidays;
             this.Number=year;
             this.IsEventOn = isEventOn;
             this.Culture = culture;
+            this.ViewColumnNumber = viewColumnNumber;
+            this.Visibility = visibility;
+            SetTexts(culture);
             this.items = new MonthModel[12] {
-                new MonthModel(1, year, showHolidays,culture, isEventOn),
-                new MonthModel(2, year, showHolidays,culture, isEventOn),
-                new MonthModel(3, year, showHolidays,culture, isEventOn),
-                new MonthModel(4, year, showHolidays,culture, isEventOn),
-                new MonthModel(5, year, showHolidays,culture, isEventOn),
-                new MonthModel(6, year, showHolidays,culture, isEventOn),
-                new MonthModel(7, year, showHolidays,culture, isEventOn),
-                new MonthModel(8, year, showHolidays,culture, isEventOn),
-                new MonthModel(9, year, showHolidays,culture, isEventOn),
-                new MonthModel(10, year, showHolidays,culture, isEventOn),
-                new MonthModel(11, year, showHolidays,culture, isEventOn),
-                new MonthModel(12, year, showHolidays,culture, isEventOn)
+                new MonthModel(1, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(2, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(3, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(4, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(5, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(6, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(7, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(8, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(9, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(10, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(11, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
+                new MonthModel(12, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility)
             };
+        }
+        public void SetTexts(string culture)
+        {
+            this.Culture = culture;
+            string[] huTexts = { "Év", "Nyelv", "Nézet", "Háttér", "Események", "Hétvégék", "Nyomtatás", "Kilépés", "Beállítások", "Beállítások mentése" };
+            string[] enTexts= { "Year", "Language", "View", "Background", "Events", "Weekends", "Print", "Exit", "Settings","Save Settings" };
+            if (Culture == "hu-HU" || Culture == "HU")
+            {
+                this.Texts = huTexts;
+            }
+            else
+            this.Texts = enTexts;
         }
     }
 }

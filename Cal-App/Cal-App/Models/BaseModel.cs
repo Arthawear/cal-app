@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cal_App.Models
+namespace CalApp.Models
 {
     public class BaseModel : INotifyPropertyChanged
     {

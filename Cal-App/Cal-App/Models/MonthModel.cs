@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cal_App.Models
+namespace CalApp.Models
 {
 
     public class MonthModel : BaseModel
     {
-        private string backgroundColour = "#008DD2";
+        private string backgroundColor = "#008DD2";
         private string name;
         private int todayRow;
         private int todayCol;
         private int numberOfDays;
         private int[] days;
         private int number;
+        private int year;
         private Dictionary<int, RenderDay> dayToPlace = new Dictionary<int, RenderDay>();
         private bool showHolidays;
         private string culture;
@@ -39,6 +41,86 @@ namespace Cal_App.Models
         private string leap;
         private bool isEventOn=false;
         string[] colors = new string[12] { "#008DD2", "#393185", "#57A7B3", "#61A375", "#009846", "#DCCF73", "#E31E24", "#E5097F", "#EF7F1A", "#CC6F3C", "#B2AD81", "#7690C9" };
+        private int gridRow;
+        private int gridColumn;
+        private int viewColumnNumber;
+        private string visibility;
+        private string currentSquareVisibility;
+        public string CurrentSquareVisibility
+        {
+            get
+            {
+                return this.currentSquareVisibility;
+            }
+            set
+            {
+                if (this.currentSquareVisibility != value)
+                {
+                    this.currentSquareVisibility = value;
+                    this.OnPropertyChanged("CurrentSquareVisibility");
+                }
+            }
+        }
+        public string Visibility
+        {
+            get
+            {
+                return this.visibility;
+            }
+            set
+            {
+                if (this.visibility != value)
+                {
+                    this.visibility = value;
+                    this.OnPropertyChanged("Visibility");
+                }
+            }
+        }
+        public int ViewColumnNumber
+        {
+            get
+            {
+                return this.viewColumnNumber;
+            }
+            set
+            {
+                if (this.viewColumnNumber != value)
+                {
+                    this.viewColumnNumber = value;
+                    this.OnPropertyChanged("ViewColumnNumber");
+                }
+            }
+        }
+        public int GridRow
+        {
+            get
+            {
+                return this.gridRow;
+            }
+            set
+            {
+                if (this.gridRow != value)
+                {
+                    this.gridRow = value;
+                    this.OnPropertyChanged("GridRow");
+                }
+            }
+        }
+        public int GridColumn
+        {
+            get
+            {
+                return this.gridColumn;
+            }
+            set
+            {
+                if (this.gridColumn != value)
+                {
+                    this.gridColumn = value;
+                    this.OnPropertyChanged("GridColumn");
+                }
+            }
+        }
         public bool IsEventOn
         {
             get
@@ -69,6 +151,8 @@ namespace Cal_App.Models
                 }
             }
         }
+        public string Button30 { get; set; }
+        public string Button31 { get; set; }
         public string Name
         {
             get
@@ -151,12 +235,32 @@ namespace Cal_App.Models
         {
             get
             {
-                return days;
+                return this.days;
             }
 
             set
             {
-                days = value;
+                if (this.days != value)
+                {
+                    this.days = value;
+                    this.OnPropertyChanged("Days");
+                }
+            }
+        }
+        public int NumberOfDays
+        {
+            get
+            {
+                return this.numberOfDays;
+            }
+
+            set
+            {
+                if (this.numberOfDays != value)
+                {
+                    this.numberOfDays = value;
+                    this.OnPropertyChanged("NumberOfDays");
+                }
             }
         }
         public int Number
@@ -193,22 +297,34 @@ namespace Cal_App.Models
 
             }
         }
-        public int Year { get; set; }
-        public string BackgroundColour
+        public int Year
         {
             get
             {
-                return this.backgroundColour;
+                return this.year;
             }
-
             set
             {
-                if (this.backgroundColour != value)
+                if (this.year != value)
                 {
-                    this.backgroundColour = value;
-                    this.OnPropertyChanged("BackgroundColour");
+                    this.year = value;
+                    this.OnPropertyChanged("Year");
                 }
-
+            }
+        }
+        public string BackgroundColor
+        {
+            get
+            {
+                return this.backgroundColor;
+            }
+            set
+            {
+                if (this.backgroundColor != value)
+                {
+                    this.backgroundColor = value;
+                    this.OnPropertyChanged("BackgroundColor");
+                }
             }
         }
         /// <summary>
@@ -218,32 +334,26 @@ namespace Cal_App.Models
         /// <param name="year">The year number </param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
-        public MonthModel(int month, int year, bool showHolidays, string culture, bool isEventOn )
+        public MonthModel(int month, int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, string visibility)
         {
+            if (month == 0 || month > 12)
+                throw new ArgumentOutOfRangeException("month", "month must be greater than 0 and smaller than 13");
+            SetRowAndColumn(month, viewColumnNumber);
+            this.Visibility = visibility;
             this.IsEventOn = isEventOn;
             this.Culture = culture;
             this.number = month;
             Today = DateTime.Now.Day;
             this.Year = year;
             this.showHolidays = showHolidays;
-            this.BackgroundColour = colors[month-1];
-            this.numberOfDays = GetNumberOfDays(month);
-            if (year%4==0&&month==2)
-            {
-                this.numberOfDays = 29;
-            }
+            this.BackgroundColor = colors[month-1];
+            GetNumberOfDays(month, year);
             if (year == DateTime.Now.Year && month == DateTime.Now.Month)
             {
                 Thickness = 100;
             }
-            this.DayToPlace = ArrangeDays(year, month, this.numberOfDays, showHolidays);
-            this.name = GetName(year, month, 1, false, culture);
-            DayNames = new string[7];
-            for (int i = 2; i < 9; i++)
-            {
-                string dayName = GetName(2017, 1, i, true, culture);
-                DayNames[i - 2] = dayName;
-            }
+            ArrangeDays(year, month, this.NumberOfDays, showHolidays);
+            SetNames(month, culture);
             if (Today > dayToPlace.Count)
             {
                 this.todayRow = 0;
@@ -254,6 +364,14 @@ namespace Cal_App.Models
             this.todayCol = dayToPlace[Today].Value;
             
         }
+        public void SetRowAndColumn(int month, int viewColumnNumber)
+        {
+            if (month == 0||month>12)
+                throw new ArgumentOutOfRangeException("month", "month must be greater than 0 and smaller than 13");
+            this.ViewColumnNumber = viewColumnNumber;
+            this.GridRow = (month - 1) / ViewColumnNumber;
+            this.GridColumn = (month - 1) % ViewColumnNumber;
+        }
         /// <summary>
         /// Gets the name of the month or the weekdays
         /// </summary>
@@ -263,7 +381,20 @@ namespace Cal_App.Models
         /// <param name="isDayName">Shows if is day name or month name</param>
         /// <param name="culture">The calendar display language</param>
         /// <returns></returns>
-        private string GetName(int year, int month, int day, bool isDayName, string culture)
+        /// 
+        public void SetNames(int month, string culture)
+        {
+            this.Culture = culture;
+            this.Name = GetName(year, month, 1, false, culture);
+            var dayNames = new string[7];
+            for (int i = 2; i < 9; i++)
+            {
+                string dayName = GetName(2017, 1, i, true, culture);
+                dayNames[i - 2] = dayName;
+            }
+            this.DayNames = dayNames;
+        }
+        private static string GetName(int year, int month, int day, bool isDayName, string culture)
         {
             string s =isDayName? "dddd": "MMMM";
             string name= new DateTime(year, month, day).ToString(s, new CultureInfo(culture));
@@ -282,30 +413,24 @@ namespace Cal_App.Models
         /// <param name="numberOfDays">The number of the days of a month</param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <returns></returns>
-        private Dictionary<int, RenderDay> ArrangeDays(int year, int month, int numberOfDays, bool showHolidays)
+        public Dictionary<int, RenderDay> ArrangeDays(int year, int month, int numberOfDays, bool showHolidays)
         {
+            this.Year = year;
+            SetProperties(year, month);
             DayOfWeek firstDay = new DateTime(year, month, 1).DayOfWeek;
             int start = 0;
             Dictionary<int, RenderDay> days1 = new Dictionary<int, RenderDay>();
-            this.days = new int[numberOfDays];
-            Enumerable.Range(1, numberOfDays).ToArray().CopyTo(days, 0);
+             var daysOfMonth = new int[numberOfDays];
+            Enumerable.Range(1, numberOfDays).ToArray().CopyTo(daysOfMonth, 0);
             start = (int)firstDay-1;
             if (firstDay==DayOfWeek.Sunday)
             {
                 start = 6;
             }
-            if (year % 4 == 0)
-            {
-                Leap = "Visible";
-            }
-            else
-            {
-                Leap = "Hidden";
-            }
-            for (int i = 0; i < days.Length; i++)
+            for (int i = 0; i < daysOfMonth.Length; i++)
             {
                 bool isHoliday = false;
-                int day = days[i];
+                int day = daysOfMonth[i];
                 int place = start + i;
                 DayOfWeek currentDayOfWeek = new DateTime(year, month, day).DayOfWeek;
                 if (currentDayOfWeek == DayOfWeek.Saturday ^ currentDayOfWeek == DayOfWeek.Sunday)
@@ -319,11 +444,37 @@ namespace Cal_App.Models
                 }
                 days1.Add(day, new RenderDay() { Key = place / 7 + 2, Value = place % 7, Color = color });
             }
+            this.Days = daysOfMonth;
+            this.DayToPlace = days1;
+           
             return days1;
         }
-        public int GetNumberOfDays(int month)
+        private void SetProperties(int year, int month)
         {
-            int numberOfDays = 0;
+            if (month == 2 && year % 4 != 0)
+            {
+                Leap = "Hidden";
+            }
+            else
+            {
+                Leap = "Visible";
+            }
+            if (year == DateTime.Now.Year && month == DateTime.Now.Month)
+            {
+                this.CurrentSquareVisibility = "Visible";
+                Thickness = 100;
+            }
+            else
+            {
+                this.CurrentSquareVisibility = "Hidden";
+                Thickness = 0;
+            }
+        }
+        public void GetNumberOfDays(int month, int year)
+        {
+            if (month == 0 || month > 12)
+                throw new ArgumentOutOfRangeException("month", "month must be greater than 0 and smaller than 13");
+            int number = 0;
             switch (month)
             {
                 case 1:
@@ -333,64 +484,38 @@ namespace Cal_App.Models
                 case 8:
                 case 10:
                 case 12:
-                    numberOfDays = 31;
+                    number = 31;
                     break;
                 case 2:
-                    numberOfDays = 28;
+                    if (year % 4 == 0 )
+                    {
+                        number = 29;
+                        break;
+                    }
+                    number = 28;
+                    this.Button30 = "Hidden";
+                    this.Button31 = "Hidden";
                     break;
                 case 4:
                 case 6:
                 case 9:
                 case 11:
-                    numberOfDays = 30;
+                    number = 30;
+                    this.Button31= "Hidden";
                     break;
                 default:
                     break;
             }
-            return numberOfDays;
+                 this.NumberOfDays=number;
         }
-        /// <summary>
-        /// Contains the grid row and column number and the color of a day
-        /// </summary>
-        public class RenderDay
-        {
-            public int Key { get; set; }
-            public int Value { get; set; }
-            public string Color { get; set; }
-        }
-        /// <summary>
-        /// Contains the background color and the number of days of a Month
-        /// </summary>
-        //private class MonthStyle
-        //{
-        //    int numberOfDays;
-        //    public int NumberOfDays { get => numberOfDays; set => numberOfDays = value; }
-        //    public MonthStyle(int month)
-        //    {
-        //        switch (month)
-        //        {
-        //            case 1:
-        //            case 3:
-        //            case 5:
-        //            case 7:
-        //            case 8:
-        //            case 10:
-        //            case 12:
-        //                this.NumberOfDays = 31;
-        //                break;
-        //            case 2:
-        //                this.NumberOfDays = 28;
-        //                break;
-        //            case 4:
-        //            case 6:
-        //            case 9:
-        //            case 11:
-        //                this.NumberOfDays = 30;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //}
+    }
+    /// <summary>
+    /// Contains the grid row and column number and the color of a day
+    /// </summary>
+    public class RenderDay
+    {
+        public int Key { get; set; }
+        public int Value { get; set; }
+        public string Color { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cal_App
+namespace CalApp
 {
     /// <summary>
     /// Gets the calendar event list from google accont

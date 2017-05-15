@@ -1,14 +1,14 @@
-﻿<Window x:Class="Cal_App.MainWindow"
+﻿<Window x:Class="CalApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cal_App"
-        xmlns:Control="clr-namespace:Cal_App.Views"
+        xmlns:local="clr-namespace:CalApp"
+        xmlns:Control="clr-namespace:CalApp.Views"
         mc:Ignorable="d"
-        Title="Calendar" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" 
-        MaxWidth="350" MinHeight="300" MinWidth="100" FontWeight="Bold" FontSize="10" 
-        Foreground="White" SizeChanged="Window_SizeChanged" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="Calendar" Name="mainWindow" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" 
+         MinHeight="150" MinWidth="50" FontWeight="Bold" FontSize="10" 
+        Foreground="White" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" MouseLeftButtonDown="Window_MouseLeftButtonDown" SizeToContent="WidthAndHeight">
     <Window.Background>
         <VisualBrush Stretch="Fill">
             <VisualBrush.Visual>
@@ -16,5 +16,5 @@
             </VisualBrush.Visual>
         </VisualBrush>
     </Window.Background>
-    <Control:Calendar x:Name="calendar"/>
+    <Control:Calendar x:Name="calendar" DataContext="{Binding ElementName=mainWindow, Path=DataContext, Mode=TwoWay}"/>
 </Window>
