@@ -249,29 +249,30 @@ namespace CalApp.Models
         /// <param name="year">The year number</param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
-        public YearModel(int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, string visibility)
+        public YearModel(int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, int viewRowNumber, string visibility)
         {
             this.ShowHolidays = showHolidays;
             this.Number=year;
             this.IsEventOn = isEventOn;
             this.Culture = culture;
             this.ViewColumnNumber = viewColumnNumber;
+            this.ViewRowNumber = viewRowNumber;
             this.Visibility = visibility;
             SetTexts(culture);
             this.items = new List<MonthModel>
         {
-                new MonthModel(1, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(2, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(3, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(4, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(5, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(6, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(7, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(8, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(9, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(10, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(11, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
-                new MonthModel(12, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility)
+                new MonthModel(1, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(2, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(3, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(4, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(5, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(6, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(7, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(8, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(9, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(10, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(11, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
+                new MonthModel(12, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility)
             };
         }
         public void SetTexts(string culture)

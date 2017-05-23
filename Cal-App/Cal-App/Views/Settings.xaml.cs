@@ -42,7 +42,7 @@ namespace CalApp.Views
             int currentMonth = DateTime.Now.Month;
             for (int i = 0; i < yearModel.Items1.Count; i++)
             {
-                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 2);
+                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 2,6);
                 yearModel.Items1[i].Visibility = "Visible";
                 if (yearModel.Number==DateTime.Now.Year&&(currentMonth == 1 || currentMonth == 12)&&(i==0||i==11))
                 {
@@ -64,7 +64,7 @@ namespace CalApp.Views
             int currentMonth = DateTime.Now.Month;
             for (int i = 0; i < yearModel.Items1.Count; i++)
             {
-                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 4);
+                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 4,3);
                 yearModel.Items1[i].Visibility = "Visible";
                 if (yearModel.Number == DateTime.Now.Year && (currentMonth == 1 || currentMonth == 12) && (i == 0 || i == 11))
                 {

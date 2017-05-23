@@ -334,11 +334,10 @@ namespace CalApp.Models
         /// <param name="year">The year number </param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
-        public MonthModel(int month, int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, string visibility)
+        public MonthModel(int month, int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, int viewRowNumber, string visibility)
         {
             if (month == 0 || month > 12)
                 throw new ArgumentOutOfRangeException("month", "month must be greater than 0 and smaller than 13");
-            SetRowAndColumn(month, viewColumnNumber);
             this.Visibility = visibility;
             this.IsEventOn = isEventOn;
             this.Culture = culture;
@@ -348,11 +347,8 @@ namespace CalApp.Models
             this.showHolidays = showHolidays;
             this.BackgroundColor = colors[month - 1];
             GetNumberOfDays(month, year);
-            if (year == DateTime.Now.Year && month == DateTime.Now.Month)
-            {
-                Thickness = 100;
-            }
             ArrangeDays(year, month, this.NumberOfDays, showHolidays);
+            SetRowAndColumn(this.Number, viewColumnNumber, viewRowNumber);
             SetNames(month, culture);
             if (Today > dayToPlace.Count)
             {
@@ -362,48 +358,55 @@ namespace CalApp.Models
             }
             this.todayRow = dayToPlace[Today].Key;
             this.todayCol = dayToPlace[Today].Value;
-
         }
-        public void SetRowAndColumn(int month, int viewColumnNumber, int viewRowNumber=6)
+        public void SetRowAndColumn(int month, int viewColumnNumber, int viewRowNumber)
         {
             if (month == 0 || month > 12)
                 throw new ArgumentOutOfRangeException("month", "month must be greater than 0 and smaller than 13");
             this.ViewColumnNumber = viewColumnNumber;
-            this.GridRow = (month - 1) / ViewColumnNumber;
-            this.GridColumn = (month - 1) % ViewColumnNumber;
+            
             int currentMonth = DateTime.Now.Month;
             if (viewColumnNumber == 1)
             {
-                Visibility = "Collapsed";
+                this.Visibility = "Collapsed";
                 GridColumn = 0;
                 if (viewRowNumber == 1 && month == currentMonth)
                 {
                     GridRow = 0;
-                    Visibility = "Visible";
+                    this.Visibility = "Visible";
                 }
-                else if (viewRowNumber == 3 && month >= currentMonth - 1 && month <= currentMonth + 1)
+                else if (viewRowNumber == 3)
                 {
-                    Visibility = "Visible";
-                    if (currentMonth != 1 && currentMonth != 12)
-                    {
-                        GridRow = month - (currentMonth - 1);
-                    }
-                }
-                int currentYear = DateTime.Now.Year;
-                if (currentMonth == 1)
-                {
-                    ArrangeDays(currentYear - 1, 12, 31, ShowHolidays);
-                    Visibility = "Visible";
-                    GridRow = 0;
-                }
-                else if (currentMonth == 12)
-                {
-                    ArrangeDays(currentYear + 1, 1, 31, ShowHolidays);
-                    Visibility = "Visible";
-                    GridRow = 2;
+                    SetThreeMonthsView(month);
                 }
             }
-
+            else
+            {
+                this.GridRow = (month - 1) / viewColumnNumber;
+                this.GridColumn = (month - 1) % viewColumnNumber;
+            }
+        }
+        private void SetThreeMonthsView(int month)
+        {
+            int currentMonth = DateTime.Now.Month;
+            if (month >= currentMonth - 1 && month <= currentMonth + 1)
+            {
+                this.Visibility = "Visible";
+                this.GridRow = this.Number - (currentMonth - 1);
+            }
+            int currentYear = DateTime.Now.Year;
+            if (currentMonth == 1&& this.Number==12)
+            {
+                this.ArrangeDays((currentYear - 1), 12, 31, ShowHolidays);
+                this.Visibility = "Visible";
+                this.GridRow = 0;
+            }
+            else if (currentMonth == 12&& this.Number == 1)
+            {
+                this.ArrangeDays((currentYear + 1), 1, 31, ShowHolidays);
+                this.Visibility = "Visible";
+                this.GridRow = 2;
+            }
         }
         /// <summary>
         /// Gets the name of the month or the weekdays
@@ -446,7 +449,7 @@ namespace CalApp.Models
         /// <param name="numberOfDays">The number of the days of a month</param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <returns></returns>
-        public Dictionary<int, RenderDay> ArrangeDays(int year, int month, int numberOfDays, bool showHolidays)
+        public void ArrangeDays(int year, int month, int numberOfDays, bool showHolidays)
         {
             this.ShowHolidays = showHolidays;
             this.Year = year;
@@ -480,8 +483,6 @@ namespace CalApp.Models
             }
             this.Days = daysOfMonth;
             this.DayToPlace = days1;
-           
-            return days1;
         }
         private void SetProperties(int year, int month)
         {

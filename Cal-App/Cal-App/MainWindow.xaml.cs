@@ -45,7 +45,7 @@ namespace CalApp
         }
         protected YearModel LoadSettings()
         {
-            var yearModel = new YearModel(DateTime.Now.Year, false, CultureInfo.CurrentCulture.ToString(), false, 2, "Visible");
+            var yearModel = new YearModel(DateTime.Now.Year, true, CultureInfo.CurrentCulture.ToString(), true, 1,3, "Visible");
             try
             {
                 var fileStorage = new FileStorage<object[]>();
@@ -77,7 +77,7 @@ namespace CalApp
             }
             catch (Exception)
             {
-                return new YearModel(DateTime.Now.Year, false, CultureInfo.CurrentCulture.ToString(), false, 2, "Visible");
+                return yearModel;
             }
 
         }
