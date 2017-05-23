@@ -85,6 +85,8 @@
     </ApplicationDefinition>
     <Compile Include="GoogleCal.cs" />
     <Compile Include="ICalendar.cs" />
+    <Compile Include="Storage\FileStorage.cs" />
+    <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Views\Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
     </Compile>

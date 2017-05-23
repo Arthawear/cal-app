@@ -1,4 +1,5 @@
 ﻿using CalApp.Models;
+using CalApp.Storage;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,7 +40,7 @@ namespace CalApp.Views
             yearModel.Data = yearModel.pathData[0];
             yearModel.ViewColumnNumber = 2;
             int currentMonth = DateTime.Now.Month;
-            for (int i = 0; i < yearModel.Items1.Length; i++)
+            for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 2);
                 yearModel.Items1[i].Visibility = "Visible";
@@ -61,7 +62,7 @@ namespace CalApp.Views
             yearModel.Data = yearModel.pathData[1];
             yearModel.ViewColumnNumber = 4;
             int currentMonth = DateTime.Now.Month;
-            for (int i = 0; i < yearModel.Items1.Length; i++)
+            for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 4);
                 yearModel.Items1[i].Visibility = "Visible";
@@ -77,69 +78,34 @@ namespace CalApp.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
-        private void Button_comboClickViewOneMonth(object sender, RoutedEventArgs e)
+        internal void Button_comboClickViewOneMonth(object sender, RoutedEventArgs e)
         {
-            int currentMonth = DateTime.Now.Month;
             var yearModel = DataContext as YearModel;
             yearModel.Data = yearModel.pathData[2];
             yearModel.ViewColumnNumber = 1;
-            for (int i = 0; i < yearModel.Items1.Length; i++)
-            {
-                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 1);
-                yearModel.Items1[i].Visibility = "Collapsed";
-            }
-            yearModel.Items1[currentMonth - 1].GridRow = 0;
-            yearModel.Items1[currentMonth - 1].GridColumn = 0;
-            yearModel.Items1[currentMonth - 1].Visibility = "Visible";
+            yearModel.ViewRowNumber = 1;
             popLink.IsOpen = false;
+            for (int i = 0; i < yearModel.Items1.Count; i++)
+            {
+                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 1, 1);
+            }
         }
         /// <summary>
         /// Sets the calendar view to three months
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
-        private void Button_comboClickViewThreeMonths(object sender, RoutedEventArgs e)
+        internal void Button_comboClickViewThreeMonths(object sender, RoutedEventArgs e)
         {
             var yearModel = DataContext as YearModel;
             yearModel.Data = yearModel.pathData[0];
             yearModel.ViewColumnNumber = 1;
-            int currentMonth = DateTime.Now.Month;
-            for (int i = 0; i < yearModel.Items1.Length; i++)
-            {
-                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 1);
-                yearModel.Items1[i].Visibility = "Collapsed"; ;
-            }
-            if (currentMonth!=1)
-            {
-                yearModel.Items1[currentMonth - 2].GridRow = 0;
-                yearModel.Items1[currentMonth - 2].GridColumn = 0;
-                yearModel.Items1[currentMonth - 2].Visibility = "Visible";
-            }
-            yearModel.Items1[currentMonth - 1].GridRow = 1;
-            yearModel.Items1[currentMonth - 1].GridColumn = 0;
-            yearModel.Items1[currentMonth - 1].Visibility= "Visible";
-            if (currentMonth != 12)
-            {
-                yearModel.Items1[currentMonth].GridRow = 2;
-                yearModel.Items1[currentMonth].GridColumn = 0;
-                yearModel.Items1[currentMonth].Visibility = "Visible";
-            }
-            int currentYear = DateTime.Now.Year;
-            if (currentMonth == 1)
-            {
-                yearModel.Items1[11].ArrangeDays(currentYear - 1, 12, 31, yearModel.ShowHolidays);
-                yearModel.Items1[11].Visibility = "Visible";
-                yearModel.Items1[11].GridRow = 0;
-                yearModel.Items1[11].GridColumn = 0;
-            }
-            else if (currentMonth == 12)
-            {
-                yearModel.Items1[0].ArrangeDays(currentYear + 1, 1, 31, yearModel.ShowHolidays);
-                yearModel.Items1[0].Visibility = "Visible";
-                yearModel.Items1[0].GridRow = 2;
-                yearModel.Items1[0].GridColumn = 0;
-            }
+            yearModel.ViewRowNumber = 3;
             popLink.IsOpen = false;
+            for (int i = 0; i < yearModel.Items1.Count; i++)
+            {
+                yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 1,3);
+            }
         }
         /// <summary>
         /// Sets the calendar's year
@@ -171,7 +137,7 @@ namespace CalApp.Views
         /// <param name="yearModel"></param>
         internal void SetYear(YearModel yearModel)
         {
-            for (int i = 0; i < yearModel.Items1.Length; i++)
+            for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 if (i==1)
                 {
@@ -219,7 +185,7 @@ namespace CalApp.Views
             }
             var yearModel = DataContext as YearModel;
             yearModel.IsEventOn = isEventOn;
-            for (int i = 0; i < yearModel.Items1.Length; i++)
+            for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 yearModel.Items1[i].IsEventOn = isEventOn;
             }
@@ -236,7 +202,7 @@ namespace CalApp.Views
             if (!yearModel.ShowHolidays)
             {
                 yearModel.ShowHolidays = true;
-                for (int i = 0; i < yearModel.Items1.Length; i++)
+                for (int i = 0; i < yearModel.Items1.Count; i++)
                 {
                     yearModel.Items1[i].ShowHolidays = true;
                     yearModel.Items1[i].ArrangeDays(yearModel.Items1[i].Year, yearModel.Items1[i].Number, yearModel.Items1[i].NumberOfDays, yearModel.Items1[i].ShowHolidays);
@@ -245,7 +211,7 @@ namespace CalApp.Views
             else
             {
                 yearModel.ShowHolidays = false;
-                for (int i = 0; i < yearModel.Items1.Length; i++)
+                for (int i = 0; i < yearModel.Items1.Count; i++)
                 {
                     yearModel.Items1[i].ShowHolidays = false;
                     yearModel.Items1[i].ArrangeDays(yearModel.Items1[i].Year, yearModel.Items1[i].Number, yearModel.Items1[i].NumberOfDays, yearModel.Items1[i].ShowHolidays);
@@ -262,18 +228,14 @@ namespace CalApp.Views
         {
             popLink.IsOpen = false;
             var modelToPrint= DataContext as YearModel;
-            //var yearModel = DataContext as YearModel;
-            //var modelToPrint = new YearModel(yearModel.Number, yearModel.ShowHolidays, yearModel.Culture, yearModel.IsEventOn, yearModel.ViewColumnNumber, yearModel.Visibility);
             if (modelToPrint.Number== DateTime.Now.Year)
             {
                 modelToPrint.Items1[DateTime.Now.Month - 1].Thickness = 0;
             }
             var calendarToPrint = new Calendar();
             calendarToPrint.DataContext = modelToPrint;
-            //calendarToPrint.Visibility = Visibility.Visible;
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintVisual(calendarToPrint, "Calendar Printing.");
-            //calendarToPrint.Visibility = Visibility.Collapsed;
 
         }
         /// <summary>
@@ -283,12 +245,8 @@ namespace CalApp.Views
         /// <param name="e">The instance containing the event data</param>
         private void Button_ClickExit(object sender, RoutedEventArgs e)
         {
-
-            //RaiseEvent()
-            var grid0 = this.Parent as Grid;
-            var calendar = grid0.Parent as Calendar;
-            var window = calendar.Parent as MainWindow;
-            window.Close();
+            Window parentWindow = Window.GetWindow(this);
+            parentWindow.Close();
         }
         /// <summary>
         /// Sets the calendar's display language
@@ -301,7 +259,7 @@ namespace CalApp.Views
             string newCulture = comboItem.Content.ToString();
             var yearModel = DataContext as YearModel;
             yearModel.SetTexts(newCulture);
-            for (int i = 0; i < yearModel.Items1.Length; i++)
+            for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 yearModel.Items1[i].SetNames(yearModel.Items1[i].Number, newCulture);
             }
@@ -310,7 +268,14 @@ namespace CalApp.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            Window parentWindow = Window.GetWindow(this);
+            var location = parentWindow.PointToScreen(new Point(0, 0));
+            int currentMonth = DateTime.Now.Month;
+            string savedSettingsFilePath = "SavedSettings.json";
             var yearModel = DataContext as YearModel;
+            var fileStorage = new FileStorage<object[]>();
+            fileStorage.SetModel(savedSettingsFilePath, new object[] { yearModel.Number, yearModel.Culture, yearModel.ViewColumnNumber,
+                yearModel.IsEventOn, yearModel.ShowHolidays, yearModel.BackgroundColor, yearModel.Data, yearModel.ViewRowNumber, location.X, location.Y});
             popLink.IsOpen = false;
         }
     }

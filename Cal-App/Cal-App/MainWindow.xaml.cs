@@ -1,4 +1,5 @@
 ﻿using CalApp.Models;
+using CalApp.Storage;
 using CalApp.Views;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,11 @@ namespace CalApp
     {
         //A timer for delay the hiding of the window resize grip, the header with year number and the settings sign
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        string savedSettingsFilePath = "SavedSettings.json";
         public MainWindow()
         {
             InitializeComponent();
-            var yearModel= new YearModel(DateTime.Now.Year, false, CultureInfo.CurrentCulture.ToString(), false, 2, "Visible");
+            var yearModel = LoadSettings();
             this.DataContext = yearModel;
             //sets the timer
             dispatcherTimer.Tick += new EventHandler(DispatcherTimerTick);
@@ -40,6 +42,44 @@ namespace CalApp
             var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.MaxHeight = screenHeight*4/5;
             
+        }
+        protected YearModel LoadSettings()
+        {
+            var yearModel = new YearModel(DateTime.Now.Year, false, CultureInfo.CurrentCulture.ToString(), false, 2, "Visible");
+            try
+            {
+                var fileStorage = new FileStorage<object[]>();
+                var settingsSaved = fileStorage.GetModel(savedSettingsFilePath);
+                yearModel.Number = Convert.ToInt32(settingsSaved[0],CultureInfo.CurrentCulture);
+                yearModel.Culture = (string)settingsSaved[1];
+                yearModel.ViewColumnNumber = Convert.ToInt32(settingsSaved[2], CultureInfo.CurrentCulture);
+                yearModel.IsEventOn = (bool)settingsSaved[3];
+                yearModel.ShowHolidays = (bool)settingsSaved[4];
+                yearModel.BackgroundColor = (string)settingsSaved[5];
+                yearModel.Data = (string)settingsSaved[6];
+                yearModel.ViewRowNumber = Convert.ToInt32(settingsSaved[7], CultureInfo.CurrentCulture);
+                Left = Convert.ToDouble(settingsSaved[8], CultureInfo.CurrentCulture);
+                Top = Convert.ToDouble(settingsSaved[9], CultureInfo.CurrentCulture);
+                yearModel.SetTexts(yearModel.Culture);
+                calendar.settings.SetYear(yearModel);
+                for (int i = 0; i < yearModel.Items1.Count; i++)
+                {
+                    yearModel.Items1[i].SetNames(yearModel.Items1[i].Number, yearModel.Culture);
+                    if (i == 1)
+                    {
+                        yearModel.Items1[i].GetNumberOfDays(yearModel.Items1[i].Number, yearModel.Number);
+                    }
+                    yearModel.Items1[i].ArrangeDays(yearModel.Number, yearModel.Items1[i].Number, yearModel.Items1[i].NumberOfDays, yearModel.ShowHolidays);
+                    yearModel.Items1[i].IsEventOn = yearModel.IsEventOn;
+                    yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, yearModel.ViewColumnNumber, yearModel.ViewRowNumber);
+                }
+                return yearModel;
+            }
+            catch (Exception)
+            {
+                return new YearModel(DateTime.Now.Year, false, CultureInfo.CurrentCulture.ToString(), false, 2, "Visible");
+            }
+
         }
         /// <summary>
         /// Shows up the window resize grip, the header with year number and the settings sign  

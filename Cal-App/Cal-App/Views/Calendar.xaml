@@ -78,7 +78,7 @@
                     <ColumnDefinition ></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Name="set1" MaxWidth="10" Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="1" Content="⋮" Click="Button_Click_Popup" Background="Transparent" Foreground="White" FontSize="25" BorderThickness="0" 
+                <Button Name="set1" MaxWidth="15" Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="1" Content="⋮" Click="Button_Click_Popup" Background="Transparent" Foreground="White" FontSize="35" BorderThickness="0" 
                         ToolTipService.InitialShowDelay ="1" ToolTipService.Placement="Mouse">
                     <Button.ToolTip>
                         <ToolTip  BorderThickness="0">

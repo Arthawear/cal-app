@@ -10,16 +10,17 @@ namespace CalApp.Models
     {
         private int number = DateTime.Now.Year;
         private int isLeap;
-        private MonthModel[] items;
+        private List<MonthModel> items;
         private string culture;
         private bool isEventOn = false;
         private int viewColumnNumber;
+        private int viewRowNumber;
         private string visibility;
         private bool showHolidays;
         internal string[] pathData = new string[3] { "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z", "M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z", "M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" };
         private string data = "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z";
-        private string[] texts;
-        public string[] Texts
+        private List<string> texts;
+        public List<string> Texts
         {
             get
             {
@@ -112,6 +113,21 @@ namespace CalApp.Models
                 {
                     this.visibility = value;
                     this.OnPropertyChanged("Visibility");
+                }
+            }
+        }
+        public int ViewRowNumber
+        {
+            get
+            {
+                return this.viewRowNumber;
+            }
+            set
+            {
+                if (this.viewRowNumber != value)
+                {
+                    this.viewRowNumber = value;
+                    this.OnPropertyChanged("ViewRowNumber");
                 }
             }
         }
@@ -210,7 +226,7 @@ namespace CalApp.Models
                 }
             }
         }
-        public MonthModel[] Items1
+        public List<MonthModel> Items1
         {
             get
             {
@@ -242,7 +258,8 @@ namespace CalApp.Models
             this.ViewColumnNumber = viewColumnNumber;
             this.Visibility = visibility;
             SetTexts(culture);
-            this.items = new MonthModel[12] {
+            this.items = new List<MonthModel>
+        {
                 new MonthModel(1, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
                 new MonthModel(2, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
                 new MonthModel(3, year, showHolidays,culture, isEventOn, viewColumnNumber, visibility),
@@ -260,8 +277,8 @@ namespace CalApp.Models
         public void SetTexts(string culture)
         {
             this.Culture = culture;
-            string[] huTexts = { "Év", "Nyelv", "Nézet", "Háttér", "Események", "Hétvégék", "Nyomtatás", "Kilépés", "Beállítások", "Beállítások mentése" };
-            string[] enTexts= { "Year", "Language", "View", "Background", "Events", "Weekends", "Print", "Exit", "Settings","Save Settings" };
+            List<string> huTexts = new List<string> { "Év", "Nyelv", "Nézet", "Háttér", "Események", "Hétvégék", "Nyomtatás", "Kilépés", "Beállítások", "Beállítások mentése" };
+            List<string> enTexts = new List<string> { "Year", "Language", "View", "Background", "Events", "Weekends", "Print", "Exit", "Settings","Save Settings" };
             if (Culture == "hu-HU" || Culture == "HU")
             {
                 this.Texts = huTexts;
