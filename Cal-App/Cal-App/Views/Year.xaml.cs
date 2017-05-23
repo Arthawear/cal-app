@@ -24,6 +24,9 @@ namespace CalApp.Views
     /// </summary>
     public partial class Year: UserControl 
     {
+        /// <summary>
+        /// Implements a year UI
+        /// </summary>
         public Year()
         {
             InitializeComponent();

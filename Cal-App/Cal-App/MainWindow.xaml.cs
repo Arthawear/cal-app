@@ -30,6 +30,9 @@ namespace CalApp
         //A timer for delay the hiding of the window resize grip, the header with year number and the settings sign
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         string savedSettingsFilePath = "SavedSettings.json";
+        /// <summary>
+        /// Implementing the application UI
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -41,8 +44,11 @@ namespace CalApp
             //sets the window size to different screens
             var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.MaxHeight = screenHeight*4/5;
-            
         }
+        /// <summary>
+        /// Loads the YearModel from saved settings file, or initializes a new YearModel
+        /// </summary>
+        /// <returns>The saved or a new YearModel</returns>
         protected YearModel LoadSettings()
         {
             var yearModel = new YearModel(DateTime.Now.Year, true, CultureInfo.CurrentCulture.ToString(), true, 1,3, "Visible");

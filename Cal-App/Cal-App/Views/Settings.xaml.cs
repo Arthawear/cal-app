@@ -25,12 +25,15 @@ namespace CalApp.Views
     public partial class Settings : UserControl
     {
         private bool isEventOn = false;
+        /// <summary>
+        /// Implements the Settings UI
+        /// </summary>
         public Settings()
         {
             InitializeComponent();
         }
         /// <summary>
-        /// Sets the calendar view to thin
+        /// Sets the calendar view to thin: 12 months in 2 columns and 6 rows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
@@ -52,7 +55,7 @@ namespace CalApp.Views
             popLink.IsOpen = false;
         }
         /// <summary>
-        /// Sets the calendar view to large
+        /// Sets the calendar view to large: 12 months in 4 columns and 3 rows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
@@ -74,7 +77,7 @@ namespace CalApp.Views
             popLink.IsOpen = false;
         }
         /// <summary>
-        /// Sets the calendar view to one month
+        /// Sets the calendar view to one month: only the current month
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
@@ -91,7 +94,7 @@ namespace CalApp.Views
             }
         }
         /// <summary>
-        /// Sets the calendar view to three months
+        /// Sets the calendar view to three months: three consecutive months in 1 column, the current month in the center
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
@@ -132,7 +135,7 @@ namespace CalApp.Views
             popLink.IsOpen = false;
         }
         /// <summary>
-        /// sets the view combos, if other year then the current, the one month view and the three months view is disabled
+        /// Sets the view details, if other year then the current, the one month view and the three months view is disabled
         /// </summary>
         /// <param name="yearModel"></param>
         internal void SetYear(YearModel yearModel)
@@ -265,7 +268,11 @@ namespace CalApp.Views
             }
             popLink.IsOpen = false;
         }
-
+        /// <summary>
+        /// Saves the user's settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);

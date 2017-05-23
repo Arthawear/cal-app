@@ -22,6 +22,9 @@ namespace CalApp.Views
     /// </summary>
     public partial class Events : UserControl
     {
+        /// <summary>
+        /// Implements a day's events UI
+        /// </summary>
         public Events()
         {
             InitializeComponent();

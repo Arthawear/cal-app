@@ -29,7 +29,7 @@ namespace CalApp
         /// <param name="year">The year of the event list</param>
         /// <param name="month">The month of the event list</param>
         /// <param name="day">The day of the event list</param>
-        /// <returns>Task<string></returns>
+        /// <returns>Task<string>The asked day's event list or null if does not exist event on that day</returns>
         public async Task<string> GetEvents(int year, int month, int day)
         {
             UserCredential credential;

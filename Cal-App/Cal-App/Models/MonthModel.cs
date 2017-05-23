@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace CalApp.Models
 {
-
+    /// <summary>
+    /// Implements a month
+    /// </summary>
     public class MonthModel : BaseModel
     {
         private string backgroundColor = "#008DD2";
@@ -22,6 +24,17 @@ namespace CalApp.Models
         private Dictionary<int, RenderDay> dayToPlace = new Dictionary<int, RenderDay>();
         private bool showHolidays;
         private string culture;
+        private string[] dayNames;
+        private string leap;
+        private bool isEventOn = false;
+        string[] colors = new string[12] { "#008DD2", "#393185", "#57A7B3", "#61A375", "#009846", "#DCCF73", "#E31E24", "#E5097F", "#EF7F1A", "#CC6F3C", "#B2AD81", "#7690C9" };
+        private int gridRow;
+        private int gridColumn;
+        private string visibility;
+        private string currentSquareVisibility;
+        /// <summary>
+        /// The display language of the calendar
+        /// </summary>
         public string Culture
         {
             get
@@ -37,15 +50,9 @@ namespace CalApp.Models
                 }
             }
         }
-        private string[] dayNames;
-        private string leap;
-        private bool isEventOn = false;
-        string[] colors = new string[12] { "#008DD2", "#393185", "#57A7B3", "#61A375", "#009846", "#DCCF73", "#E31E24", "#E5097F", "#EF7F1A", "#CC6F3C", "#B2AD81", "#7690C9" };
-        private int gridRow;
-        private int gridColumn;
-        private int viewColumnNumber;
-        private string visibility;
-        private string currentSquareVisibility;
+        /// <summary>
+        /// The visibility of square for indicate the current day
+        /// </summary>
         public string CurrentSquareVisibility
         {
             get
@@ -61,6 +68,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The visibility of the month 
+        /// </summary>
         public string Visibility
         {
             get
@@ -76,21 +86,9 @@ namespace CalApp.Models
                 }
             }
         }
-        public int ViewColumnNumber
-        {
-            get
-            {
-                return this.viewColumnNumber;
-            }
-            set
-            {
-                if (this.viewColumnNumber != value)
-                {
-                    this.viewColumnNumber = value;
-                    this.OnPropertyChanged("ViewColumnNumber");
-                }
-            }
-        }
+        /// <summary>
+        /// The month's number of row in grid in different views
+        /// </summary>
         public int GridRow
         {
             get
@@ -106,6 +104,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The month's number of column in grid in different views
+        /// </summary>
         public int GridColumn
         {
             get
@@ -121,6 +122,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The event task enabled/disabled
+        /// </summary>
         public bool IsEventOn
         {
             get
@@ -136,6 +140,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The weekdays names in the set language
+        /// </summary>
         public string[] DayNames
         {
             get
@@ -151,8 +158,17 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The visibility of button for the 30th day of the month
+        /// </summary>
         public string Button30 { get; set; }
+        /// <summary>
+        /// The visibility of button for the 31th day of the month
+        /// </summary>
         public string Button31 { get; set; }
+        /// <summary>
+        /// The name of the month
+        /// </summary>
         public string Name
         {
             get
@@ -168,6 +184,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// a month's days with the column and row number of each day in the grid, and the color indicating the weekend/weekdays
+        /// </summary>
         public Dictionary<int, RenderDay> DayToPlace
         {
             get
@@ -184,8 +203,17 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The thickness of the square indicating the current day
+        /// </summary>
         public int Thickness { get; set; }
+        /// <summary>
+        /// The current day's number
+        /// </summary>
         public int Today { get; set; }
+        /// <summary>
+        /// The current day's row number in grid
+        /// </summary>
         public int TodayRow
         {
             get
@@ -201,6 +229,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The current day's column number in grid
+        /// </summary>
         public int TodayCol
         {
             get
@@ -216,6 +247,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The visibility of button for the 29th day of the month
+        /// </summary>
         public string Leap
         {
             get
@@ -231,6 +265,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The days of the month
+        /// </summary>
         public int[] Days
         {
             get
@@ -247,6 +284,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The number of days of the month
+        /// </summary>
         public int NumberOfDays
         {
             get
@@ -263,6 +303,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The number of the month
+        /// </summary>
         public int Number
         {
             get
@@ -280,6 +323,9 @@ namespace CalApp.Models
 
             }
         }
+        /// <summary>
+        /// The weekends display in different color/or not
+        /// </summary>
         public bool ShowHolidays
         {
             get
@@ -297,6 +343,9 @@ namespace CalApp.Models
 
             }
         }
+        /// <summary>
+        /// The year of the month
+        /// </summary>
         public int Year
         {
             get
@@ -312,6 +361,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The background color of the month
+        /// </summary>
         public string BackgroundColor
         {
             get
@@ -334,6 +386,10 @@ namespace CalApp.Models
         /// <param name="year">The year number </param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
+        /// <param name="isEventOn">The event task enabled/disabled</param>
+        /// <param name="viewColumnNumber">The calendar display column number</param>
+        /// <param name="viewRowNumber">The calendar display row number</param>
+        /// <param name="visibility">The visibility of the Month UIElement</param>
         public MonthModel(int month, int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, int viewRowNumber, string visibility)
         {
             if (month == 0 || month > 12)
@@ -359,12 +415,16 @@ namespace CalApp.Models
             this.todayRow = dayToPlace[Today].Key;
             this.todayCol = dayToPlace[Today].Value;
         }
+        /// <summary>
+        /// Sets the view of the calendar depending on the display options
+        /// </summary>
+        /// <param name="month">The number of the month</param>
+        /// <param name="viewColumnNumber">The number of the columns of the calendar</param>
+        /// <param name="viewRowNumber">The number of the rows of the calendar</param>
         public void SetRowAndColumn(int month, int viewColumnNumber, int viewRowNumber)
         {
             if (month == 0 || month > 12)
                 throw new ArgumentOutOfRangeException("month", "month must be greater than 0 and smaller than 13");
-            this.ViewColumnNumber = viewColumnNumber;
-            
             int currentMonth = DateTime.Now.Month;
             if (viewColumnNumber == 1)
             {
@@ -386,6 +446,10 @@ namespace CalApp.Models
                 this.GridColumn = (month - 1) % viewColumnNumber;
             }
         }
+        /// <summary>
+        /// Sets the calendar view for the three months option
+        /// </summary>
+        /// <param name="month">The number of the month</param>
         private void SetThreeMonthsView(int month)
         {
             int currentMonth = DateTime.Now.Month;
@@ -409,7 +473,7 @@ namespace CalApp.Models
             }
         }
         /// <summary>
-        /// Gets the name of the month or the weekdays
+        /// Sets the name of the month and the weekdays
         /// </summary>
         /// <param name="year">The number of year</param>
         /// <param name="month">The number of month</param>
@@ -430,6 +494,15 @@ namespace CalApp.Models
             }
             this.DayNames = dayNames;
         }
+        /// <summary>
+        /// Gets the name of the month or the weekdays
+        /// </summary>
+        /// <param name="year">The number of year</param>
+        /// <param name="month">The number of month</param>
+        /// <param name="day">The number of day</param>
+        /// <param name="isDayName">Shows if is day name or month name</param>
+        /// <param name="culture">The calendar display language</param>
+        /// <returns></returns>
         private static string GetName(int year, int month, int day, bool isDayName, string culture)
         {
             string s =isDayName? "dddd": "MMMM";
@@ -484,6 +557,11 @@ namespace CalApp.Models
             this.Days = daysOfMonth;
             this.DayToPlace = days1;
         }
+        /// <summary>
+        /// Sets the properties of the month
+        /// </summary>
+        /// <param name="year">The number of year</param>
+        /// <param name="month">The number of month</param>
         private void SetProperties(int year, int month)
         {
             if (month == 2 && year % 4 != 0)
@@ -505,6 +583,11 @@ namespace CalApp.Models
                 Thickness = 0;
             }
         }
+        /// <summary>
+        /// Gets the number of the days of a month
+        /// </summary>
+        /// <param name="month">The number of month</param>
+        /// <param name="year">The number of year</param>
         public void GetNumberOfDays(int month, int year)
         {
             if (month == 0 || month > 12)

@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CalApp.Models
-{
+{/// <summary>
+/// Implements a year
+/// </summary>
     public class YearModel : BaseModel
     {
         private int number = DateTime.Now.Year;
-        private int isLeap;
         private List<MonthModel> items;
         private string culture;
         private bool isEventOn = false;
@@ -20,6 +21,12 @@ namespace CalApp.Models
         internal string[] pathData = new string[3] { "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z", "M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z", "M63,0L764,0C798,0,827,32,827,72L827,873C827,913,798,945,764,945L63,945C28,945,0,913,0,873L0,72C0,32,28,0,63,0z" };
         private string data = "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z";
         private List<string> texts;
+        private string backgroundColor= "Transparent";
+        private bool isEventPopupOpen = false;
+        private string eventsText= "Events from google calendar";
+        /// <summary>
+        /// The texts of the settings in the set language
+        /// </summary>
         public List<string> Texts
         {
             get
@@ -36,6 +43,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The year's grid background path data
+        /// </summary>
         public string Data
         {
             get
@@ -52,9 +62,9 @@ namespace CalApp.Models
                 }
             }
         }
-        private string backgroundColor= "Transparent";
-        private bool isEventPopupOpen = false;
-        private string eventsText= "Events from google calendar";
+        /// <summary>
+        /// The display text for the events popup
+        /// </summary>
         public string EventsText
         {
             get
@@ -70,6 +80,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The Event popup IsOpen property setter
+        /// </summary>
         public bool IsEventPopupOpen
         {
             get
@@ -85,6 +98,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The year's grid background color
+        /// </summary>
         public string BackgroundColor
         {
             get
@@ -101,6 +117,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The visibility of the months 
+        /// </summary>
         public string Visibility
         {
             get
@@ -116,6 +135,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The number of rows of the year display
+        /// </summary>
         public int ViewRowNumber
         {
             get
@@ -131,6 +153,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The number of columns of the year display
+        /// </summary>
         public int ViewColumnNumber
         {
             get
@@ -146,6 +171,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The event task enabled/disabled
+        /// </summary>
         public bool IsEventOn
         {
             get
@@ -161,6 +189,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The display language of the calendar
+        /// </summary>
         public string Culture
         {
             get
@@ -176,6 +207,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The year's number
+        /// </summary>
         public int Number
         {
             get
@@ -193,23 +227,9 @@ namespace CalApp.Models
 
             }
         }
-        public int IsLeap
-        {
-            get
-            {
-                return isLeap;
-            }
-
-            set
-            {
-                if (this.isLeap != value)
-                {
-                    this.isLeap = value;
-                    this.OnPropertyChanged("IsLeap");
-                }
-
-            }
-        }
+        /// <summary>
+        /// The weekends display in different color/or not
+        /// </summary>
         public bool ShowHolidays
         {
             get
@@ -226,6 +246,9 @@ namespace CalApp.Models
                 }
             }
         }
+        /// <summary>
+        /// The months of the year
+        /// </summary>
         public List<MonthModel> Items1
         {
             get
@@ -249,6 +272,10 @@ namespace CalApp.Models
         /// <param name="year">The year number</param>
         /// <param name="showHolidays">The holidays/weekends to be shown/or not</param>
         /// <param name="culture">The calendar's display language</param>
+        /// <param name="isEventOn">The event task enabled/disabled</param>
+        /// <param name="viewColumnNumber">The calendar display column number</param>
+        /// <param name="viewRowNumber">The calendar display row number</param>
+        /// <param name="visibility">The visibility of the Month UIElement</param>
         public YearModel(int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, int viewRowNumber, string visibility)
         {
             this.ShowHolidays = showHolidays;
@@ -275,14 +302,23 @@ namespace CalApp.Models
                 new MonthModel(12, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility)
             };
         }
+        /// <summary>
+        /// Sets the language of the Settings
+        /// </summary>
+        /// <param name="culture">The calendar display language</param>
         public void SetTexts(string culture)
         {
             this.Culture = culture;
             List<string> huTexts = new List<string> { "Év", "Nyelv", "Nézet", "Háttér", "Események", "Hétvégék", "Nyomtatás", "Kilépés", "Beállítások", "Beállítások mentése" };
             List<string> enTexts = new List<string> { "Year", "Language", "View", "Background", "Events", "Weekends", "Print", "Exit", "Settings","Save Settings" };
+            List<string> roTexts = new List<string> { "An", "Limbă", "Aspect", "Fundal", "Evenimente", "Weekends", "Imprimare", "Ieșire", "Setări", "Salvare Setări" };
             if (Culture == "hu-HU" || Culture == "HU")
             {
                 this.Texts = huTexts;
+            }
+            else if (Culture == "ro-RO" || Culture == "RO")
+            {
+                this.Texts = roTexts;
             }
             else
             this.Texts = enTexts;

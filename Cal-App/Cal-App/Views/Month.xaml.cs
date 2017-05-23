@@ -23,7 +23,9 @@ namespace CalApp.Views
     /// </summary>
     public partial class Month : UserControl
     {
-        //public static bool isEventPopupOpen = false;
+        /// <summary>
+        /// Implements a month UI
+        /// </summary>
         public Month()
         {
             InitializeComponent();

@@ -23,6 +23,9 @@ namespace CalApp.Views
     /// </summary>
     public partial class Calendar : UserControl
     {
+        /// <summary>
+        /// Implements a calendar
+        /// </summary>
         public Calendar()
         {
             InitializeComponent();

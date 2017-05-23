@@ -20,6 +20,9 @@ namespace CalApp.Views
     /// </summary>
     public partial class YearNumber : UserControl
     {
+        /// <summary>
+        /// Implements a year number display UI
+        /// </summary>
         public YearNumber()
         {
             InitializeComponent();
