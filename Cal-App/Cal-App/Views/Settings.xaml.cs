@@ -52,7 +52,7 @@ namespace CalApp.Views
                     yearModel.Items1[i].ArrangeDays(yearModel.Number, yearModel.Items1[i].Number, yearModel.Items1[i].NumberOfDays, yearModel.Items1[i].ShowHolidays);
                 }
             }
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Sets the calendar view to large: 12 months in 4 columns and 3 rows
@@ -74,7 +74,7 @@ namespace CalApp.Views
                     yearModel.Items1[i].ArrangeDays(yearModel.Number, yearModel.Items1[i].Number, yearModel.Items1[i].NumberOfDays, yearModel.Items1[i].ShowHolidays);
                 }
             }
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Sets the calendar view to one month: only the current month
@@ -87,7 +87,7 @@ namespace CalApp.Views
             yearModel.Data = yearModel.pathData[2];
             yearModel.ViewColumnNumber = 1;
             yearModel.ViewRowNumber = 1;
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
             for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 1, 1);
@@ -104,7 +104,7 @@ namespace CalApp.Views
             yearModel.Data = yearModel.pathData[0];
             yearModel.ViewColumnNumber = 1;
             yearModel.ViewRowNumber = 3;
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
             for (int i = 0; i < yearModel.Items1.Count; i++)
             {
                 yearModel.Items1[i].SetRowAndColumn(yearModel.Items1[i].Number, 1,3);
@@ -123,7 +123,7 @@ namespace CalApp.Views
             if (!isNumber)
             {
                 yearTxtBox.Text = yearModel.Number.ToString(CultureInfo.CurrentCulture);
-                popLink.IsOpen = false;
+                //popLink.IsOpen = false;
                 return;
             }
             yearModel.Number = a;
@@ -132,7 +132,7 @@ namespace CalApp.Views
             {
                 this.ButtonComboClickViewThin(sender, e);
             }
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Sets the view details, if other year then the current, the one month view and the three months view is disabled
@@ -169,7 +169,7 @@ namespace CalApp.Views
             var yearModel = DataContext as YearModel;
             ComboBoxItem a = (ComboBoxItem)e.OriginalSource;
             yearModel.BackgroundColor = a.Background.ToString();
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Enable/Disable google events buttons
@@ -192,7 +192,7 @@ namespace CalApp.Views
             {
                 yearModel.Items1[i].IsEventOn = isEventOn;
             }
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Sets to show/or not the weekends with different color
@@ -220,7 +220,7 @@ namespace CalApp.Views
                     yearModel.Items1[i].ArrangeDays(yearModel.Items1[i].Year, yearModel.Items1[i].Number, yearModel.Items1[i].NumberOfDays, yearModel.Items1[i].ShowHolidays);
                 }
             } 
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Prints the calendar
@@ -229,7 +229,7 @@ namespace CalApp.Views
         /// <param name="e">The instance containing the event data</param>
         private void Button_ClickPrint(object sender, RoutedEventArgs e)
         {
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
             var modelToPrint= DataContext as YearModel;
             if (modelToPrint.Number== DateTime.Now.Year)
             {
@@ -251,8 +251,9 @@ namespace CalApp.Views
         /// <param name="e">The instance containing the event data</param>
         private void Button_ClickExit(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow(this);
-            parentWindow.Close();
+            //Window parentWindow = Window.GetWindow(this);
+            //parentWindow.Close();
+            popLink.IsOpen = false;
         }
         /// <summary>
         /// Sets the calendar's display language
@@ -269,7 +270,7 @@ namespace CalApp.Views
             {
                 yearModel.Items1[i].SetNames(yearModel.Items1[i].Number, newCulture);
             }
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
         /// <summary>
         /// Saves the user's settings
@@ -286,7 +287,7 @@ namespace CalApp.Views
             var fileStorage = new FileStorage<object[]>();
             fileStorage.SetModel(savedSettingsFilePath, new object[] { yearModel.Number, yearModel.Culture, yearModel.ViewColumnNumber,
                 yearModel.IsEventOn, yearModel.ShowHolidays, yearModel.BackgroundColor, yearModel.Data, yearModel.ViewRowNumber, location.X, location.Y});
-            popLink.IsOpen = false;
+            //popLink.IsOpen = false;
         }
     }
 }

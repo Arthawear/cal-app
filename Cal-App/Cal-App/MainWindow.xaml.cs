@@ -52,7 +52,7 @@ namespace CalApp
         /// <returns>The saved or a new YearModel</returns>
         protected YearModel LoadSettings()
         {
-            var yearModel = new YearModel(DateTime.Now.Year, true, CultureInfo.CurrentCulture.ToString(), true, 1,3, "Visible");
+            var yearModel = new YearModel(DateTime.Now.Year, true, CultureInfo.CurrentCulture.ToString(), true, 2,6, "Visible");
             try
             {
                 var fileStorage = new FileStorage<object[]>();
@@ -136,7 +136,13 @@ namespace CalApp
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            calendar.MovePopups();
             //this.dispatcherTimer.Start();
+        }
+
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            calendar.MovePopups();
         }
     }
 }

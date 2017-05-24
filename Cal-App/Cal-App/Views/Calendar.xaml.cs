@@ -104,5 +104,21 @@ namespace CalApp.Views
             Window parentWindow = Window.GetWindow(this);
             parentWindow.Close();
         }
+        /// <summary>
+        /// Moves popups with parent window
+        /// </summary>
+        internal void MovePopups()
+        {
+            if (popEvent.IsOpen)
+            {
+                popEvent.IsOpen = false;
+                popEvent.IsOpen = true;
+            }
+            if (settings.popLink.IsOpen)
+            {
+                settings.popLink.IsOpen = false;
+                settings.popLink.IsOpen = true;
+            }
+        }
     }
 }

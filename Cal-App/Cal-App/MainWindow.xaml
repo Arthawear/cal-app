@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Calendar" Name="mainWindow" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" 
          MinHeight="150" MinWidth="50" FontWeight="Bold" FontSize="10" 
-        Foreground="White" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" MouseLeftButtonDown="Window_MouseLeftButtonDown" SizeToContent="WidthAndHeight">
+        Foreground="White" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" MouseLeftButtonDown="Window_MouseLeftButtonDown" SizeToContent="WidthAndHeight" SizeChanged="MainWindow_SizeChanged">
     <Window.Background>
         <VisualBrush Stretch="Fill">
             <VisualBrush.Visual>
