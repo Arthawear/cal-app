@@ -235,11 +235,14 @@ namespace CalApp.Views
             {
                 modelToPrint.Items1[DateTime.Now.Month - 1].Thickness = 0;
             }
+            modelToPrint.HeaderForegroundColor = Brushes.White.ToString();
+            modelToPrint.YearNumberColor = Brushes.Black.ToString();
             var calendarToPrint = new Calendar();
             calendarToPrint.DataContext = modelToPrint;
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintVisual(calendarToPrint, "Calendar Printing.");
-
+            modelToPrint.HeaderForegroundColor = modelToPrint.Items1[DateTime.Now.Month - 1].BackgroundColor;
+            modelToPrint.YearNumberColor = modelToPrint.Items1[DateTime.Now.Month - 1].BackgroundColor;
         }
         /// <summary>
         /// Shuts down the application

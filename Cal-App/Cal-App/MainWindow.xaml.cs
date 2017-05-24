@@ -27,8 +27,8 @@ namespace CalApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        //A timer for delay the hiding of the window resize grip, the header with year number and the settings sign
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        ////A timer for delay the hiding of the window resize grip, the header with year number and the settings sign
+        //System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         string savedSettingsFilePath = "SavedSettings.json";
         /// <summary>
         /// Implementing the application UI
@@ -38,13 +38,13 @@ namespace CalApp
             InitializeComponent();
             var yearModel = LoadSettings();
             this.DataContext = yearModel;
-            //sets the timer
-            dispatcherTimer.Tick += new EventHandler(DispatcherTimerTick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            ////sets the timer
+            //dispatcherTimer.Tick += new EventHandler(DispatcherTimerTick);
+            //dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             //sets the window size to different screens
             var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.MaxHeight = screenHeight*4/5;
-            dispatcherTimer.Start();
+            //dispatcherTimer.Start();
         }
         /// <summary>
         /// Loads the YearModel from saved settings file, or initializes a new YearModel
@@ -94,7 +94,7 @@ namespace CalApp
         /// <param name="e">The instance containing the event data</param>
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
-            dispatcherTimer.Stop();
+            //dispatcherTimer.Stop();
             this.ResizeMode = ResizeMode.CanResizeWithGrip;
             calendar.yearPanel.Visibility = Visibility.Visible;
             calendar.set1.Visibility = Visibility.Visible;
@@ -109,7 +109,11 @@ namespace CalApp
         {
             if (!(calendar.settings.popLink.IsOpen || calendar.popEvent.IsOpen))
             {
-                dispatcherTimer.Start();
+                //dispatcherTimer.Start();
+                this.ResizeMode = ResizeMode.NoResize;
+                calendar.yearPanel.Visibility = Visibility.Hidden;
+                calendar.set1.Visibility = Visibility.Hidden;
+                calendar.exitButton.Visibility = Visibility.Hidden;
             }
         }
         /// <summary>
@@ -117,13 +121,13 @@ namespace CalApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">The instance containing the event data</param>
-        public void DispatcherTimerTick(object sender, EventArgs e)
-        {
-            this.ResizeMode = ResizeMode.NoResize;
-            calendar.yearPanel.Visibility = Visibility.Hidden;
-            calendar.set1.Visibility = Visibility.Hidden;
-            calendar.exitButton.Visibility = Visibility.Hidden;
-        }
+        ////public void DispatcherTimerTick(object sender, EventArgs e)
+        ////{
+        ////    this.ResizeMode = ResizeMode.NoResize;
+        ////    calendar.yearPanel.Visibility = Visibility.Hidden;
+        ////    calendar.set1.Visibility = Visibility.Hidden;
+        ////    calendar.exitButton.Visibility = Visibility.Hidden;
+        ////}
         /// <summary>
         /// Method for dragging the window
         /// </summary>
@@ -132,7 +136,7 @@ namespace CalApp
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-            this.dispatcherTimer.Start();
+            //this.dispatcherTimer.Start();
         }
     }
 }

@@ -90,7 +90,7 @@
                     <ColumnDefinition ></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Name="exitButton" Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="0" Content="×" Click="Button_Click" FontSize="15" Foreground="White"
+                <Button Name="exitButton" Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="0" Content="×" Click="Button_Click" FontSize="15" Foreground="{Binding HeaderForegroundColor}"
                         ToolTipService.InitialShowDelay ="1" ToolTipService.Placement="Mouse">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource VisualBrushStyle2}" BorderThickness="0">
@@ -98,7 +98,7 @@
                         </ToolTip>
                     </Button.ToolTip>
                 </Button>
-                <Button Name="set1"  Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Content="&#xe115;" FontFamily="Segoe UI Symbol" Click="Button_Click_Popup" Background="Transparent" Foreground="White" FontSize="10" BorderThickness="0" 
+                <Button Name="set1"  Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Content="&#xe115;" FontFamily="Segoe UI Symbol" Click="Button_Click_Popup" Background="Transparent" Foreground="{Binding HeaderForegroundColor}" FontSize="10" BorderThickness="0" 
                         ToolTipService.InitialShowDelay ="1" ToolTipService.Placement="Mouse">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource VisualBrushStyle2}" BorderThickness="0">
@@ -107,9 +107,9 @@
                     </Button.ToolTip>
                 </Button>
                 <StackPanel Name="yearPanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button Style="{StaticResource ButtonStyle}" Content="  ‹  " FontSize="25" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_ClickPrevYear"></Button>
-                    <local:YearNumber x:Name="yearNumber" Grid.Row="0"></local:YearNumber>
-                    <Button Style="{StaticResource ButtonStyle}" Content="  ›  " FontSize="25" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_ClickNextYear"></Button>
+                    <Button Name="leftArrow" Style="{StaticResource ButtonStyle}" Content="  ‹  " FontSize="25" Background="Transparent" BorderThickness="0" Foreground="{Binding HeaderForegroundColor}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_ClickPrevYear"></Button>
+                    <local:YearNumber x:Name="yearNumber" Grid.Row="0" Foreground="{Binding YearNumberColor}"></local:YearNumber>
+                    <Button Name="rightArrow" Style="{StaticResource ButtonStyle}" Content="  ›  " FontSize="25" Background="Transparent" BorderThickness="0" Foreground="{Binding HeaderForegroundColor}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_ClickNextYear"></Button>
                 </StackPanel>
                 <local:Year x:Name="yearToCalendar" Grid.Column="0" Grid.Row="2" DataContext="{Binding ElementName=calendar, Path=DataContext, Mode=TwoWay}"></local:Year>
             </Grid>

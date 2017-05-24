@@ -22,6 +22,8 @@ namespace CalApp.Models
         private string data = "M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z";
         private List<string> texts;
         private string backgroundColor= "Transparent";
+        private string headerForegroundColor= "#008DD2";
+        private string yearNumberColor = "#008DD2";
         private bool isEventPopupOpen = false;
         private string eventsText= "Events from google calendar";
         /// <summary>
@@ -114,6 +116,42 @@ namespace CalApp.Models
                 {
                     this.backgroundColor = value;
                     this.OnPropertyChanged("BackgroundColor");
+                }
+            }
+        }
+        /// <summary>
+        /// The calendar header foreground color
+        /// </summary>
+        public string HeaderForegroundColor
+        {
+            get
+            {
+                return this.headerForegroundColor;
+            }
+
+            set
+            {
+                if (this.headerForegroundColor != value)
+                {
+                    this.headerForegroundColor = value;
+                    this.OnPropertyChanged("HeaderForegroundColor");
+                }
+            }
+        }
+
+        public string YearNumberColor
+        {
+            get
+            {
+                return this.yearNumberColor;
+            }
+
+            set
+            {
+                if (this.yearNumberColor != value)
+                {
+                    this.yearNumberColor = value;
+                    this.OnPropertyChanged("YearNumberColor");
                 }
             }
         }
@@ -279,7 +317,7 @@ namespace CalApp.Models
         public YearModel(int year, bool showHolidays, string culture, bool isEventOn, int viewColumnNumber, int viewRowNumber, string visibility)
         {
             this.ShowHolidays = showHolidays;
-            this.Number=year;
+            this.Number = year;
             this.IsEventOn = isEventOn;
             this.Culture = culture;
             this.ViewColumnNumber = viewColumnNumber;
@@ -301,6 +339,8 @@ namespace CalApp.Models
                 new MonthModel(11, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility),
                 new MonthModel(12, year, showHolidays,culture, isEventOn, viewColumnNumber,viewRowNumber, visibility)
             };
+            this.HeaderForegroundColor = this.items[DateTime.Now.Month - 1].BackgroundColor;
+            this.YearNumberColor = this.items[DateTime.Now.Month - 1].BackgroundColor;
         }
         /// <summary>
         /// Sets the language of the Settings

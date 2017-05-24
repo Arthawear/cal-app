@@ -12,7 +12,7 @@
     <Window.Background>
         <VisualBrush Stretch="Fill">
             <VisualBrush.Visual>
-                <Path Data="M151,1L2416,1C2498,1,2566,68,2566,151L2566,6680C2566,6762,2498,6830,2416,6830L151,6830C69,6830,1,6762,1,6680L1,151C1,68,69,1,151,1z" Stroke="Transparent" Fill="Transparent"/>
+                <Path Data="{Binding Path=Data}" Stroke="Transparent" Fill="Beige" Opacity="0.01"/>
             </VisualBrush.Visual>
         </VisualBrush>
     </Window.Background>
