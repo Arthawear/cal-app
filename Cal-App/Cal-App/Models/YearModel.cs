@@ -309,9 +309,9 @@ namespace CalApp.Models
         public void SetTexts(string culture)
         {
             this.Culture = culture;
-            List<string> huTexts = new List<string> { "Év", "Nyelv", "Nézet", "Háttér", "Események", "Hétvégék", "Nyomtatás", "Kilépés", "Beállítások", "Beállítások mentése" };
-            List<string> enTexts = new List<string> { "Year", "Language", "View", "Background", "Events", "Weekends", "Print", "Exit", "Settings","Save Settings" };
-            List<string> roTexts = new List<string> { "An", "Limbă", "Aspect", "Fundal", "Evenimente", "Weekends", "Imprimare", "Ieșire", "Setări", "Salvare Setări" };
+            List<string> huTexts = new List<string> { "Év", "Nyelv", "Nézet", "Háttér", "Események", "Hétvégék", "Nyomtatás", "Kilépés", "Beállítások", "Beállítások mentése","Bezár" };
+            List<string> enTexts = new List<string> { "Year", "Language", "View", "Background", "Events", "Weekends", "Print", "Exit", "Settings","Save Settings","Close" };
+            List<string> roTexts = new List<string> { "An", "Limbă", "Aspect", "Fundal", "Evenimente", "Weekends", "Imprimare", "Ieșire", "Setări", "Salvare Setări","Închide" };
             if (Culture == "hu-HU" || Culture == "HU")
             {
                 this.Texts = huTexts;

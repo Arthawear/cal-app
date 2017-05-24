@@ -16,7 +16,7 @@
                         <Border Name="Border" CornerRadius="5" BorderThickness="0"
                     Background="Transparent"
                     BorderBrush="Transparent">
-                            <ContentPresenter Margin="2" 
+                            <ContentPresenter Margin="0" 
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center" 
                                  RecognizesAccessKey="True"/>
@@ -65,40 +65,53 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style  x:Key="VisualBrushStyle2" TargetType="{x:Type ToolTip}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Path Data="M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z" Fill="Beige"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <local:Settings x:Name="settings" DataContext="{Binding ElementName=yearToCalendar, Path=DataContext, Mode=TwoWay}"></local:Settings>
-        <Viewbox Name="viewBox" Stretch="Uniform" StretchDirection="Both" >
+        <Viewbox Name="viewBox" Stretch="Uniform" StretchDirection="Both">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition ></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Name="set1" MaxWidth="15" Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="1" Content="⋮" Click="Button_Click_Popup" Background="Transparent" Foreground="White" FontSize="35" BorderThickness="0" 
+                <Button Name="exitButton" Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="0" Content="×" Click="Button_Click" FontSize="15" Foreground="White"
                         ToolTipService.InitialShowDelay ="1" ToolTipService.Placement="Mouse">
                     <Button.ToolTip>
-                        <ToolTip  BorderThickness="0">
-                            <ToolTip.Background>
-                                <VisualBrush Stretch="Fill">
-                                    <VisualBrush.Visual>
-                                        <Path Data="M2394,4273L5874,4273C5954,4273,6019,4339,6019,4419L6019,7274C6019,7354,5954,7420,5874,7420L2394,7420C2314,7420,2248,7354,2248,7274L2248,4419C2248,4339,2314,4273,2394,4273z" Fill="Beige"/>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </ToolTip.Background>
+                        <ToolTip Style="{StaticResource VisualBrushStyle2}" BorderThickness="0">
+                            <TextBlock Text="{Binding Texts[10]}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Name="set1"  Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Content="&#xe115;" FontFamily="Segoe UI Symbol" Click="Button_Click_Popup" Background="Transparent" Foreground="White" FontSize="10" BorderThickness="0" 
+                        ToolTipService.InitialShowDelay ="1" ToolTipService.Placement="Mouse">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource VisualBrushStyle2}" BorderThickness="0">
                             <TextBlock Name="settingsContent" Text="{Binding Texts[8]}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                         </ToolTip>
                     </Button.ToolTip>
                 </Button>
-                <StackPanel Name="yearPanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Name="yearPanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button Style="{StaticResource ButtonStyle}" Content="  ‹  " FontSize="25" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_ClickPrevYear"></Button>
                     <local:YearNumber x:Name="yearNumber" Grid.Row="0"></local:YearNumber>
                     <Button Style="{StaticResource ButtonStyle}" Content="  ›  " FontSize="25" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_ClickNextYear"></Button>
                 </StackPanel>
-                <local:Year x:Name="yearToCalendar" Grid.Column="0" Grid.Row="1" DataContext="{Binding ElementName=calendar, Path=DataContext, Mode=TwoWay}" ></local:Year>
+                <local:Year x:Name="yearToCalendar" Grid.Column="0" Grid.Row="2" DataContext="{Binding ElementName=calendar, Path=DataContext, Mode=TwoWay}"></local:Year>
             </Grid>
         </Viewbox>
         <Popup  Name="popEvent" StaysOpen="True" IsOpen="{Binding Path=IsEventPopupOpen}" Placement="Right" PlacementTarget="{Binding ElementName=yearToCalendar}" 
@@ -116,8 +129,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <local:Events x:Name="eventsToCalendar" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4"></local:Events>
-                <TextBlock Name="eventPopupContent" Text="{Binding Texts[4]}" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Black" FontWeight="Medium"  FontSize="20"></TextBlock>
-                <Button Style="{StaticResource ButtonStyle}" Grid.Column="3" Foreground="Black" FontWeight="Medium" FontSize="20" Click="Button_ClickExitEvent">x</Button>
+                <TextBlock Name="eventPopupContent" Text="{Binding Texts[4]}" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black" FontWeight="Medium"  FontSize="20"></TextBlock>
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="3" Foreground="Black" FontWeight="Medium" FontSize="20" Margin="5" Click="Button_ClickExitEvent">×</Button>
             </Grid>
         </Popup>
     </Grid>

@@ -45,7 +45,7 @@ namespace CalApp.Views
             var monthModel = button.DataContext as MonthModel;
             var day = (int)button.Content;
             var events = googleCal.GetEvents(monthModel.Year, monthModel.Number, day);
-            yearModel.EventsText= String.Format("        {0:yyyy.MM.dd}\n\n{1}", new DateTime(monthModel.Year, monthModel.Number, day), await events);
+            yearModel.EventsText= String.Format("{0:yyyy.MM.dd}\n\n{1}", new DateTime(monthModel.Year, monthModel.Number, day), await events);
         }
     }
 }

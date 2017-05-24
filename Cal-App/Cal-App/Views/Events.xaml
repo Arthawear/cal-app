@@ -6,6 +6,6 @@
              xmlns:local="clr-namespace:CalApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Name="events1">
-    <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Text="{Binding Path=EventsText}" Background="Beige" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
+    <TextBlock Name="GoogleEvents" Foreground="Black" Margin="10"  FontSize="15" Text="{Binding Path=EventsText}" Background="Transparent" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" TextWrapping="Wrap">
              </TextBlock>
 </UserControl>

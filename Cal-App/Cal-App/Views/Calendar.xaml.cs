@@ -94,6 +94,15 @@ namespace CalApp.Views
         {
             popEvent.IsOpen = false;
         }
-        
+        /// <summary>
+        /// Shuts down the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            parentWindow.Close();
+        }
     }
 }
