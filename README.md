@@ -23,3 +23,5 @@ The calendar can be set to show buttons for asking google events – when events
 The calendar can be set to show weekends with different color
 
 The calendar can be printed in pdf file
+
+The settings can be saved for further use
