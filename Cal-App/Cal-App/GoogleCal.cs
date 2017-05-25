@@ -1,0 +1,84 @@
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CalApp
+{
+    /// <summary>
+    /// Gets the calendar event list from google accont
+    /// </summary>
+    class GoogleCal: ICalendar
+    {
+        // If modifying these scopes, delete your previously saved credentials
+        // at ~/.credentials/calendar-dotnet-quickstart.json
+        private string[] Scopes = { CalendarService.Scope.CalendarReadonly };
+        private string ApplicationName = "Google Calendar API .NET Quickstart";
+
+        /// <summary>
+        /// Gets the calendar event list
+        /// </summary>
+        /// <param name="year">The year of the event list</param>
+        /// <param name="month">The month of the event list</param>
+        /// <param name="day">The day of the event list</param>
+        /// <returns>Task<string>The asked day's event list or null if does not exist event on that day</returns>
+        public async Task<string> GetEvents(int year, int month, int day)
+        {
+            UserCredential credential;
+            using (var stream =
+              new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            {
+                string credPath = System.Environment.GetFolderPath(
+                  System.Environment.SpecialFolder.Personal);
+                credPath = Path.Combine(credPath, ".credentials/calendar-dotnet-quickstart.json");
+
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                  GoogleClientSecrets.Load(stream).Secrets,
+                  Scopes,
+                  "user",
+                  CancellationToken.None,
+                  new FileDataStore(credPath, true)).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+            }
+            Events events;
+            var result = String.Empty;
+            // Create Google Calendar API service.
+            using (var service = new CalendarService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            }))
+            {
+                // Define parameters of request.
+                EventsResource.ListRequest request = service.Events.List("primary");
+                DateTime questionedDay = new DateTime(year, month, day);
+                request.TimeMin = questionedDay;
+                request.ShowDeleted = false;
+                request.SingleEvents = true;
+                TimeSpan oneDay = new TimeSpan(1, 0, 0, 0);
+                request.TimeMax = questionedDay + oneDay;
+                //request.MaxResults = 15;
+                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+                // List events.
+                events = await request.ExecuteAsync();
+            }
+            if (events.Items != null && events.Items.Count > 0)
+            {
+                foreach (var eventItem in events.Items)
+                {
+                    var when = eventItem.Start.DateTime;
+                    result += String.Format("{0:H:mm} - {1}\n", when, eventItem.Summary);
+                }
+            }
+            return result;
+        }
+    }
+}
