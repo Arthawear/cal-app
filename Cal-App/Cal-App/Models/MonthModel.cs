@@ -31,6 +31,25 @@ namespace CalApp.Models
         private int gridRow;
         private int gridColumn;
         private string visibility;
+        private string color;
+        /// <summary>
+        /// The display color of weekend day names
+        /// </summary>
+        public string Color
+        {
+            get
+            {
+                return this.color;
+            }
+            set
+            {
+                if (this.color != value)
+                {
+                    this.color = value;
+                    this.OnPropertyChanged("Color");
+                }
+            }
+        }
         private string currentSquareVisibility;
         /// <summary>
         /// The display language of the calendar
@@ -526,6 +545,11 @@ namespace CalApp.Models
         {
             this.ShowHolidays = showHolidays;
             this.Year = year;
+            Color = "#FEFEFE";
+            if (showHolidays)
+            {
+                Color = "#2B2A29";
+            }
             SetProperties(year, month);
             DayOfWeek firstDay = new DateTime(year, month, 1).DayOfWeek;
             int start = 0;
